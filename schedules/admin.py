@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Schedule, Course, CourseSession
+
+class ScheduleAdmin(admin.ModelAdmin):
+	list_display = ['id', 'owner']
+
+admin.site.register(Schedule, ScheduleAdmin)
+admin.site.register(Course)
+admin.site.register(CourseSession)

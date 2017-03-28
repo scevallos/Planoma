@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import UserProfile
+from .models import Profile
 
-class UserProfileAdmin(admin.ModelAdmin):
-	list_display = ['user', 'full_name', 'year' ,'email']
+class ProfileAdmin(admin.ModelAdmin):
+	list_display = ['user', 'dept']
 
-admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Profile, ProfileAdmin)

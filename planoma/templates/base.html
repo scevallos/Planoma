@@ -1,9 +1,10 @@
 {% load i18n %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
+    <link rel="stylesheet" href="{% static "planoma/main.css" %}" />
     <title>{% block title %}User test{% endblock %}</title>
 </head>
 
@@ -14,8 +15,8 @@
 
     {% if user.is_authenticated %}
         {% trans "Logged in" %}: {{ user.username }} 
-        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> | 
-        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
+        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> | <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a> | <a href="{% url 'mycals' %}">{% trans "My Schedules" %}</a> | <a href="{% url 'profile' %}">{% trans "My Profile" %}</a>)
+
     {% else %}
        <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
     {% endif %}

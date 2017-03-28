@@ -1,0 +1,28 @@
+h1, h2, h3 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #217AC0;
+}
+
+h4 {
+	text-align: center;
+	font-size: 1.5em;
+    color: gray;
+}
+
+a {
+    font-size: 1em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.hovered {
+    opacity: .6;
+}
+
+a {
+    text-decoration: none;
+    color: #33D;
+}

@@ -1,40 +1,29 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 from dept_codes import DEPTS
 
-class BaseUser(AbstractBaseUser):
-    email = models.EmailField(primary_key=True)
-    full_name = models.CharField(max_length=50, default='Cecil Sagehen')
-
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     dept = models.CharField(
         max_length=4,
         choices = DEPTS,
         default = 'CSCI'
     )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELD = USERNAME_FIELD
-
     def __unicode__(self):
-        return '{} - {}'.format(self.full_name, self.email)
+        return '{} - {}'.format(self.full_name, self.user)
 
-    class Meta:
-        abstract = True
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
 
-class GenericUser(BaseUser):
-    pass
-
-class Student(BaseUser):
-    year = models.IntegerField(default=2020, null=True)
-    avatar = models.ImageField(upload_to='uploads/', null=True)
-    advisor = models.ForeignKey('Advisor', null=True, on_delete=models.SET_NULL)
-
-
-class Advisor(BaseUser):
-    pass
-    
-
-    
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

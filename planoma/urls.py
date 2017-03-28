@@ -21,6 +21,7 @@ from accounts import views
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^accounts/mycals', views.mycals, name='mycals'),
 	url(r'^accounts/profile', views.profile, name='profile'),
     url(r'^admin/', admin.site.urls),
 ]

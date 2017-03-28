@@ -2,5 +2,17 @@
 {% load i18n %}
 
 {% block content %}
-Profile page
+<h2> Your Profile </h2>
+<h4>{{ user.get_full_name }}</h4>
+<ul>
+  <li>Username: {{ user.username }}</li>
+  <li>First Name: {{ user.first_name }}</li>
+  <li>Department: {{ user.profile.dept }}</li>
+</ul>
+<form method="post">
+  {% csrf_token %}
+  {{ user_form.as_p }}
+  {{ profile_form.as_p }}
+  <button type="submit">Save changes</button>
+</form>
 {% endblock %}

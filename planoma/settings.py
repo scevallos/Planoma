@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'schedules',
 ]
 
 MIDDLEWARE = [
@@ -83,14 +84,17 @@ DATABASES = {
         'HOST' : 'localhost',
         'PORT' : ''
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 # django-registration settings:
 # Number of days given to activate account
 ACCOUNT_ACTIVATION_DAYS = 7
 
-AUTH_USER_MODEL = 'accounts.BaseUser'
-
+# AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -125,10 +129,16 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/accounts/mycals.html'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Setting up mailing to activate account
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
