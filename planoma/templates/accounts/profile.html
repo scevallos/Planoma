@@ -7,7 +7,7 @@
 <ul>
   <li>Username: {{ user.username }}</li>
   <li>First Name: {{ user.first_name }}</li>
-  <li>Department: {{ user.profile.dept }}</li>
+  <li>Major: {{ user.studentprofile.major }}</li>
 </ul>
 <form method="post">
   {% csrf_token %}

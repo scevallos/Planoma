@@ -33,13 +33,13 @@ class UserForm(forms.ModelForm):
 class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
-        fields = ('dept', 'year')
+        fields = ('major', 'year')
 
 ## A form to be used by students to invite their advisors
 class AdvisorInviteForm(forms.ModelForm):
 	class Meta:
 		model = AdvisorProfile
-		fields = ('email',)
+		fields = ('dept','email')
 
 
 """
