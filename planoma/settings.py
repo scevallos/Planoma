@@ -89,6 +89,8 @@ DATABASES = {
 # Number of days given to activate account
 ACCOUNT_ACTIVATION_DAYS = 7
 
+AUTH_USER_MODEL = 'accounts.BaseUser'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
