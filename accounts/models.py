@@ -16,6 +16,26 @@ class Profile(models.Model):
         default = 'CSCI'
     )
 
+class StudentProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    major = models.CharField(
+        max_length=4,
+        choices = DEPTS,
+        default = 'CSCI'
+    )
+    year = models.IntegerField(
+        max_length = 4,
+        default= 1925
+        )
+
+class AdvisorProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    dept = models.CharField(
+        max_length=4,
+        choices = DEPTS,
+        default = 'CSCI'
+    )
+
     def __unicode__(self):
         return '{} - {}'.format(self.full_name, self.user)
 
