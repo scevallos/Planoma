@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Profile
+from .models import StudentProfile
 
-class ProfileAdmin(admin.ModelAdmin):
-	list_display = ['user', 'dept']
+# class StudentProfileAdmin(admin.ModelAdmin):
+# 	list_display = ['user.first_name', 'user.last_name', 'year', 'dept']
 
-admin.site.register(Profile, ProfileAdmin)
+admin.site.register(StudentProfile)

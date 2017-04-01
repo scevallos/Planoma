@@ -2,21 +2,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-class Schedule(models.Model):
-    # Use django default id number as primary key
-    owner = models.ForeignKey('accounts.Profile')
-    start_sem = models.CharField(max_length=4) # FA\d{2}|SP\d{2}
-    end_sem = models.CharField(max_length=4)
-
-    # date of creation (and update?)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    public = models.BooleanField(default=False)
-
-    def __unicode__(self):
-        return "Schedule owner: {}".format(self.owner)
-
 class Course(models.Model):
     course_id = models.CharField(max_length=9) # e.g. CHEM170A or '\w{2,4}\d+\w?'
     
@@ -81,3 +66,20 @@ class CourseSession(models.Model):
     class Meta:
         unique_together = (('term', 'semester'),)
         ordering = ('term', 'semester', )
+
+class Schedule(models.Model):
+    # Use django default id number as primary key
+    owner = models.ForeignKey('accounts.StudentProfile')
+    start_sem = models.CharField(max_length=4) # FA\d{2}|SP\d{2}
+    end_sem = models.CharField(max_length=4)
+
+    # date of creation and last update time
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    public = models.BooleanField(default=False)
+
+    courses_take = models.ManyToManyField(Course)
+
+    def __unicode__(self):
+        return "Schedule owner: {}".format(self.owner)

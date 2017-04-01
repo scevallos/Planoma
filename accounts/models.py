@@ -2,34 +2,14 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from annoying.fields import AutoOneToOneField
 
 
+from datetime import datetime
 from dept_codes import DEPTS
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    dept = models.CharField(
-        max_length=4,
-        choices = DEPTS,
-        default = 'CSCI'
-    )
-
-class StudentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    major = models.CharField(
-        max_length=4,
-        choices = DEPTS,
-        default = 'CSCI'
-    )
-    year = models.IntegerField(
-        max_length = 4,
-        default= 1925
-        )
-
-class AdvisorProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class UserProfile(models.Model):
+    user = AutoOneToOneField(User, primary_key=True)
     dept = models.CharField(
         max_length=4,
         choices = DEPTS,
@@ -37,13 +17,22 @@ class AdvisorProfile(models.Model):
     )
 
     def __unicode__(self):
-        return '{} - {}'.format(self.full_name, self.user)
+        return '{} - {}'.format(self.user, self.dept)
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+    class Meta(object):
+        abstract = True
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+class AdvisorProfile(models.Model):
+    pass
+
+
+class StudentProfile(models.Model):
+    YEAR_CHOICES = []
+    for r in range(2010, (datetime.now().year+1)):
+        YEAR_CHOICES.append((r,r))
+    year = models.IntegerField(
+        choices=YEAR_CHOICES,
+        default=datetime.now().year
+    ) # default to being a first-year lol
+    adv = models.ForeignKey('AdvisorProfile', null=True, on_delete=models.SET_NULL)
+
