@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Course(models.Model):
-    course_id = models.CharField(max_length=9) # e.g. CHEM170A or '\w{2,4}\d+\w?'
+    course_id = models.CharField(max_length=9, primary_key=True) # e.g. CHEM170A or '\w{2,4}\d+\w?'
     
     area_opts = (
         ('1', 'Area 1'),
@@ -33,19 +33,29 @@ class Course(models.Model):
     )
 
     credit_opts = (
-        ('Full', '1.0'),
-        ('Half', '0.5'),
+        ('Full', '1.00'),
+        ('Half', '0.50'),
         ('Qrtr', '0.25'),
+        ('Zero', '0.00'), # for labs
     )
     credit = models.CharField(
         max_length=4,
         choices = credit_opts
     )
 
-    link = models.URLField()
+    # link to aspc page, if applicable
+    link = models.URLField(null=True, blank=True)
+
+    # defining pre-req relationship as foreign key to self
+    pre_req = models.ForeignKey('self', null=True, on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return "{}".format(self.course_id)
+
+class EquivCourses(models.Model):
+    course_one = models.ForeignKey(Course, related_name='course_one')
+    course_two = models.ForeignKey(Course, related_name='course_two')
+    equiv_to = models.ForeignKey(Course, related_name='equiv_to')
 
 class CourseSession(models.Model):
     course = models.ManyToManyField(Course)
@@ -69,7 +79,7 @@ class CourseSession(models.Model):
 
 class Schedule(models.Model):
     # Use django default id number as primary key
-    owner = models.ForeignKey('accounts.StudentProfile')
+    owner = models.ForeignKey('accounts.StudentProfile', on_delete=models.CASCADE)
     start_sem = models.CharField(max_length=4) # FA\d{2}|SP\d{2}
     end_sem = models.CharField(max_length=4)
 
@@ -79,7 +89,7 @@ class Schedule(models.Model):
 
     public = models.BooleanField(default=False)
 
-    courses_take = models.ManyToManyField(Course)
+    course_sessions = models.ManyToManyField(CourseSession)
 
     def __unicode__(self):
         return "Schedule owner: {}".format(self.owner)

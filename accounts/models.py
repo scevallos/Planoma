@@ -22,11 +22,11 @@ class UserProfile(models.Model):
     class Meta(object):
         abstract = True
 
-class AdvisorProfile(models.Model):
+class AdvisorProfile(UserProfile):
     pass
 
 
-class StudentProfile(models.Model):
+class StudentProfile(UserProfile):
     YEAR_CHOICES = []
     for r in range(2010, (datetime.now().year+1)):
         YEAR_CHOICES.append((r,r))
