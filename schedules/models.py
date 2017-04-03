@@ -5,6 +5,8 @@ from django.db import models
 class Course(models.Model):
     course_id = models.CharField(max_length=9, primary_key=True) # e.g. CHEM170A or '\w{2,4}\d+\w?'
     
+    course_name = models.CharField(max_length=50)
+
     area_opts = (
         ('1', 'Area 1'),
         ('2', 'Area 2'),
@@ -57,8 +59,11 @@ class EquivCourses(models.Model):
     course_two = models.ForeignKey(Course, related_name='course_two')
     equiv_to = models.ForeignKey(Course, related_name='equiv_to')
 
+    class Meta:
+        unique_together = (('course_one', 'course_two', 'equiv_to'),)
+
 class CourseSession(models.Model):
-    course = models.ManyToManyField(Course)
+    courses = models.ManyToManyField(Course)
     term = models.IntegerField(default=2017) # The year the course is taking place
 
     SEMS = (
