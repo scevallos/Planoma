@@ -16,12 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from accounts import views
+from accounts import views as acc_views
+from schedules import views as sch_views
 
 urlpatterns = [
-	url(r'^$', views.index, name='index'),
-	url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^accounts/mycals', views.mycals, name='mycals'),
-	url(r'^accounts/profile', views.profile, name='profile'),
+    url(r'^$', acc_views.index, name='index'),
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^accounts/mycals', acc_views.mycals, name='mycals'),
+    url(r'^accounts/profile/view/', acc_views.profile_view, name='profile_view'),
+    url(r'^accounts/profile/edit/', acc_views.update_profile, name='update_profile'),
+    url(r'^schedules/new_schedule/', sch_views.new_schedule, name='new_schedule'),
+    url(r'^courses/course_new', sch_views.add_course, name='course_new'),
     url(r'^admin/', admin.site.urls),
 ]
