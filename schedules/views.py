@@ -5,9 +5,9 @@ from forms import CourseForm, ScheduleForm
 @login_required
 def add_course(request):
     form = CourseForm()
-    return render(request, 'courses/course_new', {'form': form})
+    return render(request, 'courses/course_new.html', {'form': form})
 
 @login_required
 def new_schedule(request):
     form = ScheduleForm()
-    return render(request, 'schedules/new_schedule', {'form': form})
+    return render(request, 'schedules/new_schedule.html', {'form': form})
