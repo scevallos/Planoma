@@ -9,10 +9,11 @@
   <li>First Name: {{ user.first_name }}</li>
   <li>Major: {{ user.studentprofile.major }}</li>
 </ul>
-<form method="post">
+<a href="{% url 'update_profile' %}">Update profile</a>
+<!-- <form method="post">
   {% csrf_token %}
   {{ user_form.as_p }}
   {{ profile_form.as_p }}
   <button type="submit">Save changes</button>
-</form>
+</form> -->
 {% endblock %}

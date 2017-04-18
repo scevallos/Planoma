@@ -2,8 +2,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.contrib import messages
 
-from forms import UserForm
+from forms import UserForm, StudentProfileForm
 
 
 def index(request):
@@ -19,8 +20,21 @@ def mycals(request):
 
 @login_required
 def update_profile(request):
-    form = UserForm()
-    return render(request, 'accounts/profile/edit.html', {'form': form})
+    # if request.method == 'POST':
+    #     userForm = UserForm(request.POST, instance=request.user)
+    #     profileForm = StudentProfileForm(request.POST, instance=request.user.profile)
+    #     if form.is_valid():
+    #         userForm.save()
+    #         profileForm.save()
+    #         messages.success(request, 'Your profile was successfully updated!')
+    #         return redirect('settings:profile')
+    #     else:
+    #         messages.error(request, 'Please correct the error below.')
+    # else:
+    #     userForm = UserForm(instance=request.user)
+    #     profileForm = StudentProfileForm(instance=request.user.profile)
+    profileForm = StudentProfileForm(request.POST, instance=request.user.UserProfile)
+    return render(request, 'accounts/profile/edit.html')
     # if request.method == 'POST':
     #     user_form = UserForm(request.POST, instance=request.user)
     #     profile_form = ProfileForm(request.POST, instance=request.user.profile)

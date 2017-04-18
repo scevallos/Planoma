@@ -92,6 +92,9 @@ class Schedule(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # title of schedule
+    title = models.CharField(max_length=50, default='Untitled', blank=True)
+
     public = models.BooleanField(default=False)
 
     course_sessions = models.ManyToManyField(CourseSession)

@@ -35,6 +35,7 @@ for child in courseList.find_elements_by_xpath(".//*"):
 
 	s = child.text
 	s = s.encode('utf-8')
+	print '$', child.get_attribute("href"), '$'
 	try:
 		# cid = re.findall('[A-Z]+\d+\w+?', s)[0]
 		cid = re.findall('(^.*)PO', s)[0].strip()
