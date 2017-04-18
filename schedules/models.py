@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from planoma.schedules.schedule_options import *
 
 class Course(models.Model):
     course_id = models.CharField(max_length=9, primary_key=True) # e.g. CHEM170A or '\w{2,4}\d+\w?'
@@ -92,12 +93,18 @@ class Schedule(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # title of schedule
-    title = models.CharField(max_length=50, default='Untitled', blank=True)
-
     public = models.BooleanField(default=False)
 
     course_sessions = models.ManyToManyField(CourseSession)
 
     def __unicode__(self):
         return "Schedule owner: {}".format(self.owner)
+
+class ScheduleOptions(models.Model):
+    schedule = models.OneToOneField(Schedule, 
+                                    on_delete=models.CASCASE,
+                                    primary_key=True)
+
+    existing_credits = models.CharField(choices = CREDIT_CHOICES)
+    languages_completed = models.CharField(choices = LANGUAGE_CHOICES)
+    math_completed = models.CharField(choices = MATH_CHOICES)

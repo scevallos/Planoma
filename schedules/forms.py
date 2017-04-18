@@ -1,6 +1,7 @@
 from django import forms
 from models import Schedule, Course
-from accounts.dept_codes import DEPTS
+from planoma.accounts.dept_codes import DEPTS
+from planoma.schedules.schedule_options import *
 
 class CourseForm(forms.ModelForm):
     class Meta:
@@ -12,54 +13,30 @@ class ScheduleForm(forms.ModelForm):
         model = Schedule
         fields = ('title', 'start_sem', 'end_sem', 'public')
 
-# class CreditsForm(forms.ModelForm):
-#     CREDIT_CHOICES = (
-#         ('0', '0'),
-#         ('1',  '1'),
-#         ('2',  '2'), 
-#     )
 
-#     credits_completed = forms.ChoiceField(choices = CREDIT_CHOICES,
-#                                           default = '0')
+class ScheduleOptionsForm(forms.ModelForm):
 
-# class LanguageForm(forms.ModelForm):
-#     LANGUAGE_CHOICES = (
-#         ('0',  '0'),
-#         ('1',   '1'),
-#         ('2',   '2'),
-#         ('3', '3'),
-#     )
+	existing_credits = forms.ChoiceField(choices = CREDIT_CHOICES,
+										 label = "Credits completed before college",
+										 default = 'ZERO')
 
-#     languages_completed = forms.ChoiceField(choices = LANGUAGE_CHOICES,
-#                                             default = '0')
+	languages_completed = forms.ChoiceField(choices = LANGUAGE_CHOICES,
+											label = "Semesters of language taken",
+											default = 'ZERO')
+
+	math_completed = forms.ChoiceField(choices = MATH_CHOICES,
+								       label = "Math completed before college",
+									   default = 'NONE')
+
+	class Meta:
+		model = ScheduleOptions
+
 
 # class PreviousCourseForm(forms.ModelForm):
-#     department_selected = forms.ChoiceField(choices = DEPTS,
-#                                             default = CSCI)
+# 	department_selected = forms.ChoiceField(choices = DEPTS,
+# 											default = 'CSCI')
 
-#     TERM_CHOICES = (
-#         ('FA13', 'Fall 2013'),
-#         ('SP14', 'Spring 2014'),
-#         ('FA14', 'Fall 2014'),
-#         ('SP15', 'Spring 2015'),
-#         ('FA15', 'Fall 2015'),
-#         ('SP16', 'Spring 2016'),
-#         ('FA16', 'Fall 2016'),
-#         ('SP17', 'Spring 2017'),
-#     )
+# 	term_selected = forms.ChoiceField(choices = TERM_CHOICES,
+# 									  default = 'SP17')
 
-#     term_selected = forms.ChoiceField(choices = TERM_CHOICES,
-#                                       default = 'FA13')
-
-
-
-# class MathForm(forms.ModelForm):
-#     MATH_CHOICES = (
-#         ('None', 'None'),
-#         ('CALC1', 'Calc I'),
-#         ('CALC2', 'Calc II'),
-#         ('LINEAR', 'Linear +')
-#     )
-
-#     math_completed = forms.ChoiceField(choices = MATH_CHOICES,
-#                                        default = 'None')
+	
