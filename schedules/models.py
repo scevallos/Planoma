@@ -47,18 +47,34 @@ class Course(models.Model):
     )
 
     # link to aspc page, if applicable
-    link = models.URLField(null=True, blank=True)
+    # NOTE: don't really wanna do this anymore lol
+    # link = models.URLField(null=True, blank=True)
 
     # defining pre-req relationship as foreign key to self
-    pre_req = models.ForeignKey('self', null=True, on_delete=models.SET_NULL)
+    # Making this its own model so it has its own table
+    # pre_req = models.ForeignKey('self', null=True, on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return "{}".format(self.course_id)
+
+class PrereqCourses(models.Model):
+    course_req = models.ForeignKey(Course, related_name='course_req')
+    course_take = models.ForeignKey(Course, related_name='course_take')
+
+    def __unicode__(self):
+        return "{} for {}".format(self.course_req, self.course_take)
+
+    class Meta:
+        unique_together = (('course_req', 'course_take'), )
+
 
 class EquivCourses(models.Model):
     course_one = models.ForeignKey(Course, related_name='course_one')
     course_two = models.ForeignKey(Course, related_name='course_two')
     equiv_to = models.ForeignKey(Course, related_name='equiv_to')
+
+    def __unicode__(self):
+        return "{} == {} for {}".format(self.course_one, self.course_two, self.equiv_to)
 
     class Meta:
         unique_together = (('course_one', 'course_two', 'equiv_to'),)

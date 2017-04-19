@@ -6,7 +6,7 @@ from schedule_options import *
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ('course_id', 'course_name', 'area', 'overlay', 'credit', 'link', 'pre_req')
+        fields = ('course_id', 'course_name', 'area', 'overlay', 'credit')
 
 class ScheduleForm(forms.ModelForm):
     class Meta:

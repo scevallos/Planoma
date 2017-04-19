@@ -113,7 +113,7 @@
  #wsite-mini-cart .wsite-cart-bottom .wsite-subtotal-wrapper > span { text-transform: uppercase; font-family: 'Josefin Sans', sans-serif; font-weight: bold; font-size: 14px; line-height: normal; }
  #wsite-mini-cart .wsite-cart-bottom .wsite-subtotal-wrapper > span.wsite-price { text-transform: normal; font-family: 'Josefin Sans', sans-serif; font-size: 14px; line-height: normal; }
  .wsite-header-section { height: 600px; }
- .banner-wrap { position: relative; }
+ .banner-wrap { position: relative;}
  .banner-wrap .container { display: table; padding: 60px 0; vertical-align: middle; box-sizing: border-box; }
  .banner-wrap .banner { display: table-cell; vertical-align: middle; text-align: center; }
  .banner-wrap .banner h2 { padding-bottom: 25px; text-align: center; color: white; letter-spacing: 0.05em; text-transform: uppercase; font-family: 'Josefin Sans', sans-serif; font-weight: bold; font-size: 70px; line-height: normal; }

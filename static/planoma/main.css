@@ -160,11 +160,11 @@
     .wsite-header-section .paragraph {} .wsite-button-inner {} .wsite-not-footer blockquote {} .wsite-footer blockquote {} .blog-header h2 a {} #wsite-content h2.wsite-product-title {} .wsite-product .wsite-product-price a {}
 }
 .wsite-background {
-    background-image: url("bg.png") !important;
+    background-image: url("{{ STATIC_URL }}/planoma/bg.png") !important;
     background-repeat: no-repeat !important;
     background-position: 50% 50% !important;
     background-size: 100% !important;
-    background-color: transparent !important;
+    background-color: #31c3dd !important;
     background: inherit;
 }
 body.wsite-background {

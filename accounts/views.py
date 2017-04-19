@@ -1,22 +1,31 @@
 # from django.db import transaction
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, HttpResponse
+from django.template import loader
 from django.contrib import messages
 
+from models import StudentProfile
+from schedules.models import Schedule, Course, CourseSession
 from forms import UserForm, StudentProfileForm
 
 
 def index(request):
-	return render(request, 'index.html',)
+    return render(request, 'index.html',)
 
 @login_required
 def profile_view(request):
-	return render(request, 'accounts/profile/view.html')
+    return render(request, 'accounts/profile/view.html')
 
 @login_required
 def mycals(request):
-	return render(request, 'accounts/mycals.html')
+    # Get the latest 3 schedules made by the user
+    latest_scheds = Schedule.objects.all().filter(owner_id=request.user.id).order_by('-created_at')[:3]
+    template = loader.get_template('accounts/mycals.html')
+    context = {
+        'latest_scheds': latest_scheds
+    }
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def update_profile(request):
@@ -33,7 +42,16 @@ def update_profile(request):
     # else:
     #     userForm = UserForm(instance=request.user)
     #     profileForm = StudentProfileForm(instance=request.user.profile)
-    profileForm = StudentProfileForm(request.POST, instance=request.user.UserProfile)
+    if request.method == 'POST':
+        userForm = UserForm(request.POST, instance=request.user)
+        profileForm = StudentProfileForm(request.POST, instance=StudentProfile.objects.get(user_id=request.user.id))
+        if profileForm.is_valid() and userForm.is_valid():
+            userForm.save()
+            profileForm.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('profile_view')
+    else:
+        profileForm = StudentProfileForm()
     return render(request, 'accounts/profile/edit.html')
     # if request.method == 'POST':
     #     user_form = UserForm(request.POST, instance=request.user)

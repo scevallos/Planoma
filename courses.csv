@@ -1,0 +1,18 @@
+CourseID,Course_Name,Area,Overlay,Credit
+CSCI030,Computation & Cognition w/Lab,5,None,1.00
+CSCI030L ,"Lab, Computation and Cognition",5,None,0.00
+CSCI051,Intro to Computer Science w/Lab,5,None,1.00
+CSCI051L,"Lab, Intro to Computer Science",5,None,0.00
+CSCI052,Fundamentals of Computer Science,5,None,1.00
+CSCI055,Discrete Mathematics,5,None,1.00
+CSCI062,Data Structures Adv Programming,5,None,1.00
+CSCI062L,Data Structures/Adv Program Lab,5,None,0.00
+CSCI081,Computability & Logic,5,None,1.00
+CSCI105,Computer Systems,5,None,1.00
+CSCI105L,"Computer Systems, Lab",5,None,0.00
+CSCI131,Programming Languages,5,None,1.00
+CSCI133,Database Systems,5,None,1.00
+CSCI134,Operating Systems Principles,5,None,1.00
+CSCI140,Algorithms,5,None,1.00
+CSCI190,Computer Science Senior Seminar,5,None,0.50
+MATH103,Combinatorial Mathematics,5,None,1.00
