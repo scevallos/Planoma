@@ -15,7 +15,7 @@ def new_schedule(request):
         form = ScheduleForm(request.POST)
         if form.is_valid():
             schedule = form.save(commit=False)
-            schedule.owner = StudentProfile.objects.get(user_id= request.user.id)
+            schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
             schedule.save()
             return redirect('mycals')
     else:

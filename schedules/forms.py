@@ -1,7 +1,7 @@
 from django import forms
 from models import Schedule, Course
-from planoma.accounts.dept_codes import DEPTS
-from planoma.schedules.schedule_options import *
+from accounts.dept_codes import DEPTS
+from schedule_options import *
 
 class CourseForm(forms.ModelForm):
     class Meta:
@@ -11,25 +11,26 @@ class CourseForm(forms.ModelForm):
 class ScheduleForm(forms.ModelForm):
     class Meta:
         model = Schedule
-        fields = ('title', 'start_sem', 'end_sem', 'public')
+        fields = ('title', 'start_sem', 'end_sem', 'public', 'existing_credits', 'languages_completed', 'math_completed')
 
 
-class ScheduleOptionsForm(forms.ModelForm):
+# class ScheduleOptionsForm(forms.ModelForm):
 
-	existing_credits = forms.ChoiceField(choices = CREDIT_CHOICES,
-										 label = "Credits completed before college",
-										 default = 'ZERO')
+	# existing_credits = forms.ChoiceField(choices = CREDIT_CHOICES,
+	# 									 label = "Credits completed before college",
+	# 									 initial = 'ZERO')
 
-	languages_completed = forms.ChoiceField(choices = LANGUAGE_CHOICES,
-											label = "Semesters of language taken",
-											default = 'ZERO')
+	# languages_completed = forms.ChoiceField(choices = LANGUAGE_CHOICES,
+	# 										label = "Semesters of language taken",
+	# 										initial = 'ZERO')
 
-	math_completed = forms.ChoiceField(choices = MATH_CHOICES,
-								       label = "Math completed before college",
-									   default = 'NONE')
+	# math_completed = forms.ChoiceField(choices = MATH_CHOICES,
+	# 							       label = "Math completed before college",
+	# 								   initial = 'NONE')
 
-	class Meta:
-		model = ScheduleOptions
+	# class Meta:
+	# 	model = ScheduleOptions
+	# 	fields = ('existing_credits', 'languages_completed', 'math_completed')
 
 
 # class PreviousCourseForm(forms.ModelForm):

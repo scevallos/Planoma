@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from planoma.schedules.schedule_options import *
+from schedule_options import *
 
 class Course(models.Model):
     course_id = models.CharField(max_length=9, primary_key=True) # e.g. CHEM170A or '\w{2,4}\d+\w?'
@@ -76,9 +76,6 @@ class CourseSession(models.Model):
         choices = SEMS
     )
 
-    # Not sure if we really need this
-    # days_meet = models.CharField(max_length=5) # one or more of 'MTWRF'
-
     class Meta:
         unique_together = (('term', 'semester'),)
         ordering = ('term', 'semester', )
@@ -86,8 +83,8 @@ class CourseSession(models.Model):
 class Schedule(models.Model):
     # Use django default id number as primary key
     owner = models.ForeignKey('accounts.StudentProfile', on_delete=models.CASCADE)
-    start_sem = models.CharField(max_length=4) # FA\d{2}|SP\d{2}
-    end_sem = models.CharField(max_length=4)
+    start_sem = models.CharField(max_length=4, choices=TERM_CHOICES) # FA\d{2}|SP\d{2}
+    end_sem = models.CharField(max_length=4, choices=TERM_CHOICES)
 
     # date of creation and last update time
     created_at = models.DateTimeField(auto_now_add=True)
@@ -95,16 +92,15 @@ class Schedule(models.Model):
 
     public = models.BooleanField(default=False)
 
+    # title for the schedule
+    title = models.CharField(max_length=50, default='Untitled', blank=True)
+
     course_sessions = models.ManyToManyField(CourseSession)
+
+    # Stuff needed for auto-gen
+    existing_credits = models.CharField(choices = CREDIT_CHOICES, max_length=12, null=True)
+    languages_completed = models.CharField(choices = LANGUAGE_CHOICES, max_length=12, null=True)
+    math_completed = models.CharField(choices = MATH_CHOICES, max_length=12, null=True)
 
     def __unicode__(self):
         return "Schedule owner: {}".format(self.owner)
-
-class ScheduleOptions(models.Model):
-    schedule = models.OneToOneField(Schedule, 
-                                    on_delete=models.CASCASE,
-                                    primary_key=True)
-
-    existing_credits = models.CharField(choices = CREDIT_CHOICES)
-    languages_completed = models.CharField(choices = LANGUAGE_CHOICES)
-    math_completed = models.CharField(choices = MATH_CHOICES)
