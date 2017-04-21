@@ -16,3 +16,17 @@ CSCI134,Operating Systems Principles,5,None,1.00
 CSCI140,Algorithms,5,None,1.00
 CSCI190,Computer Science Senior Seminar,5,None,0.50
 MATH103,Combinatorial Mathematics,5,None,1.00
+MATH030,Calculus I,5,None,1.00
+MATH031,Calculus II,5,None,1.00
+MATH060,Linear Algebra,5,None,1.00
+LANG1,Language Requirement Semester 1,None,None,1.00
+LANG2,Language Requirement Semester 2,None,None,1.00
+LANG3,Language Requirement Semester 3,None,None,1.00
+ID1,Freshman ID1 Course,None,None,1.00
+AREA1,Area 1 Requirement,1,None,1.00
+AREA2,Area 2 Requirement,2,None,1.00
+AREA3,Area 3 Requirement,3,None,1.00
+AREA4,Area 4 Requirement,4,None,1.00
+AREA5,Area 5 Requirement,5,None,1.00
+AREA6,Area 6 Requirement,6,None,1.00
+OTHER,Other course,None,None,1.00

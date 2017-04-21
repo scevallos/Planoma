@@ -5,18 +5,18 @@ TEMPLATE=(
 'ID1',
 'CSCI051',
 'AREA1',
-'MATH1',
+'MATH030',
 ##########
 'CSCI052',
 'CSCI055',
-'MATH2'
+'MATH031'
 'AREA2',
 
 # SOPHOMORE
 ##########
 'CSCI062',
 'CSCI081',
-'MATH3',
+'MATH060',
 'AREA3',
 ##########
 'CSCI105',
