@@ -18,16 +18,6 @@ def profile_view(request):
     return render(request, 'accounts/profile/view.html')
 
 @login_required
-def mycals(request):
-    # Get the latest 3 schedules made by the user
-    latest_scheds = Schedule.objects.all().filter(owner_id=request.user.id).order_by('-created_at')[:3]
-    template = loader.get_template('accounts/mycals.html')
-    context = {
-        'latest_scheds': latest_scheds
-    }
-    return HttpResponse(template.render(context, request))
-
-@login_required
 def update_profile(request):
     # if request.method == 'POST':
     #     userForm = UserForm(request.POST, instance=request.user)

@@ -11,7 +11,7 @@
     <link id="wsite-base-style" rel="stylesheet" type="text/css" href="http://cdn2.editmysite.com/css/sites.css?buildTime=1234" />
     <link rel="stylesheet" type="text/css" href="http://cdn2.editmysite.com/css/old/fancybox.css?1234" />
     <link rel="stylesheet" type="text/css" href="http://cdn2.editmysite.com/css/social-icons.css?buildtime=1234" media="screen,projection" />
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'planoma/files/main_style.css' %}" title="wsite-theme-css" /> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'planoma/files/main_style.css' %}" title="wsite-theme-css" /> 
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,300italic,700,400italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Cardo:400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
 
@@ -51,7 +51,7 @@
                     <div class="logo">
                         <span class="wsite-logo">
                             <span class="wsite-title-placeholder">&nbsp;</span>
-                            <span style="display:none"><span style="display:none">Best</span></span>
+                            <span style="display:none"><span style="display:none">Best  I DONT KNOW</span></span>
                         </span>
                     </div>
             </div><!-- end .topBar -->
@@ -75,7 +75,7 @@
                     <div class="wsite-menu-wrap" style="display:none">
                         <ul class="wsite-menu">
                             <li id="wsite-nav-897518554912638124" class="wsite-menu-subitem-wrap ">
-                            <a href="{% url 'mycals' %}" class="wsite-menu-subitem">
+                            <a href="{% url 'my_schedules' %}" class="wsite-menu-subitem">
                                 <span class="wsite-menu-title">
                                     View My Schedules
                                 </span>
@@ -124,7 +124,316 @@
                     </li>
             </ul>                
         </div>
+    
+
+<!--$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$% Main $%$%%$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%
+%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$% Wrapper $%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%  -->
+
+   <!--  <div class="main-wrap">
+            <div id="wsite-content" class="wsite-elements wsite-not-footer">
+                <div class="wsite-section-wrap">
+                    <div class="wsite-section wsite-body-section wsite-background-2 wsite-custom-background">
+                        <div class="wsite-section-content">
+                            <div class="container">
+                                <div class="wsite-section-elements">
+                                    <h2 class="wsite-content-title" style="text-align:center;">Create A Schedule</h2>
+
+                                    <div class="wsite-spacer" style="height:50px;"></div>
+
+                                    <div>
+                                        <div class="wsite-multicol">
+                                            <div class="wsite-multicol-table-wrap" style="margin:0 -45px;">
+                                                <table class="wsite-multicol-table">
+                                                    <tbody class="wsite-multicol-tbody">
+                                                        <tr class="wsite-multicol-tr">
+                                                            <td class="wsite-multicol-col" style="width:19.886473233616%; padding:0 45px;">
+
+
+
+                                                                <div class="wsite-spacer" style="height:50px;"></div>
+
+
+
+                                                            </td>
+                                                            <td class="wsite-multicol-col" style="width:60.077505188458%; padding:0 45px;">
+
+
+
+                                                                <div class="wsite-spacer" style="height:50px;"></div>
+
+                                                                <div class="wsite-spacer" style="height:10px;"></div>
+
+
+
+                                                            </td>
+                                                            <td class="wsite-multicol-col" style="width:20.036021577925%; padding:0 45px;">
+                                                                <div class="wsite-spacer" style="height:50px;"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="wsite-spacer" style="height:50px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="wsite-section-wrap">
+                    <div class="wsite-section wsite-body-section wsite-section-bg-color wsite-background-3 wsite-custom-background" style="background-color: #f8f8f8;background-image: none;is_customized: 1;">
+                        <div class="wsite-section-content">
+                            <div class="container">
+                                <div class="wsite-section-elements">
+                                    <div class="wsite-spacer" style="height:38px;"></div>
+
+                                    <h2 class="wsite-content-title" style="text-align:center;">Advisor<br /></h2>
+
+                                    <div>
+                                        <div class="wsite-multicol">
+                                            <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
+                                                <table class="wsite-multicol-table">
+                                                    <tbody class="wsite-multicol-tbody">
+                                                        <tr class="wsite-multicol-tr">
+                                                            <td class="wsite-multicol-col" style="width:49.052631578947%; padding:0 15px;">
+
+
+
+                                                                <div class="wsite-spacer" style="height:50px;"></div>
+
+
+
+                                                            </td>
+                                                            <td class="wsite-multicol-col" style="width:50.947368421053%; padding:0 15px;">
+
+
+
+                                                                <div class="wsite-spacer" style="height:50px;"></div>
+
+
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="wsite-section-wrap">
+                    <div class="wsite-section wsite-body-section wsite-section-bg-color wsite-background-4 wsite-custom-background" style="height: 558px;vertical-align: bottom;background-color: #FFFFFF;background-image: none;is_customized: 1;">
+                        <div class="wsite-section-content">
+                            <div class="container">
+                                <div class="wsite-section-elements">
+                                    <div class="wsite-spacer" style="height:50px;"></div>
+
+                                    <h2 class="wsite-content-title" style="text-align:center;">MY SCHEDULES</h2>
+
+                                    <div>
+                                        <div class="wsite-multicol">
+                                            <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
+                                                <table class="wsite-multicol-table">
+                                                    <tbody class="wsite-multicol-tbody">
+                                                        <tr class="wsite-multicol-tr">
+                                                            <td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
+
+
+
+                                                                <div>
+                                                                    <div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:center">
+                                                                        <a>
+                                                                            <img src="planoma/templates/uploads/498115425.jpg" alt="Picture" style="width:auto;max-width:100%" />
+                                                                        </a>
+                                                                        <div style="display:block;font-size:90%"></div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <h2 class="wsite-content-title" style="text-align:center;"><font size="5">&#8203;Schedule One</font></h2>
+
+                                                                <div class="paragraph" style="text-align:center;">September 14, 2016</div>
+
+
+
+                                                            </td>
+                                                            <td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
+
+
+
+                                                                <div>
+                                                                    <div class="wsite-image wsite-image-border-none " style="padding-top:30px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:center">
+                                                                        <a>
+                                                                            <img src="uploads/273319276.jpg" alt="Picture" style="width:auto;max-width:100%" />
+                                                                        </a>
+                                                                        <div style="display:block;font-size:90%"></div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <h2 class="wsite-content-title" style="text-align:center;"><font size="5">Schedule 2</font></h2>
+
+                                                                <div class="paragraph" style="text-align:center;"><span>August 21, 2016</span>
+                                                                </div>
+
+
+
+                                                            </td>
+                                                            <td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
+
+
+
+                                                                <div>
+                                                                    <div class="wsite-image wsite-image-border-none wsite-image-border-black" style="padding-top:30px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:center">
+                                                                        <a>
+                                                                            <img src="uploads/668812516.jpg" alt="Picture" style="width:auto;max-width:100%" />
+                                                                        </a>
+                                                                        <div style="display:block;font-size:90%"></div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <h2 class="wsite-content-title" style="text-align:center;"><font size="5">Schedule 3</font><br /></h2>
+
+                                                                <div class="paragraph" style="text-align:center;"><span>July 30, 2016</span>
+                                                                </div>
+
+
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="wsite-spacer" style="height:50px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="wsite-section-wrap">
+                    <div class="wsite-section wsite-body-section wsite-section-bg-image wsite-background-7 wsite-custom-background" style="background-image: url('bg.png') ;background-repeat: no-repeat ;background-position: undefined undefined ;background-size: 100% ;background-color: transparent ;background-size: cover;">
+                        <div class="wsite-section-content">
+                            <div class="container">
+                                <div class="wsite-section-elements">
+                                    <div class="wsite-spacer" style="height:26px;"></div>
+
+                                    <h2 class="wsite-content-title" style="text-align:center;"><font color="#ffffff">Thanks For visting</font></h2>
+
+                                    <div class="paragraph" style="text-align:center;"><font color="#ffffff"><font size="5">More Stuff</font></font>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div> -->
+
+<!--$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$% Footer $%$%%$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%
+%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$% Wrapper $%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%  -->
+
+
+        <div class="footer-wrap">
+            <div class="container">
+                <div class="footer">Thanks for Visiting!</div>
+            </div>
+            <!-- end container -->
+        </div>
+        </div>
+
+<!--$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$% Hamburger $%$%%$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%
+%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$% Wrapper $%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%  -->
+
+        <div class="w-navpane nav mobile-nav">
+        <label class="hamburger w-navpane-trigger"><span></span>
+        </label>
+        <ul class="wsite-menu-default">
+            <li id="active" class="wsite-menu-item-wrap">
+                <a href="{% url 'index' %}" class="wsite-menu-item">
+                        Home
+                    </a>
+
+            </li>
+            <li id="pg460448653247643812" class="wsite-menu-item-wrap">
+                <a class="wsite-menu-item">
+                        My Schedules
+                    </a>
+                <div class="wsite-menu-wrap" style="display:none">
+                    <ul class="wsite-menu">
+                        <li id="wsite-nav-897518554912638124" class="wsite-menu-subitem-wrap ">
+                            <a href="{url 'my_schedules'}" class="wsite-menu-subitem">
+                                <span class="wsite-menu-title">
+            Schedules
+        </span>
+                            </a>
+
+                        </li>
+                        <li id="wsite-nav-422608878921176102" class="wsite-menu-subitem-wrap ">
+                            <a href="{% url 'new_schedule'%}" class="wsite-menu-subitem">
+                                <span class="wsite-menu-title">
+            Create New Schedule
+        </span>
+                            </a>
+
+                        </li>
+
+                    </ul>
+                </div>
+
+            </li>
+            <li id="pg399140095119712199" class="wsite-menu-item-wrap">
+                <a class="wsite-menu-item">
+                        Account
+                    </a>
+                <div class="wsite-menu-wrap" style="display:none">
+                    <ul class="wsite-menu">
+                        <li id="wsite-nav-941108741491433856" class="wsite-menu-subitem-wrap ">
+                            <a href="{% url 'profile_view' %}" class="wsite-menu-subitem">
+                                <span class="wsite-menu-title">
+            Profile Settings
+        </span>
+                            </a>
+
+                        </li>
+                        <li id="wsite-nav-803442335788721107" class="wsite-menu-subitem-wrap ">
+                            <a href="my-advisor.html" class="wsite-menu-subitem">
+                                <span class="wsite-menu-title">
+            My Advisor
+        </span>
+                            </a>
+
+                        </li>
+
+                    </ul>
+                </div>
+
+            </li>
+            <li id="pg223160214585533492" class="wsite-menu-item-wrap">
+                <a href="contact-us.html" class="wsite-menu-item">
+                        Contact Us
+                    </a>
+
+            </li>
+        </ul>
     </div>
+
+    <script type="text/javascript" src="{% static 'planoma/files/theme/plugins.js' %}"></script>
+    <script type="text/javascript" src="{% static 'planoma/files/theme/custom.js' %}"></script>
+
+
+
 </body>
 
 </html>

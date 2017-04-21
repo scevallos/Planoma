@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<form method="post" action=".">
+<!-- <form method="post" action=".">
   {% csrf_token %} 
   {{ form.as_p }}
 
@@ -11,5 +11,80 @@
 </form>
 
 <p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
-<p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+<p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p> -->
+
+
+<div class="banner-wrap">
+    <div class="wsite-elements wsite-not-footer wsite-header-elements">
+        <div class="wsite-section-wrap">
+            <div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;height: 666px;background-image: url('bg.png') ;background-repeat: no-repeat ;background-position: 50% 50% ;background-size: 100% ;background-color: #4ac3de ;background-size: cover;">
+                <div class="wsite-section-content">
+                    <div class="container">
+                        <div class="banner">
+                            <div class="wsite-section-elements">
+                            	<form method="post" action=".">
+                            		{% csrf_token %} 
+                            		{{ form.as_p }}
+                            		<input type="submit" value="{% trans 'Log in' %}" />
+                            		<input type="hidden" name="next" value="{{ next }}" />
+                            	</form>
+
+                            	<p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
+                            	<p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+                                <!-- <div class="wsite-spacer" style="height:50px;"></div>
+                                <h2 class="wsite-content-title" style="text-align:center;">Planoma.</h2>
+                                <div class="wsite-spacer" style="height:30px;"></div>
+                                <div>
+                                    <div class="wsite-multicol">
+                                        <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
+                                            {% if user.is_authenticated %}
+                                            <span> Welcome back! </span> {% else %}
+                                            <table class="wsite-multicol-table">
+                                                <tbody class="wsite-multicol-tbody">
+                                                    <tr class="wsite-multicol-tr">
+                                                        <td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
+                                                            <div style="text-align:right;">
+                                                                <div style="height: 10px; overflow: hidden;"></div>
+                                                                <a class="wsite-button wsite-button-large wsite-button-highlight" href="javascript:;">
+                                                                    <span class="wsite-button-inner">Sign Up</span>
+                                                                </a>
+                                                                <div style="height: 10px; overflow: hidden;"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
+                                                            <div style="text-align:left;">
+                                                                <div style="height: 10px; overflow: hidden;"></div>
+                                                                <a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'auth_login' %}">
+                                                                    <span class="wsite-button-inner">Log In</span>
+                                                                </a>
+                                                                <div style="height: 10px; overflow: hidden;"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="main-wrap">
+ 	<div id="wsite-content" class="wsite-elements wsite-not-footer">
+ 		<div class="wsite-section-wrap">
+ 			<div class="wsite-section wsite-body-section wsite-background-2 wsite-custom-background">
+ 				<div class="wsite-spacer" style="height:-50px;"></div>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div> -->
 {% endblock %}

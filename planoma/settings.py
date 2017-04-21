@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'planoma.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
+    # use on sebastian's computer 
     'default' : {
         'ENGINE' : 'django.db.backends.mysql',
         'NAME' : 'planoma',
@@ -85,14 +86,17 @@ DATABASES = {
         'HOST' : 'localhost',
         'PORT' : ''
     }
+
+    # use on simple.cs server -- NOT WORKING
     # 'default' : {
     #     'ENGINE' : 'django.db.backends.mysql',
-    #     'NAME' : 'planoma',
+    #     'NAME' : 'scevallos',
     #     'USER' : 'scevallos',
     #     'PASSWORD' : 'pomona4747',
     #     'HOST' : '134.173.66.208',
     #     'PORT' : '3306'
     # }
+    
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
@@ -139,7 +143,7 @@ USE_TZ = True
 
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/accounts/mycals'
+LOGIN_REDIRECT_URL = '/schedules/my_schedules'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
