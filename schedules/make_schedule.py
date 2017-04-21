@@ -20,12 +20,16 @@ def makeQueue(pid, sid):
 	for session in sched.course_sessions:
 		for course in session.courses.all():
 			past_courses.append(course)
-	# TODO: we need the template we're referencing to be a set of course objects rather than cids
+
+	past_cids = []
+	for course in past_courses
+		past_cids.append(course.course_id)
+	# built a list of past course cids
 	
 
 	# create a set from past courses
 	# this will be used for set-wise difference to get classes from template still not taken
-	p = set(past_courses)
+	p = set(past_cids)
 
 	## we now have a list of remaining courses
 	# this enforces that all areas must be completed
@@ -51,20 +55,21 @@ def makeQueue(pid, sid):
 		first_other = remaining_courses.index("OTHER")
 		remaining_courses[first_other] = 'LANG3'
 
-	# does forcing a schedule to match our template automatically ensure the correct credit count?????????
-	credit_count = 0
-	for x in past_courses:
-		current_course = Course.objects.get(course_id = x)
-		credit_count = credit_count + float(current_course.credit)
+	# # does forcing a schedule to match our template automatically ensure the correct credit count?????????
+	# credit_count = 0
+	# for x in past_courses:
+	# 	current_course = Course.objects.get(course_id = x)
+	# 	credit_count = credit_count + float(current_course.credit)
 
 	return remaining_courses
 
 
 
-def makeSchedule(start_sem, end_sem, remaining_courses, credit_count, chunk_size):
+def makeSchedule(start_sem, end_sem, remaining_courses, chunk_size, sid):
 
 	term_index = TERM_CHOICES.index(start_sem)
 	end_index = TERM_CHOICES.index(end_sem)
+	sched = Schedule.objects.filter(id = sid)[0]
 
 	# if a schedule can't be completed with a given chunk size and start/end sem,
 	# ERROR
@@ -76,9 +81,14 @@ def makeSchedule(start_sem, end_sem, remaining_courses, credit_count, chunk_size
 
 		###### make a query to look up a course with x as the course_id
 		to_add = Course.objects.get(course_id = x)		
-		course = Schedule.course_sessions(semester = TERM_CHOICES[term_index][:2], 
+		# course = Schedule.course_sessions(semester = TERM_CHOICES[term_index][:2], 
+		# 								  term = ('20' + TERM_CHOICES[term_index][-2:])).courses(course_id = x, 
+		# 								  course_name = to_add.course_name, area = to_add.area,
+		# 								  overlay = to_add.overlay, credit = to_add.credit) # Fix: add support for area, course name, and overlay
+		course = sched.course_sessions(semester = TERM_CHOICES[term_index][:2], 
 										  term = ('20' + TERM_CHOICES[term_index][-2:])).courses(course_id = x, 
 										  course_name = to_add.course_name, area = to_add.area,
 										  overlay = to_add.overlay, credit = to_add.credit) # Fix: add support for area, course name, and overlay
+
 		course.save()
 
