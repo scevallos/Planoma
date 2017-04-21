@@ -3,30 +3,30 @@ TEMPLATE=(
 # FRESHMAN
 #########
 'ID1',
-'CS051',
+'CSCI051',
 'AREA1',
 'MATH1',
 ##########
-'CS052',
-'CS055',
+'CSCI052',
+'CSCI055',
 'MATH2'
 'AREA2',
 
 # SOPHOMORE
 ##########
-'CS062',
-'CS081',
+'CSCI062',
+'CSCI081',
 'MATH3',
 'AREA3',
 ##########
-'CS105',
-'CS140',
+'CSCI105',
+'CSCI140',
 'AREA5',
 'OTHER',
 
 # JUNIOR
 ##########
-'CS131',
+'CSCI131',
 'ELEC1',
 'AREA6',
 'OTHER',
@@ -38,7 +38,7 @@ TEMPLATE=(
 
 # SENIOR
 ##########
-'CS190',
+'CSCI190',
 'ELEC3',
 'OTHER',
 'OTHER',

@@ -85,6 +85,14 @@ DATABASES = {
         'HOST' : 'localhost',
         'PORT' : ''
     }
+    # 'default' : {
+    #     'ENGINE' : 'django.db.backends.mysql',
+    #     'NAME' : 'planoma',
+    #     'USER' : 'scevallos',
+    #     'PASSWORD' : 'pomona4747',
+    #     'HOST' : '134.173.66.208',
+    #     'PORT' : '3306'
+    # }
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),

@@ -1,6 +1,6 @@
-from planoma.schedules.models import Schedule
-from planoma.schedules.course_template import TEMPLATE
-from planoma.schedules.schedule_options import *
+from schedules.models import Schedule
+from schedules.course_template import TEMPLATE
+from schedules.schedule_options import *
 
 ########################### TODO:
 ## prepare the data for making a queue
@@ -10,10 +10,18 @@ from planoma.schedules.schedule_options import *
 ###########################
 
 # make a queue for a given user id
-def makeQueue(pid):
+def makeQueue(pid, sid):
 	# for a user id that matches our provided id, get all the course ids in their schedule
 	## instead of querying their schedule, we need to query their list of past courses
-	past_courses = (Schedule.objects.filter(owner.id == pid)).course_sessions.courses.values(course_id)
+	sched = Schedule.objects.filter(owner = pid).filter(id = sid)[0]
+
+	# Getting all the past_courses in this list of Course objects
+	past_courses = []
+	for session in sched.course_sessions:
+		for course in session.courses.all():
+			past_courses.append(course)
+	# TODO: we need the template we're referencing to be a set of course objects rather than cids
+	
 
 	# create a set from past courses
 	# this will be used for set-wise difference to get classes from template still not taken
@@ -48,6 +56,8 @@ def makeQueue(pid):
 	for x in past_courses:
 		current_course = Course.objects.get(course_id = x)
 		credit_count = credit_count + float(current_course.credit)
+
+	return remaining_courses
 
 
 

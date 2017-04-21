@@ -169,6 +169,7 @@
 }
 body.wsite-background {
     background-attachment: fixed !important;
+    background-color: #31c3dd !important;
 }
 .wsite-background.wsite-custom-background {
     background-size: cover !important

@@ -92,6 +92,9 @@ class CourseSession(models.Model):
         choices = SEMS
     )
 
+    def __unicode__(self):
+        return "{} {}".format(self.semester, self.term)
+
     class Meta:
         unique_together = (('term', 'semester'),)
         ordering = ('term', 'semester', )
