@@ -20,6 +20,7 @@ MATH_CHOICES = (
 
 
 # For pre-existing classes taken
+## change to year which is just a number, and semester which is fall or spring
 TERM_CHOICES = (
     ('FA13', 'Fall 2013'),
     ('SP14', 'Spring 2014'),
