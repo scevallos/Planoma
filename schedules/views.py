@@ -2,11 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from forms import CourseForm, ScheduleForm
 from accounts.models import StudentProfile
-<<<<<<< HEAD
 from schedules.models import *
-=======
 from make_schedule import makeQueue, makeSchedule
->>>>>>> 139a312beb5e79b28a39d1801aeccdabe873beb1
+
 
 @login_required
 def add_course(request):
