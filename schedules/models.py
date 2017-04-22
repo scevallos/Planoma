@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from schedule_options import *
+from itertools import chain
 
 class Course(models.Model):
     course_id = models.CharField(max_length=9, primary_key=True) # e.g. CHEM170A or '\w{2,4}\d+\w?'
@@ -123,7 +124,7 @@ class Schedule(models.Model):
 
 
     def get_all_courses(self):
-        return [course for session in [session.courses.all() for session in self.course_sessions.all()] for course in session]
+        return list(chain(*[session.courses.all() for session in s.course_sessions.all()]))
 
 
     def __unicode__(self):
