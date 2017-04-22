@@ -121,5 +121,10 @@ class Schedule(models.Model):
     languages_completed = models.CharField(choices = LANGUAGE_CHOICES, max_length=12, null=True)
     math_completed = models.CharField(choices = MATH_CHOICES, max_length=12, null=True)
 
+
+    def get_all_courses(self):
+        return [course for session in [session.courses.all() for session in self.course_sessions.all()] for course in session]
+
+
     def __unicode__(self):
         return "Schedule owner: {}".format(self.owner)

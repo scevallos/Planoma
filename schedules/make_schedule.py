@@ -9,24 +9,21 @@ from schedules.schedule_options import *
 ## Add lang if they aren't in there, removing some of the others
 ###########################
 
-# make a queue for a given user id
-def makeQueue(pid, sid):
-	# for a user id that matches our provided id, get all the course ids in their schedule
-	## instead of querying their schedule, we need to query their list of past courses
-	sched = Schedule.objects.filter(owner = pid).filter(id = sid)[0]
+def makeQueue(sid):
+	"""
+		Given a schedule id, creates the queue of courses to take based on TEMPLATE
+		minus courses already taken (placed in schedule)
+	"""
 
-	# Getting all the past_courses in this list of Course objects
-	past_courses = []
-	for session in sched.course_sessions:
-		for course in session.courses.all():
-			past_courses.append(course)
+	# Get the schedule with the given scheduleID
+	sched = Schedule.objects.get(id = sid)
 
-	past_cids = []
-	for course in past_courses
-		past_cids.append(course.course_id)
+	# Get all the courses currently on this schedule
+	past_courses = sched.get_all_courses()
+
 	# built a list of past course cids
+	past_cids = [course.course_id for course in past_courses]	
 	
-
 	# create a set from past courses
 	# this will be used for set-wise difference to get classes from template still not taken
 	p = set(past_cids)
