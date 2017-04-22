@@ -89,3 +89,25 @@ def makeSchedule(start_sem, end_sem, remaining_courses, chunk_size, sid):
 
 		course.save()
 
+
+def makeBlankSchedule(start_sem, end_sem, remaining_courses, credit_count, sid):
+
+	term_index = TERM_CHOICES.index(start_sem)
+	end_index = TERM_CHOICES.index(end_sem)
+	num_semesters = end_index - term_index + 1
+	cred_needed = 32 - credit_count
+	chunk_size = cred_needed / num_semesters
+
+	sched = Schedule.objects.filter(id = sid)[0]
+
+	for x in range(1, cred_needed + 1):
+		if (x % chunk_size == 0) term_index++ # if we have met the chunk size, increment the term index
+
+		# fill schedule with others
+		#other = Course.objects.get(course_id = 'OTHER')
+		course = sched.course_session(semester = TERM_CHOICES[term_index][:2], 
+										  term = ('20' + TERM_CHOICES[term_index][-2:])).courses(course_id = 'OTHER', 
+										  course_name = 'Other course', area = None,
+										  overlay = None, credit = '1.00')
+		course.save()
+
