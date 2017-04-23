@@ -9,7 +9,7 @@ TEMPLATE=(
 ##########
 'CSCI052',
 'CSCI055',
-'MATH031'
+'MATH031',
 'AREA2',
 
 # SOPHOMORE

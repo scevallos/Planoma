@@ -21,6 +21,7 @@ from schedules import views as sch_views
 
 urlpatterns = [
     url(r'^$', acc_views.index, name='index'),
+    # url(r'^accounts/register', acc_views.register),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/profile/view/', acc_views.profile_view, name='profile_view'),
     url(r'^accounts/profile/edit/', acc_views.update_profile, name='update_profile'),

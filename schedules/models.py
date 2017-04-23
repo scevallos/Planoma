@@ -118,13 +118,13 @@ class Schedule(models.Model):
     course_sessions = models.ManyToManyField(CourseSession)
 
     # Stuff needed for auto-gen
-    existing_credits = models.CharField(choices = CREDIT_CHOICES, max_length=12, null=True)
-    languages_completed = models.CharField(choices = LANGUAGE_CHOICES, max_length=12, null=True)
-    math_completed = models.CharField(choices = MATH_CHOICES, max_length=12, null=True)
+    existing_credits = models.CharField(choices = CREDIT_CHOICES, max_length=12, null=True, default=0)
+    languages_completed = models.CharField(choices = LANGUAGE_CHOICES, max_length=12, null=True, default=0)
+    math_completed = models.CharField(choices = MATH_CHOICES, max_length=12, null=True, default=None)
 
 
     def get_all_courses(self):
-        return list(chain(*[session.courses.all() for session in s.course_sessions.all()]))
+        return list(chain(*[session.courses.all() for session in self.course_sessions.all()]))
 
 
     def __unicode__(self):

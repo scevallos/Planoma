@@ -28,6 +28,12 @@ def makeQueue(sid):
 	# this will be used for set-wise difference to get classes from template still not taken
 	p = set(past_cids)
 
+
+	# Get reqs specified in schedule form
+	sched.languages_completed
+
+	sched.math_completed
+
 	## we now have a list of remaining courses
 	# this enforces that all areas must be completed
 	remaining_courses = [x for x in TEMPLATE if x not in p]
@@ -64,7 +70,7 @@ def makeQueue(sid):
 
 def makeSchedule(start_sem, end_sem, remaining_courses, chunk_size, sid):
 
-	term_index = TERM_CHOICES.index(start_sem)
+	start_index = TERM_CHOICES.index(start_sem)
 	end_index = TERM_CHOICES.index(end_sem)
 	sched = Schedule.objects.filter(id = sid)[0]
 
@@ -74,39 +80,53 @@ def makeSchedule(start_sem, end_sem, remaining_courses, chunk_size, sid):
 
 	# iterate through the remaining courses and add them to the schedule
 	for x in remaining_courses:
-		if (x % chunk_size == 0) term_index++ # if we have met the chunk size, increment the term index
+		if (x % chunk_size == 0):
+			start_index += 1 # if we have met the chunk size, increment the term index
 
 		###### make a query to look up a course with x as the course_id
 		to_add = Course.objects.get(course_id = x)		
-		# course = Schedule.course_sessions(semester = TERM_CHOICES[term_index][:2], 
-		# 								  term = ('20' + TERM_CHOICES[term_index][-2:])).courses(course_id = x, 
+		# course = Schedule.course_sessions(semester = TERM_CHOICES[start_index][:2], 
+		# 								  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = x, 
 		# 								  course_name = to_add.course_name, area = to_add.area,
 		# 								  overlay = to_add.overlay, credit = to_add.credit) # Fix: add support for area, course name, and overlay
-		course = sched.course_sessions(semester = TERM_CHOICES[term_index][:2], 
-										  term = ('20' + TERM_CHOICES[term_index][-2:])).courses(course_id = x, 
+		course = sched.course_sessions(semester = TERM_CHOICES[start_index][:2], 
+										  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = x, 
 										  course_name = to_add.course_name, area = to_add.area,
 										  overlay = to_add.overlay, credit = to_add.credit) # Fix: add support for area, course name, and overlay
 
 		course.save()
 
 
-def makeBlankSchedule(start_sem, end_sem, remaining_courses, credit_count, sid):
+def makeBlankSchedule(start_sem, end_sem, remaining_courses, sid):
 
-	term_index = TERM_CHOICES.index(start_sem)
+	# Get index of the terms in the TERM_CHOICES tuple
+	start_index = TERM_CHOICES.index(start_sem)
 	end_index = TERM_CHOICES.index(end_sem)
-	num_semesters = end_index - term_index + 1
-	cred_needed = 32 - credit_count
+
+	# Calculate how many semesters this is
+	num_semesters = end_index - start_index + 1
+	
+	# Some checks about these choices
+	try:
+		assert end_index > start_index and num_semesters >= 6 and num_semesters <= 11
+	except:
+		# TODO: figure out best way to handle this
+		print 'Error: Invalid start and end semester!'
+		exit()
+
+	cred_needed = 32 - Schedule.objects.get(id=sid).existing_credits - credit_count
 	chunk_size = cred_needed / num_semesters
 
 	sched = Schedule.objects.filter(id = sid)[0]
 
 	for x in range(1, cred_needed + 1):
-		if (x % chunk_size == 0) term_index++ # if we have met the chunk size, increment the term index
+		if (x % chunk_size == 0):
+			start_index += 1 # if we have met the chunk size, increment the term index
 
 		# fill schedule with others
 		#other = Course.objects.get(course_id = 'OTHER')
-		course = sched.course_session(semester = TERM_CHOICES[term_index][:2], 
-										  term = ('20' + TERM_CHOICES[term_index][-2:])).courses(course_id = 'OTHER', 
+		course = sched.course_session(semester = TERM_CHOICES[start_index][:2], 
+										  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = 'OTHER', 
 										  course_name = 'Other course', area = None,
 										  overlay = None, credit = '1.00')
 		course.save()

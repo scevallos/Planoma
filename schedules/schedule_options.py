@@ -1,21 +1,21 @@
 CREDIT_CHOICES = (
-    ('ZERO', '0'),
-    ('ONE',  '1'),
-    ('TWO',  '2'), 
+    (0, '0'),
+    (1, '1'),
+    (2, '2'), 
 )
 
 LANGUAGE_CHOICES = (
-    ('ZERO',  '0'),
-    ('ONE',   '1'),
-    ('TWO',   '2'),
-    ('THREE', '3'),
+    (0, '0'),
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
 )
 
 MATH_CHOICES = (
     ('NONE', 'None'),
-    ('CALC1', 'Calc I'),
-    ('CALC2', 'Calc II'),
-    ('LINEAR', 'Linear+')
+    ('MATH030', 'Calc1'),
+    ('MATH031', 'Calc2'),
+    ('MATH060', 'Linear')
 )
 
 

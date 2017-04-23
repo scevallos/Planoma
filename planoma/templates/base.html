@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="{% static 'planoma/main.css' %}" />
 </head>
 
-<body class="header-page  wsite-page-index  wsite-theme-light" style="background-image: #31c3dd">
+<body class="header-page  wsite-page-index  wsite-theme-light">
     <div class="wrapper">
         <div class="header-wrap">
             <div id="topBar" class="topbar">
@@ -56,7 +56,7 @@
                     </div>
             </div><!-- end .topBar -->
 
-            <div class="banner-wrap">
+            <div class="banner-wrap" style="background-image: url('{% static 'planoma/bg.png' %}');">
                 {% block content%}{% endblock %}
             </div>
         </div> <!-- end .header-wrap -->
@@ -373,7 +373,7 @@
                 <div class="wsite-menu-wrap" style="display:none">
                     <ul class="wsite-menu">
                         <li id="wsite-nav-897518554912638124" class="wsite-menu-subitem-wrap ">
-                            <a href="{url 'my_schedules'}" class="wsite-menu-subitem">
+                            <a href="{% url 'my_schedules' %}" class="wsite-menu-subitem">
                                 <span class="wsite-menu-title">
             Schedules
         </span>

@@ -26,9 +26,9 @@ def new_schedule(request):
         if form.is_valid():
             schedule = form.save(commit=False)
             schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
-            schedule.save()
+            # schedule.save()
             ## still need to make course sessions???? Not sure how those really work with this view
-            remaining_courses = makeQueue(request.user.id, schedule.id)
+            remaining_courses = makeQueue(schedule.id)
             makeSchedule(schedule.start_sem, schedule.end_sem, remaining_courses, 4, schedule.id)
             return redirect('my_schedules')
     else:
