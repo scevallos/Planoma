@@ -2,22 +2,42 @@
 {% load static %}
 
 {% block content %}
-<h2> Your Schedules </h2>
-<a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a>
+<div class="banner-wrap">
+	<div class="wsite-elements wsite-not-footer wsite-header-elements">
+		<div class="wsite-section-wrap">
+			<div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%; overflow:hidden" >
+				<div class="wsite-section-content">
+					<div class="container">
+						<div class="banner">
+							<div class="wsite-section-elements">
+								<div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
+								<h2 class="wsite-content-title" style="text-align:center;"><br>My Schedules</h2>
+								<div class="wsite-spacer" style="height:30px;"></div>
+								<a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a>
+								<div class="wsite-spacer" style="height:455px;"></div>
+								<!-- <div class="wsite-spacer" style="height:100%;"></div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-<h3> Your Schedules</h3>
+<!-- <h3> Your Schedules</h3>
 {% if latest_scheds %}
-	<ul>
-		{% for sched in latest_scheds %}
-			<li>
-				<h4>{{ sched.title}}</h4>
-				<p> Made on: {{ sched.created_at }}</p>
-				<p> Updated on: {{ sched.updated_at }}</p>
-			</li>
-		{% endfor %}
-	</ul>
+<ul>
+	{% for sched in latest_scheds %}
+	<li>
+		<h4>{{ sched.title}}</h4>
+		<p> Made on: {{ sched.created_at }}</p>
+		<p> Updated on: {{ sched.updated_at }}</p>
+	</li>
+	{% endfor %}
+</ul>
 {% else %}
-	<h4>You haven't made any schedules.</h4>
+<h4>You haven't made any schedules.</h4> -->
 {% endif %}
 {% endblock %}
