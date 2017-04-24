@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^contact_us/', acc_views.contact_us, name='contact_us'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/profile/view/', acc_views.profile_view, name='profile_view'),
+    url(r'^accounts/profile/my_advisor/', acc_views.my_advisor, name='my_advisor'),
     url(r'^accounts/profile/edit/', acc_views.update_profile, name='update_profile'),
     url(r'^schedules/my_schedules/', sch_views.my_schedules, name='my_schedules'),
     url(r'^schedules/new_schedule/', sch_views.new_schedule, name='new_schedule'),

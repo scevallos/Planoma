@@ -22,6 +22,10 @@ def profile_view(request):
     return render(request, 'accounts/profile/view.html')
 
 @login_required
+def my_advisor(request):
+    return render(request, 'accounts/profile/my-advisor.html')    
+
+@login_required
 @transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
