@@ -18,7 +18,7 @@
 								<ul>
 									<ul>Username: {{ user.username }}</ul>
 									<ul>First Name: {{ user.first_name }}</ul>
-									<ul>Major: {{ user.studentprofile.major }}</ul>
+									<ul>Major: {{ user.studentprofile.get_dept_display }}</ul>
 									{% if user.studentprofile.adv %}
 									<ul>Advisor: {{ user.studentprofile.adv }} </ul>
 									{% else %}
@@ -29,6 +29,13 @@
 								<a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'update_profile' %}">
 									<span class="wsite-button-inner">Update Profile</span>
 								</a>
+								{% if messages %}
+								  <ul class="messages">
+								    {% for message in messages %}
+								      <li class="{{ message.tags }}">{{ message }}</li>
+								    {% endfor %}
+								  </ul>
+								{% endif %}
 
 								<div class="wsite-spacer" style="height:350px;"></div>
 							</div>

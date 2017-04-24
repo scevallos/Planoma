@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'annoying',
     'accounts',
     'schedules',
 ]
@@ -107,8 +106,6 @@ DATABASES = {
 # Number of days given to activate account
 ACCOUNT_ACTIVATION_DAYS = 7
 
-# AUTH_USER_MODEL = 'accounts.Profile'
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -133,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
