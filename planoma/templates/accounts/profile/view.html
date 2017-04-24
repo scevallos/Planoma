@@ -1,15 +1,45 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
-<h2> Your Profile </h2>
-<h4>{{ user.get_full_name }}</h4>
-<ul>
-  <li>Username: {{ user.username }}</li>
-  <li>First Name: {{ user.first_name }}</li>
-  <li>Major: {{ user.studentprofile.major }}</li>
-</ul>
-<a href="{% url 'update_profile' %}">Update profile</a>
+<div class="banner-wrap">
+	<div class="wsite-elements wsite-not-footer wsite-header-elements">
+		<div class="wsite-section-wrap">
+			<div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%; overflow:hidden" >
+				<div class="wsite-section-content">
+					<div class="container">
+						<div class="banner">
+							<div class="wsite-section-elements">
+								<div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
+								<h2 class="wsite-content-title" style="text-align:center;"><br>My Profile</h2>
+
+								<h4>{{ user.get_full_name }}</h4>
+								<ul>
+									<ul>Username: {{ user.username }}</ul>
+									<ul>First Name: {{ user.first_name }}</ul>
+									<ul>Major: {{ user.studentprofile.major }}</ul>
+									{% if user.studentprofile.adv %}
+									<ul>Advisor: {{ user.studentprofile.adv }} </ul>
+									{% else %}
+									<ul> Add your advisor </ul>
+									{% endif %}
+								</ul>
+								<!-- <a href="{% url 'update_profile' %}">Update profile</a> -->
+								<a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'update_profile' %}">
+									<span class="wsite-button-inner">Update Profile</span>
+								</a>
+
+								<div class="wsite-spacer" style="height:350px;"></div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- <form method="post">
   {% csrf_token %}
   {{ user_form.as_p }}
