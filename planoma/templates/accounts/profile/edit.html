@@ -4,7 +4,8 @@
 {% block content %}
 	<h2> Update Your Profile </h2>
 	<form method="POST" class="update-form">{% csrf_token %}
-		{{ form.as_p }}
+		{{ user_form.as_p }}
+		{{ prof_form.as_p }}
 		<button type="submit" class="save btn">Save</button>
 	</form>
 {% endblock %}
