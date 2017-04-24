@@ -2,14 +2,13 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
-from annoying.fields import AutoOneToOneField
-
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from datetime import datetime
 from dept_codes import DEPTS
 
 class UserProfile(models.Model):
-    user = AutoOneToOneField(User, primary_key=True)
+    user = models.OneToOneField(User, primary_key=True)
     dept = models.CharField(
         max_length=4,
         choices = DEPTS,
@@ -33,6 +32,15 @@ class StudentProfile(UserProfile):
     year = models.IntegerField(
         choices=YEAR_CHOICES,
         default=datetime.now().year
-    ) # default to being a first-year lol
+    )
     adv = models.ForeignKey('AdvisorProfile', null=True, on_delete=models.SET_NULL)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            StudentProfile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.studentprofile.save()
 

@@ -17,11 +17,8 @@ class UserForm(forms.ModelForm):
 class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
-        # model.user = current_user
         fields = ('dept', 'year')
 
-
-# class CustomRegisterForm(registration.forms.RegistrationForm):
 
 
 ## A form to be used by students to invite their advisors
