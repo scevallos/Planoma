@@ -1,10 +1,37 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
-	<h2> Update Your Profile </h2>
-	<form method="POST" class="update-form">{% csrf_token %}
-		{{ form.as_p }}
-		<button type="submit" class="save btn">Save</button>
-	</form>
+	<div class="banner-wrap">
+	<div class="wsite-elements wsite-not-footer wsite-header-elements">
+		<div class="wsite-section-wrap">
+			<div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%; overflow:hidden" >
+				<div class="wsite-section-content">
+					<div class="container">
+						<div class="banner">
+							<div class="wsite-section-elements">
+								<div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
+								<h2 class="wsite-content-title" style="text-align:center;"><br>Update Profile</h2>
+
+								<form method="POST" class="update-form">{% csrf_token %}
+									{{ user_form.as_p }}
+									{{ prof_form.as_p }}
+									<a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'auth_login' %}" >
+										<span class="wsite-button-inner">Save</span>
+									</a>
+									<button type="submit" class="save btn">Save</button>
+								</form>
+
+
+								<div class="wsite-spacer" style="height:350px;"></div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+	
 {% endblock %}
