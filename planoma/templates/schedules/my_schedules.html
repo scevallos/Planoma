@@ -13,8 +13,22 @@
 								<div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
 								<h2 class="wsite-content-title" style="text-align:center;"><br>My Schedules</h2>
 								<div class="wsite-spacer" style="height:30px;"></div>
+								{% if latest_scheds %}
+								<ul>
+									{% for sched in latest_scheds %}
+									<li>
+										<h4>{{ sched.title}}</h4>
+										<p> Made on: {{ sched.created_at }}</p>
+										<p> Updated on: {{ sched.updated_at }}</p>
+									</li>
+									{% endfor %}
+								</ul>
+								{% else %}
+								<h4>You haven't made any schedules. Create One!</h4> 
 								<a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a>
-								<div class="wsite-spacer" style="height:455px;"></div>
+								<div class="wsite-spacer" style="height:305px;"></div>
+								{% endif %}
+								
 								<!-- <div class="wsite-spacer" style="height:100%;"></div> -->
                             </div>
                         </div>

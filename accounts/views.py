@@ -13,6 +13,9 @@ from forms import UserForm, StudentProfileForm
 def index(request):
     return render(request, 'index.html',)
 
+def contact_us(request):
+    return render(request, 'contact-us.html',)
+
 @login_required
 def profile_view(request):
     return render(request, 'accounts/profile/view.html')

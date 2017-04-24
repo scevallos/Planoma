@@ -337,64 +337,64 @@
 <!--$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$% Hamburger $%$%%$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%
 %$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$% Wrapper $%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%  -->
 
-        <div class="w-navpane nav mobile-nav">
-            <label class="hamburger w-navpane-trigger"><span></span>
-            </label>
-            <ul class="wsite-menu-default">
-                <li id="active" class="wsite-menu-item-wrap">
-                    <a href="{% url 'index' %}" class="wsite-menu-item"> Home </a>
-                </li>
+<div class="w-navpane nav mobile-nav">
+    <label class="hamburger w-navpane-trigger"><span></span>
+    </label>
+    <ul class="wsite-menu-default">
+        <li id="active" class="wsite-menu-item-wrap">
+            <a href="{% url 'index' %}" class="wsite-menu-item"> Home </a>
+        </li>
 
-                <li id="pg460448653247643812" class="wsite-menu-item-wrap">
-                    <a class="wsite-menu-item"> My Schedules </a>
-                    <div class="wsite-menu-wrap" style="display:none">
-                        <ul class="wsite-menu">
-                            <li id="wsite-nav-897518554912638124" class="wsite-menu-subitem-wrap ">
-                                <a href="{% url 'my_schedules' %}" class="wsite-menu-subitem">
-                                    <span class="wsite-menu-title"> Schedules </span>
-                                </a>
+        <li id="pg460448653247643812" class="wsite-menu-item-wrap">
+            <a class="wsite-menu-item"> My Schedules </a>
+            <div class="wsite-menu-wrap" style="display:none">
+                <ul class="wsite-menu">
+                    <li id="wsite-nav-897518554912638124" class="wsite-menu-subitem-wrap ">
+                        <a href="{% url 'my_schedules' %}" class="wsite-menu-subitem">
+                            <span class="wsite-menu-title"> Schedules </span>
+                        </a>
 
-                            </li>
-                            <li id="wsite-nav-422608878921176102" class="wsite-menu-subitem-wrap ">
-                                <a href="{% url 'new_schedule'%}" class="wsite-menu-subitem">
-                                    <span class="wsite-menu-title"> Create New Schedule </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    </li>
+                    <li id="wsite-nav-422608878921176102" class="wsite-menu-subitem-wrap ">
+                        <a href="{% url 'new_schedule'%}" class="wsite-menu-subitem">
+                            <span class="wsite-menu-title"> Create New Schedule </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                </li>
-                <li id="pg399140095119712199" class="wsite-menu-item-wrap">
-                    <a class="wsite-menu-item">
-                        Account
-                    </a>
-                    <div class="wsite-menu-wrap" style="display:none">
-                        <ul class="wsite-menu">
-                            <li id="wsite-nav-941108741491433856" class="wsite-menu-subitem-wrap ">
-                                <a href="{% url 'profile_view' %}" class="wsite-menu-subitem">
-                                    <span class="wsite-menu-title">Profile Settings  </span>
-                                </a>
+        </li>
+        <li id="pg399140095119712199" class="wsite-menu-item-wrap">
+            <a class="wsite-menu-item">
+                Account
+            </a>
+            <div class="wsite-menu-wrap" style="display:none">
+                <ul class="wsite-menu">
+                    <li id="wsite-nav-941108741491433856" class="wsite-menu-subitem-wrap ">
+                        <a href="{% url 'profile_view' %}" class="wsite-menu-subitem">
+                            <span class="wsite-menu-title">Profile Settings  </span>
+                        </a>
 
-                            </li>
-                            <li id="wsite-nav-803442335788721107" class="wsite-menu-subitem-wrap ">
-                                <a href="my-advisor.html" class="wsite-menu-subitem">
-                                    <span class="wsite-menu-title">My Advisor </span>
-                                </a>
+                    </li>
+                    <li id="wsite-nav-803442335788721107" class="wsite-menu-subitem-wrap ">
+                        <a href="my-advisor.html" class="wsite-menu-subitem">
+                            <span class="wsite-menu-title">My Advisor </span>
+                        </a>
 
-                            </li>
+                    </li>
 
-                        </ul>
-                    </div>
+                </ul>
+            </div>
 
-                </li>
-                <li id="pg223160214585533492" class="wsite-menu-item-wrap">
-                    <a href="contact-us.html" class="wsite-menu-item">
-                        Contact Us
-                    </a>
+        </li>
+        <li id="pg223160214585533492" class="wsite-menu-item-wrap">
+            <a href="{% url 'contact_us'%}" class="wsite-menu-item">
+                Contact Us
+            </a>
 
-                </li>
-            </ul>
-        </div>
+        </li>
+    </ul>
+</div>
 
         <script type="text/javascript" src="{% static 'planoma/files/theme/plugins.js' %}"></script>
         <script type="text/javascript" src="{% static 'planoma/files/theme/custom.js' %}"></script>

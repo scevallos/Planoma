@@ -18,7 +18,13 @@
                                 <div>
                                     <div class="wsite-multicol"><div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
                                         {% if user.is_authenticated %}
-                                        <span> Welcome back! </span>
+
+                                        <a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" width="15%" height="15%" 
+                                            alt="Create-icon"/></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <a href="{% url 'my_schedules' %}" ><img src="{% static 'planoma/images/schedules/icon-view-schedule.png'%}" width="15%" height="15%" 
+                                            alt="View-icon"/></a>
+                                        <div class="wsite-spacer" style="height:290px;"></div>
+
                                         {% else %}
                                         <table class="wsite-multicol-table">
                                             <tbody class="wsite-multicol-tbody">
@@ -55,23 +61,6 @@
 </div>
 </div>
 
-<!--$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$% Main $%$%%$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%
-%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$% Wrapper $%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%  -->
-
-<div class="main-wrap">
-    <div class="wsite-section-wrap">
-        <div class="wsite-section wsite-body-section wsite-section-bg-image wsite-background-7 wsite-custom-background" 
-        style = "background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: undefined undefined ;background-size: 100% ;background-color: transparent ;background-size: cover;">
-            <!-- <div class="wsite-section-content">
-                <div class="container">
-                    <div class="wsite-section-elements">
-                        <div class="wsite-spacer" style="height:26px;"></div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-    </div>
-</div>
 
 
 {% endblock %}
