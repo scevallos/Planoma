@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+	<div class="banner-wrap">
+	<div class="wsite-elements wsite-not-footer wsite-header-elements">
+		<div class="wsite-section-wrap">
+			<div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%; overflow:hidden" >
+				<div class="wsite-section-content">
+					<div class="container">
+						<div class="banner">
+							<div class="wsite-section-elements">
+								<div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
+								<h2 class="wsite-content-title" style="text-align:center;"><br>My Advisor</h2>
+								{% if user.studentprofile.adv %}
+									Advisor: {{ user.studentprofile.adv }}
+								{% else %}
+									You do not have an advisor right now.<br>
+									<a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'auth_login' %}" >
+										<span class="wsite-button-inner">Add your Advisor</span>
+									</a>
+								{% endif %}
+
+								<div class="wsite-spacer" style="height:350px;"></div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+	
+{% endblock %}
