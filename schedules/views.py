@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from forms import CourseForm, ScheduleForm
 from accounts.models import StudentProfile
 from schedules.models import *
-from make_schedule import makeQueue, makeSchedule
+from make_schedule import *
 
 
 @login_required
@@ -26,10 +26,9 @@ def new_schedule(request):
         if form.is_valid():
             schedule = form.save(commit=False)
             schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
-            # schedule.save()
-            ## still need to make course sessions???? Not sure how those really work with this view
+            schedule.save()
             remaining_courses = makeQueue(schedule.id)
-            makeSchedule(schedule.start_sem, schedule.end_sem, remaining_courses, 4, schedule.id)
+            makeBlankSchedule(remaining_courses, schedule.id)
             return redirect('my_schedules')
     else:
         form = ScheduleForm()

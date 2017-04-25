@@ -1,6 +1,7 @@
-from schedules.models import Schedule
+from schedules.models import *
 from schedules.course_template import TEMPLATE
 from schedules.schedule_options import *
+
 
 ########################### TODO:
 ## prepare the data for making a queue
@@ -124,22 +125,24 @@ def makeBlankSchedule(remaining_courses, sid):
 
 	for x in xrange(1, cred_needed + 1):
 		if (x % chunk_size == 0):
-			sesh = CourseSession(semester = TERM_CHOICES[start_index][0][:2], term = ('20' + TERM_CHOICES[start_index][0][-2:]))
+			sesh = CourseSession(schedule=sched, semester = TERM_CHOICES[start_index][0][:2], term = ('20' + TERM_CHOICES[start_index][0][-2:]))
 			sesh.save()
-			for i in xrange(chunk_size):
-				sesh.course.add(other)
-			sesh.save()
+			sched.course_sessions.add(sesh)
+			sched.save()
+			# for i in xrange(chunk_size):
+			# 	sesh.course.add(other)
+			# sesh.save()
 			start_index += 1 # if we have met the chunk size, increment the term index
 
 
 
 		# fill schedule with others
 		#other = Course.objects.get(course_id = 'OTHER')
-		course = sched.course_session(semester = TERM_CHOICES[start_index][:2], 
-										  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = 'OTHER', 
-										  course_name = 'Other course', area = None,
-										  overlay = None, credit = '1.00')
-		course.save()
+		# course = sched.course_session(semester = TERM_CHOICES[start_index][:2], 
+		# 								  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = 'OTHER', 
+		# 								  course_name = 'Other course', area = None,
+		# 								  overlay = None, credit = '1.00')
+		# course.save()
 
 def getIndex(term_id, schedule):
 	for i in xrange(len(TERM_CHOICES)):
