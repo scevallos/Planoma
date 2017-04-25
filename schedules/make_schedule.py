@@ -1,6 +1,5 @@
 from schedules.models import *
-from schedules.course_template import TEMPLATE
-from schedules.schedule_options import *
+from constants import *
 
 
 ########################### TODO:

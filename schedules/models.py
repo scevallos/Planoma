@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from schedule_options import *
+from constants import *
 from itertools import chain
 
 class Course(models.Model):

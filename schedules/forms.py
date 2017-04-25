@@ -1,7 +1,7 @@
 from django import forms
 from models import Schedule, Course
 from accounts.dept_codes import DEPTS
-from schedule_options import *
+from constants import *
 
 class CourseForm(forms.ModelForm):
     class Meta:
@@ -12,6 +12,10 @@ class ScheduleForm(forms.ModelForm):
     class Meta:
         model = Schedule
         fields = ('title', 'start_sem', 'end_sem', 'public', 'existing_credits', 'languages_completed', 'math_completed')
+
+
+class ClassesTakenForm(forms.Form):
+	classes_taken = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), widget=forms.CheckboxSelectMultiple())
 
 
 # class ScheduleOptionsForm(forms.ModelForm):

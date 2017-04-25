@@ -1,17 +1,72 @@
+TEMPLATE=(
+
+# FRESHMAN
+#########
+'ID1',
+'CSCI051',
+'AREA1',
+'MATH030',
+##########
+'CSCI052',
+'CSCI055',
+'MATH031',
+'AREA2',
+
+# SOPHOMORE
+##########
+'CSCI062',
+'CSCI081',
+'MATH060',
+'AREA3',
+##########
+'CSCI105',
+'CSCI140',
+'AREA5',
+'OTHER',
+
+# JUNIOR
+##########
+'CSCI131',
+'ELEC1',
+'AREA6',
+'OTHER',
+##########
+'ELEC2',
+'OTHER',
+'OTHER',
+'OTHER',
+
+# SENIOR
+##########
+'CSCI190',
+'ELEC3',
+'OTHER',
+'OTHER',
+##########
+'OTHER',
+'OTHER',
+'OTHER',
+'OTHER'
+)
+
+###
+# Schedule Modifiers:
+###
 CREDIT_CHOICES = (
-    ('0', '0'),
-    ('1', '1'),
-    ('2', '2'), 
+    (0, '0'),
+    (1, '1'),
+    (2, '2'), 
 )
 
 LANGUAGE_CHOICES = (
-    ('0', '0'),
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
+    (0, '0'),
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
 )
 
 MATH_CHOICES = (
+    # 
     ('NONE', 'None'),
     ('MATH030', 'Calc1'),
     ('MATH031', 'Calc2'),
@@ -39,3 +94,4 @@ TERM_CHOICES = (
     ('FA20', 'Fall 2020'),
     ('SP21', 'Spring 2021'),
 )
+
