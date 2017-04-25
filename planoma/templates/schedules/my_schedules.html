@@ -17,7 +17,7 @@
 								<ul>
 									{% for sched in latest_scheds %}
 									<li>
-										<h4>{{ sched.title}}</h4>
+										<h4><a href="{% url 'detail' sched.id %}">{{ sched.title}}</a></h4>
 										<p> Made on: {{ sched.created_at }}</p>
 										<p> Updated on: {{ sched.updated_at }}</p>
 									</li>

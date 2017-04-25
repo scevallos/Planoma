@@ -3,5 +3,15 @@
 
 {% block content %}
 	<h2> Schedule Viewer </h2>
-	
+	<h3>Title: {{ schedule.title }}</h3>
+	<ul>
+	{% for session in schedule.course_sessions.all %}
+		<li><h4>{{ session.get_semester_display }} {{ session.term }}</h4></li>
+		<ul>
+		{% for course in session.courses.all %}
+			<li>{{ course.course_name }}</li>
+		{% endfor %}
+		</ul>
+	{% endfor %}
+	</ul>
 {% endblock %}

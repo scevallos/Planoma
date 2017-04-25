@@ -33,3 +33,9 @@ def new_schedule(request):
     else:
         form = ScheduleForm()
     return render(request, 'schedules/new_schedule.html', {'form': form})
+
+@login_required
+def detail(request, schedule_id):
+    # Get the schedule 
+    sched = get_object_or_404(Schedule, pk=schedule_id)
+    return render(request, 'schedules/detail.html', {'schedule': sched})
