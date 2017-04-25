@@ -70,9 +70,12 @@ def makeQueue(sid):
 
 def makeSchedule(start_sem, end_sem, remaining_courses, chunk_size, sid):
 
+	
+
+
 	start_index = TERM_CHOICES.index(start_sem)
 	end_index = TERM_CHOICES.index(end_sem)
-	sched = Schedule.objects.filter(id = sid)[0]
+	
 
 	# if a schedule can't be completed with a given chunk size and start/end sem,
 	# ERROR
@@ -97,11 +100,11 @@ def makeSchedule(start_sem, end_sem, remaining_courses, chunk_size, sid):
 		course.save()
 
 
-def makeBlankSchedule(start_sem, end_sem, remaining_courses, sid):
+def makeBlankSchedule(remaining_courses, sid):
 
-	# Get index of the terms in the TERM_CHOICES tuple
-	start_index = TERM_CHOICES.index(start_sem)
-	end_index = TERM_CHOICES.index(end_sem)
+	sched = Schedule.objects.get(id = sid)
+	start_index = getIndex(sched.start_sem, sched)
+	end_index = getIndex(sched.end_sem, sched)
 
 	# Calculate how many semesters this is
 	num_semesters = end_index - start_index + 1
@@ -114,14 +117,21 @@ def makeBlankSchedule(start_sem, end_sem, remaining_courses, sid):
 		print 'Error: Invalid start and end semester!'
 		exit()
 
-	cred_needed = 32 - Schedule.objects.get(id=sid).existing_credits - credit_count
+	cred_needed = 32 - int(sched.existing_credits)
 	chunk_size = cred_needed / num_semesters
 
-	sched = Schedule.objects.filter(id = sid)[0]
+	other = Course.objects.get(course_id='OTHER')
 
-	for x in range(1, cred_needed + 1):
+	for x in xrange(1, cred_needed + 1):
 		if (x % chunk_size == 0):
+			sesh = CourseSession(semester = TERM_CHOICES[start_index][0][:2], term = ('20' + TERM_CHOICES[start_index][0][-2:]))
+			sesh.save()
+			for i in xrange(chunk_size):
+				sesh.course.add(other)
+			sesh.save()
 			start_index += 1 # if we have met the chunk size, increment the term index
+
+
 
 		# fill schedule with others
 		#other = Course.objects.get(course_id = 'OTHER')
@@ -131,3 +141,7 @@ def makeBlankSchedule(start_sem, end_sem, remaining_courses, sid):
 										  overlay = None, credit = '1.00')
 		course.save()
 
+def getIndex(term_id, schedule):
+	for i in xrange(len(TERM_CHOICES)):
+		if TERM_CHOICES[i][0] == term_id:
+			return i

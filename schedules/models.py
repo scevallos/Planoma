@@ -81,6 +81,7 @@ class EquivCourses(models.Model):
         unique_together = (('course_one', 'course_two', 'equiv_to'),)
 
 class CourseSession(models.Model):
+    schedule = models.ForeignKey('Schedule', on_delete=models.CASCADE, related_name='schedule')
     courses = models.ManyToManyField(Course)
     term = models.IntegerField(default=2017) # The year the course is taking place
 
@@ -97,7 +98,7 @@ class CourseSession(models.Model):
         return "{} {}".format(self.semester, self.term)
 
     class Meta:
-        unique_together = (('term', 'semester'),)
+        unique_together = (('schedule', 'term', 'semester'),)
         ordering = ('term', 'semester', )
 
 class Schedule(models.Model):
@@ -115,7 +116,7 @@ class Schedule(models.Model):
     # title for the schedule
     title = models.CharField(max_length=50, default='Untitled', blank=True)
 
-    course_sessions = models.ManyToManyField(CourseSession)
+    course_sessions = models.ManyToManyField(CourseSession, related_name='sessions')
 
     # Stuff needed for auto-gen
     existing_credits = models.CharField(choices = CREDIT_CHOICES, max_length=12, null=True, default=0)
