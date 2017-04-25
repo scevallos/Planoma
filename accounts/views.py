@@ -1,6 +1,7 @@
 # from django.db import transaction
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse
 from django.template import loader
 from django.contrib import messages
@@ -32,6 +33,9 @@ def update_profile(request):
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = StudentProfileForm(request.POST, instance=request.user.studentprofile)
         if profile_form.is_valid() and user_form.is_valid():
+            # if blank, use last saved entry
+            # if not user_form.data['email']:
+            #     user_form.cleaned_data['email'] = User.objects.get(id=request.user.id).email
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile was successfully updated!')
