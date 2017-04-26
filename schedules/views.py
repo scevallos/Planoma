@@ -27,6 +27,20 @@ def new_schedule(request):
             schedule = form.save(commit=False)
             schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
             schedule.save()
+
+            # Make dummy course session
+            sesh = CourseSession(term=4747, semester='FA', schedule=schedule)
+            sesh.save()
+
+            # Add all previous courses
+            for course in form.cleaned_data['classes_taken']:
+                sesh.courses.add(course)
+                sesh.save()
+
+            # Save it to the schedule's course session
+            schedule.course_sessions.add(sesh)
+            schedule.save()
+
             remaining_courses = makeQueue(schedule.id)
             makeBlankSchedule(remaining_courses, schedule.id)
             return redirect('my_schedules')

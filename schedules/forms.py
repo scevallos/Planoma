@@ -9,7 +9,7 @@ class CourseForm(forms.ModelForm):
         fields = ('course_id', 'course_name', 'area', 'overlay', 'credit')
 
 class ScheduleForm(forms.ModelForm):
-    # classes_taken = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), widget=forms.CheckboxSelectMultiple())
+    classes_taken = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), widget=forms.CheckboxSelectMultiple())
     # def add_prev_courses(self):
     #     sesh = CourseSession(schedule=self.instance, term=4747, semester='FA')
     #     sesh.save()
