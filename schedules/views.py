@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from forms import CourseForm, ScheduleForm, ClassesTakenForm
+from forms import CourseForm, ScheduleForm #, ClassesTakenForm
 from accounts.models import StudentProfile
 from schedules.models import *
 from make_schedule import *
@@ -23,8 +23,7 @@ def my_schedules(request):
 def new_schedule(request):
     if request.method == "POST":
         form = ScheduleForm(request.POST)
-        class_form = ClassesTakenForm(request.POST)
-        if (form.is_valid() && class_form.is_valid()):
+        if form.is_valid():
             schedule = form.save(commit=False)
             schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
             schedule.save()
@@ -33,11 +32,18 @@ def new_schedule(request):
             return redirect('my_schedules')
     else:
         form = ScheduleForm()
-        class_form = ClassesTakenForm()
-    return render(request, 'schedules/new_schedule.html', {'form': form}, {'class_form': class_form})
+    return render(request, 'schedules/new_schedule.html', {'form': form})
 
 @login_required
 def detail(request, schedule_id):
     # Get the schedule 
     sched = get_object_or_404(Schedule, pk=schedule_id)
+
+    # Check to see requester is the owner, if it's private
+    if sched.owner.user != request.user and not sched.public:
+        return render(request, 'schedules/private.html')
+
     return render(request, 'schedules/detail.html', {'schedule': sched})
+
+def private(request):
+    return render(request, 'schedules/private.html')

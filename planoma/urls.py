@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^accounts/profile/edit/', acc_views.update_profile, name='update_profile'),
     url(r'^schedules/my_schedules/', sch_views.my_schedules, name='my_schedules'),
     url(r'^schedules/new_schedule/', sch_views.new_schedule, name='new_schedule'),
+    url(r'^schedules/private/', sch_views.private, name='private'),
     url(r'^schedules/detail/(?P<schedule_id>[0-9]+)$', sch_views.detail, name='detail'),
     url(r'^courses/course_new/', sch_views.add_course, name='course_new'),
     url(r'^admin/', admin.site.urls),
