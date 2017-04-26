@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2> Remaining Courses </h2>
+<div class="scroll" style="background-color: #00FFFF; width: 200px; height: 350px; overflow: scroll; margin-right: 8px;">
+<ul>
+{% for course in remaining_courses %}
+	<li>{{ course.course_name }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="right-div" style="margin-left: 258px;">
+<h2> Current Schedule </h2>
+</div>
+
+{% endblock %}
+
