@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from forms import CourseForm, ScheduleForm #, ClassesTakenForm
 from accounts.models import StudentProfile
 from schedules.models import *
@@ -47,7 +48,10 @@ def new_schedule(request):
 
             remaining_courses = makeQueue(schedule.id)
             makeBlankSchedule(remaining_courses, schedule.id)
+            messages.success(request, 'Your schedule was successfully made!')
             return redirect('my_schedules')
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
         form = ScheduleForm()
     return render(request, 'schedules/new_schedule.html', {'form': form})
@@ -84,7 +88,7 @@ def detail(request, schedule_id):
     if sched.owner.user != request.user and not sched.public:
         return render(request, 'schedules/private.html')
 
-    return render(request, 'schedules/detail.html', {'schedule': sched})
+    return render(request, 'schedules/detail.html', {'title': sched.title, 'sessions' : sched.course_sessions.all().order_by('term')})
 
 def private(request):
     return render(request, 'schedules/private.html')
