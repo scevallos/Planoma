@@ -336,7 +336,70 @@
 
 <!--$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$% Hamburger $%$%%$%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%
 %$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$% Wrapper $%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%%$%$%$%  -->
+<div class="w-navpane nav mobile-nav">
+                <label class="hamburger w-navpane-trigger"><span></span></label>
+                <ul class="wsite-menu-default">
+                    <li id="active" class="wsite-menu-item-wrap">
+                        <a href="{% url 'index' %}" class="wsite-menu-item">
+                            Home
+                        </a>
+                    </li>
+                    <li id="pg460448653247643812" class="wsite-menu-item-wrap">
+                        <a class="wsite-menu-item">
+                            Schedules
+                        </a>
+                        <div class="wsite-menu-wrap" style="display:none">
+                            <ul class="wsite-menu">
+                                <li id="wsite-nav-897518554912638124" class="wsite-menu-subitem-wrap ">
+                                    <a href="{% url 'my_schedules' %}" class="wsite-menu-subitem">
+                                        <span class="wsite-menu-title">
+                                    View My Schedules
+                                </span>
+                                    </a>
+                                </li>
+                                <li id="wsite-nav-422608878921176102" class="wsite-menu-subitem-wrap">
+                                    <a href="{% url 'new_schedule' %}" class="wsite-menu-subitem">
+                                        <span class="wsite-menu-title">
+                                    Create New Schedule
+                                </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="pg399140095119712199" class="wsite-menu-item-wrap">
+                        <a class="wsite-menu-item">
+                            Account
+                        </a>
+                        <div class="wsite-menu-wrap" style="display:none">
+                            <ul class="wsite-menu">
+                                <li id="wsite-nav-941108741491433856" class="wsite-menu-subitem-wrap">
+                                    <a href="{% url 'profile_view' %}" class="wsite-menu-subitem">
+                                        <span class="wsite-menu-title">
+                                    Profile Settings
+                                </span>
+                                    </a>
 
+                                </li>
+                                <li id="wsite-nav-803442335788721107" class="wsite-menu-subitem-wrap">
+                                    <a href="{% url 'profile_view' %}" class="wsite-menu-subitem">
+                                        <span class="wsite-menu-title">
+                                    My Advisor
+                                </span>
+                                    </a>
+                                </li>
+                                <li id="wsite-nav-803442335788721107" class="wsite-menu-subitem-wrap">
+                                    <a href="{% url 'auth_logout' %}" class="wsite-menu-subitem">
+                                        <span class="wsite-menu-title">
+                                    Log out
+                                </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 <div class="w-navpane nav mobile-nav">
     <label class="hamburger w-navpane-trigger"><span></span></label>
     <ul class="wsite-menu-default">

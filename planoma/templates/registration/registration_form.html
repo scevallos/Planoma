@@ -13,45 +13,38 @@
                             <div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
                                 <h2 class="wsite-content-title" style="text-align:center;">Sign Up</h2>
                                 <div class="wsite-spacer" style="height:30px;"></div>
+                                <div class="wsite-multicol">
+                                    <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
+                                        <table class="wsite-multicol-table">
+                                            <tbody class="wsite-multicol-tbody">
+                                                <tr class="wsite-multicol-tr">
+                                                    <td class="wsite-multicol-col" style="width:25%; padding:0 15px;"></td>
+                                                    <td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
+                                                        <div style="text-align:left;">
+                                                            <form method="post" action=".">
+                                                                {% csrf_token %}
+                                                                {{ form.as_p }}
+                                                                <div class="wsite-button wsite-button-large wsite-button-highlight">
+                                                                    <input class="wsite-button-inner" type="submit" value="Submit" />
+                                                                </div>
 
-
-
-
-
-                                        <div class="wsite-multicol">
-                                            <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
-                                                <table class="wsite-multicol-table">
-                                                    <tbody class="wsite-multicol-tbody">
-                                                        <tr class="wsite-multicol-tr">
-                                                            <td class="wsite-multicol-col" style="width:25%; padding:0 15px;"></td>
-                                                            <td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-                                                                <div style="text-align:left;">
-                                                                <form method="post" action=".">
-                                                                    {% csrf_token %}
-                                                                    {{ form.as_p }}
-                                                                    <input type="submit" value="Submit" />
-                                                                </form>
-                                                            </div>
-                                                            </td>
-                                                            <td class="wsite-multicol-col" style="width:25%; padding:0 15px;"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-
-
-
-
-                                
+                                                                <!-- <input type="submit" value="Submit" /> -->
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                    <td class="wsite-multicol-col" style="width:25%; padding:0 15px;"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 

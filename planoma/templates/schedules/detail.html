@@ -13,28 +13,43 @@
                             <div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
                                 <h2 class="wsite-content-title" style="text-align:center;">Schedule View</h2>
                                 <div class="wsite-spacer" style="height:30px;"></div>
-                                
+                                <div class="wsite-multicol">
+                                    <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
+                                        <table class="wsite-multicol-table">
+                                            <tbody class="wsite-multicol-tbody">
+                                                <tr class="wsite-multicol-tr">
+                                                    <td class="wsite-multicol-col" style="width:20%; padding:0 15px;"></td>
+                                                    <td class="wsite-multicol-col" style="width:60%; padding:0 15px;background-color: #ffffff;">
+                                                        <div style="text-align:left;">
+                                                        	<h3>Title: {{ schedule.title }}</h3>
+                                                        	<ul>
+                                                        		{% for session in schedule.course_sessions.all %}
+                                                        		{% if session.term != 4747 %}
+                                                        		<li><h4>{{ session.get_semester_display }} {{ session.term }}</h4></li>
+                                                        		<ul>
+                                                        			{% for course in session.courses.all %}
+                                                        			<li>{{ course.course_name }}</li>
+                                                        			{% endfor %}
+                                                        			{% endif %}
+                                                        		</ul>
+                                                        		{% endfor %}
+                                                        	</ul>
+                                                        </div>
+                                                    </td>
+                                                    <td class="wsite-multicol-col" style="width:20%; padding:0 15px;"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-</div>
 
-	<!-- EDIT THE ORDER OF THE SCHEDULE Semesters -->
-	<h3>Title: {{ schedule.title }}</h3>
-	<ul>
-	{% for session in schedule.course_sessions.all %}
-		{% if session.term != 4747 %}
-		<li><h4>{{ session.get_semester_display }} {{ session.term }}</h4></li>
-		<ul>
-		{% for course in session.courses.all %}
-			<li>{{ course.course_name }}</li>
-		{% endfor %}
-		{% endif %}
-		</ul>
-	{% endfor %}
-	</ul>
+	<!-- TODO EDIT THE ORDER OF THE SCHEDULE Semesters -->
 {% endblock %}
