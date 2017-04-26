@@ -20,6 +20,10 @@ def my_schedules(request):
     # return render(request, 'schedules/my_schedules.html')
 
 @login_required
+def schedules(request):
+    return redirect('index')
+
+@login_required
 def new_schedule(request):
     if request.method == "POST":
         form = ScheduleForm(request.POST)
@@ -48,6 +52,29 @@ def new_schedule(request):
         form = ScheduleForm()
     return render(request, 'schedules/new_schedule.html', {'form': form})
 
+@login_required
+def edit_schedule(request, schedule_id):
+    sched = get_object_or_404(Schedule, pk=schedule_id)
+
+    if sched.owner.user != request.user:
+        # TODO: edit private html to show different message if view/edit
+        return render(request, 'schedules/private.html')
+
+    remaining_courses = sched.course_sessions.filter(term=4848)[0].courses.all()
+
+    return render(request, 'schedules/edit_schedule.html', {'remaining_courses': remaining_courses})
+
+# @login_required
+# class CourseSearchListView(CourseListView):
+    
+#     def get_queryset(self):
+#         result = super(CourseSearchListView, self).get_queryset()
+
+#         query = self.request.GET.get('q')
+#         if query:
+            
+
+# TODO: Test if removing login_required breaks request.user
 @login_required
 def detail(request, schedule_id):
     # Get the schedule 
