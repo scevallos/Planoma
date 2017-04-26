@@ -37,27 +37,16 @@ def makeQueue(sid):
 	## we now have a list of remaining courses
 	# this enforces that all areas must be completed
 	remaining_courses = [x for x in TEMPLATE if x not in p]
+	
 
-	###############
-	##
-	## Might be able to avoid this by just adding these when making past courses to begin with, but then we'd also have to remove a few of the others
-	##
-	if 'LANG1' not in past_courses:
-		# replace the first other with lang1
-		first_other = remaining_courses.index("OTHER")
-		remaining_courses[first_other] = 'LANG1'
-		
-
-	if 'LANG2' not in past_courses:
-		# replace the next other with lang2
-		first_other = remaining_courses.index("OTHER")
-		remaining_courses[first_other] = 'LANG2'
-
-	if 'LANG3' not in past_courses:
-		# replace the next other with lang3
-		first_other = remaining_courses.index("OTHER")
-		remaining_courses[first_other] = 'LANG3'
-
+	# make a new course session for 4848 and fill with remaining courses
+	sesh = CourseSession(term=4848, semester='FA', schedule=sched)
+	sesh.save()
+	for course in remaining_courses:
+		sesh.courses.add(Course.objects.get(course_id=course))
+		sesh.save()
+	sched.course_sessions.add(sesh)
+	sched.save()
 	# # does forcing a schedule to match our template automatically ensure the correct credit count?????????
 	# credit_count = 0
 	# for x in past_courses:
