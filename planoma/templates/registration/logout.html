@@ -1,6 +1,33 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
-<p>{% trans "Logged out" %}</p>
+<div class="banner-wrap">
+    <div class="wsite-elements wsite-not-footer wsite-header-elements">
+        <div class="wsite-section-wrap">
+            <div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;height: 666px;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 50% 50% ;background-size: 100% ;background-color: #4ac3de ;background-size: cover;">
+                <div class="wsite-section-content">
+                    <div class="container">
+                        <div class="banner">
+                            <div class="wsite-section-elements">
+                                <h2 class="wsite-content-title" style="text-align:center;">Thanks For Visiting</h2>
+                            	<p>{% trans "Logged out" %}</p>
+                            	<div style="text-align:center;">
+                                                <div style="height: 10px; overflow: hidden;"></div>
+                                                <a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'auth_login' %}" >
+                                                    <span class="wsite-button-inner">Log In Again</span>
+                                                </a>
+                                                <div style="height: 10%; overflow: hidden;"></div>
+                                            </div>
+                            	<div class="wsite-spacer" style="height:100px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

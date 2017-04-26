@@ -12,19 +12,18 @@
 						<div class="banner">
 							<div class="wsite-section-elements">
 								<div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
-								<h2 class="wsite-content-title" style="text-align:center;"><br>My Profile</h2>
+								<h2 class="wsite-content-title" style="text-align:center;"><br>{{ user.get_full_name }}</h2>
 
-								<h4>{{ user.get_full_name }}</h4>
 								<ul>
-									<ul>Username: {{ user.username }}</ul>
-									<ul>First Name: {{ user.first_name }}</ul>
-									<ul>Major: {{ user.studentprofile.get_dept_display }}</ul>
+									<ul><b>Username:</b> {{ user.username }}</ul>
+									<ul><b>First Name:</b> {{ user.first_name }}</ul>
+									<ul><b>Major: </b>{{ user.studentprofile.get_dept_display }}</ul>
 									{% if user.studentprofile.adv %}
-									<ul>Advisor: {{ user.studentprofile.adv }} </ul>
+									<ul><b>Advisor:</b> {{ user.studentprofile.adv }} </ul>
 									{% else %}
 									<ul> Add your advisor </ul>
 									{% endif %}
-								</ul>
+								</ul><br>
 								<!-- <a href="{% url 'update_profile' %}">Update profile</a> -->
 								<a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'update_profile' %}">
 									<span class="wsite-button-inner">Update Profile</span>
@@ -37,7 +36,7 @@
 								  </ul>
 								{% endif %}
 
-								<div class="wsite-spacer" style="height:350px;"></div>
+								<div class="wsite-spacer" style="height:250px;"></div>
 							</div>
                         </div>
                     </div>
@@ -47,10 +46,4 @@
     </div>
 </div>
 
-<!-- <form method="post">
-  {% csrf_token %}
-  {{ user_form.as_p }}
-  {{ profile_form.as_p }}
-  <button type="submit">Save changes</button>
-</form> -->
 {% endblock %}
