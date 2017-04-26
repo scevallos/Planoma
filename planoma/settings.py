@@ -25,7 +25,7 @@ SECRET_KEY = '#65zdzwc9c6*wi6k!=um@&lend4q7n_6st%o$4%@vtm%ot0*wz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['project5.cs.pomona.edu']
+ALLOWED_HOSTS = ['project5.cs.pomona.edu', '127.0.0.1']
 
 
 # Application definition
@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'planoma.wsgi.application'
 
 DATABASES = {
     # use on sebastian's computer 
-    #'default' : {
-    #    'ENGINE' : 'django.db.backends.mysql',
-    #    'NAME' : 'planoma',
-    #    'USER' : 'root',
-    #    'PASSWORD' : '5cp',
-    #    'HOST' : 'localhost',
-    #    'PORT' : ''
-    #}
+    'default' : {
+       'ENGINE' : 'django.db.backends.mysql',
+       'NAME' : 'planoma',
+       'USER' : 'root',
+       'PASSWORD' : '5cp',
+       'HOST' : 'localhost',
+       'PORT' : ''
+    }
 
     # use on simple.cs server -- NOT WORKING
     # 'default' : {
@@ -96,10 +96,10 @@ DATABASES = {
     #     'PORT' : '3306'
     # }
     
-     'default': {
-         'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-     }
+    # 'default': {
+    #      'ENGINE': 'django.db.backends.sqlite3',
+    #      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 # django-registration settings:
