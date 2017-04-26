@@ -19,6 +19,9 @@ MATH103,Combinatorial Mathematics,5,None,1.00
 MATH030,Calculus I,5,None,1.00
 MATH031,Calculus II,5,None,1.00
 MATH060,Linear Algebra,5,None,1.00
+ELEC1,CS Elective 1,5,None,1.00
+ELEC2,CS Elective 2,5,None,1.00
+ELEC3,CS Elective 3,5,None,1.00
 LANG1,Language Requirement Semester 1,None,None,1.00
 LANG2,Language Requirement Semester 2,None,None,1.00
 LANG3,Language Requirement Semester 3,None,None,1.00
