@@ -60,6 +60,18 @@
                                                             <td class="wsite-multicol-col" style = "width:66.333333333333%; padding:0 15px;">
                                                             	<div class="right-div" style="margin-left: 258px;">
                                                             		<h2> Current Schedule </h2>
+	                                                        		{% for session in sessions %}
+	                                                                <ul>
+	                                                        		{% if session.term != 4747 and session.term != 4848 %}
+	                                                        		<li><h4>{{ session.get_semester_display }} {{ session.term }}</h4></li>
+	                                                        		<ul>
+	                                                        			{% for course in session.courses.all %}
+	                                                        			<li>{{ course.course_name }}</li>
+	                                                        			{% endfor %}
+	                                                        			{% endif %}
+	                                                        		</ul>
+	                                                                </ul>
+	                                                        		{% endfor %}
                                                             	</div>
 
                                                                 <!-- <div>

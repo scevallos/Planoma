@@ -65,8 +65,9 @@ def edit_schedule(request, schedule_id):
         return render(request, 'schedules/private.html')
 
     remaining_courses = sched.course_sessions.filter(term=4848)[0].courses.all()
+    sessions = sched.course_sessions.all().order_by('term')
 
-    return render(request, 'schedules/edit_schedule.html', {'remaining_courses': remaining_courses})
+    return render(request, 'schedules/edit_schedule.html', {'remaining_courses': remaining_courses, 'sessions' : sessions})
 
 # @login_required
 # class CourseSearchListView(CourseListView):
