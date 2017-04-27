@@ -81,7 +81,7 @@ def edit_schedule(request, schedule_id):
             session = add_form.cleaned_data['terms']
             courses = add_form.courses
 
-            # Logic of is the course able to be taken -- pre-req stuff
+            # Logic of is the course able to be taken -- pre-req stuff - TODO:
             session.courses.add(courses[0])
             session.save()
 
