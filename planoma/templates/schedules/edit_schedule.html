@@ -42,7 +42,22 @@
 														{% endfor %}
 													</ul>
 												</div>
-
+												<!-- Begin Course search -->
+												<form method="GET">
+											    Course Name: <input type="text" name="search"><br/>
+											    <input type="submit" value="Submit" />
+												</form>
+												<div class="results">
+													<ul>
+													{% if courses %}
+													{% for course in courses %}
+														<li> {{ course.course_name }} </li>
+													{% endfor %}
+													{% else %}
+													<p>No courses found :(</p>
+													{% endif %}
+													</ul>
+												</div>
 												<!-- <div>
                                                                     <div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:center">
                                                                         <a>

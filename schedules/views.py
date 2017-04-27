@@ -64,10 +64,19 @@ def edit_schedule(request, schedule_id):
         # TODO: edit private html to show different message if view/edit
         return render(request, 'schedules/private.html')
 
+    courses = None
+    if request.GET.get('search'):
+        search = request.GET.get('search')
+        courses = Course.objects.filter(course_name__icontains=search)
+
     remaining_courses = sched.course_sessions.filter(term=4848)[0].courses.all()
     sessions = sched.course_sessions.all().order_by('term')
 
-    return render(request, 'schedules/edit_schedule.html', {'remaining_courses': remaining_courses, 'sessions' : sessions})
+    return render(request, 'schedules/edit_schedule.html',
+        {'remaining_courses': remaining_courses,
+        'sessions' : sessions,
+        'courses' : courses
+        })
 
 # @login_required
 # class CourseSearchListView(CourseListView):
