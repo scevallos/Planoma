@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from forms import CourseForm, ScheduleForm #, ClassesTakenForm
+from forms import CourseForm, ScheduleForm, AddTermForm
 from accounts.models import StudentProfile
 from schedules.models import *
 from make_schedule import *
@@ -59,23 +59,27 @@ def new_schedule(request):
 @login_required
 def edit_schedule(request, schedule_id):
     sched = get_object_or_404(Schedule, pk=schedule_id)
+    remaining_courses = sched.course_sessions.filter(term=4848)[0].courses.all()
+    sessions = sched.course_sessions.all().order_by('term').exclude(term=4848).exclude(term=4747)
 
     if sched.owner.user != request.user:
         # TODO: edit private html to show different message if view/edit
         return render(request, 'schedules/private.html')
 
-    courses = None
+    courses = -1
+    add_form = None
     if request.GET.get('search'):
         search = request.GET.get('search')
         courses = Course.objects.filter(course_name__icontains=search)
 
-    remaining_courses = sched.course_sessions.filter(term=4848)[0].courses.all()
-    sessions = sched.course_sessions.all().order_by('term')
+        add_form = AddTermForm(sessions=sessions)
+
 
     return render(request, 'schedules/edit_schedule.html',
         {'remaining_courses': remaining_courses,
         'sessions' : sessions,
-        'courses' : courses
+        'courses' : courses,
+        'add_form' : add_form
         })
 
 # @login_required

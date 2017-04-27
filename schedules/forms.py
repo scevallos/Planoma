@@ -22,6 +22,13 @@ class ScheduleForm(forms.ModelForm):
         # Make dummy course sessions with previous courses
         fields = ('title', 'start_sem', 'end_sem', 'public', 'existing_credits', 'languages_completed', 'math_completed')
 
+class AddTermForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.sessions = kwargs.pop('sessions')
+        super(AddTermForm, self).__init__(*args, **kwargs)
+        self.fields['terms'].queryset = self.sessions
+
+    terms = forms.ModelChoiceField(queryset=Course.objects.none())
 
 
 
