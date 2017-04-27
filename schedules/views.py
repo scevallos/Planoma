@@ -72,7 +72,23 @@ def edit_schedule(request, schedule_id):
         search = request.GET.get('search')
         courses = Course.objects.filter(course_name__icontains=search)
 
-        add_form = AddTermForm(sessions=sessions)
+        add_form = AddTermForm(sessions=sessions, courses=courses)
+
+        # User just hit save button from course searches
+    if request.method == "POST":
+        add_form = AddTermForm(request.POST, sessions=sessions, courses=courses)
+        if add_form.is_valid():
+            session = add_form.cleaned_data['terms']
+            courses = add_form.courses
+
+            # Logic of is the course able to be taken -- pre-req stuff
+            session.courses.add(courses[0])
+            session.save()
+
+
+        else:
+            messages.error('Please select a valid semester.')
+
 
 
     return render(request, 'schedules/edit_schedule.html',

@@ -48,17 +48,22 @@
 											    <input type="submit" value="Submit" />
 												</form>
 												<div class="results">
+												<form method="POST">{% csrf_token %}
 													<ul>
 													{% if courses == -1 %}
 													{% elif courses %}
 														{% for course in courses %}
 															<li> {{ course.course_name }} | Add to: {{ add_form.as_p }} </li>
 														{% endfor %}
+														<div class="wsite-button wsite-button-large wsite-button-highlight">
+														<button class="wsite-button-inner save btn" type="submit">Save </button>
 													{% else %}
 													<p>No courses found :(</p>
 													{% endif %}
 													</ul>
+													
 												</div>
+												</form>
 												<!-- <div>
                                                                     <div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:center">
                                                                         <a>

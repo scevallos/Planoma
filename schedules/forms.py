@@ -25,6 +25,7 @@ class ScheduleForm(forms.ModelForm):
 class AddTermForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.sessions = kwargs.pop('sessions')
+        self.courses = kwargs.pop('courses')
         super(AddTermForm, self).__init__(*args, **kwargs)
         self.fields['terms'].queryset = self.sessions
 
