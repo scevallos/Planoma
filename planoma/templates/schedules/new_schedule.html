@@ -23,16 +23,19 @@
                                                 <tr class="wsite-multicol-tr">
                                                     <td class="wsite-multicol-col" style="width:25%; padding:0 15px;"></td>
                                                     <td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-                                                        <div style="text-align:left;">
-                                                            <form method="POST" class="schedule-form">{% csrf_token %}
-                                                            	{{ form.as_p }}
-                                                            	{{ class_form.as_p}}
+                                                        <div class="first-year" style="text-align:left;"> 
+                                                        <a href="{% url 'first_year' %}">Soon to-be first-year</a>
+                                                            <!-- <form method="POST" class="schedule-form"> -->
+                                                            	
 
-                                                            	<div class="wsite-button wsite-button-large wsite-button-highlight">
+                                                            	<!-- <div class="wsite-button wsite-button-large wsite-button-highlight"> -->
                                                                     <!-- <input class="wsite-button-inner" type="submit" value="Submit" /> -->
-                                                                    <button type="submit" class="wsite-button-inner save btn">Create Schedule</button>
-                                                                </div>
-                                                            </form>
+                                                                    <!-- <button type="submit" class="wsite-button-inner save btn">Create Schedule</button> -->
+                                                                <!-- </div> -->
+                                                            <!-- </form> -->
+                                                        </div>
+                                                        <div class="non-first-year" style="text-align: right">
+                                                            <a href="{% url 'other_year' %}">Current Student</a>
                                                         </div>
                                                     </td>
                                                     <td class="wsite-multicol-col" style="width:25%; padding:0 15px;"></td>

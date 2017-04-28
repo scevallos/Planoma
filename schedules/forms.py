@@ -31,7 +31,13 @@ class AddTermForm(forms.Form):
 
     terms = forms.ModelChoiceField(queryset=Course.objects.none())
 
-
+class firstYearForm(forms.ModelForm):
+    """docstring for firstYearForm"""
+    class Meta:
+        model = Schedule
+        fields = ('title', 'start_sem', 'end_sem', 'public', 'existing_credits', 
+            'languages_completed', 'math_completed')
+        
 
 # class ScheduleOptionsForm(forms.ModelForm):
 

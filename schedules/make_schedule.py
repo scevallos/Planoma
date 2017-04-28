@@ -1,6 +1,6 @@
 from schedules.models import *
 from constants import *
-
+from django.contrib import messages
 
 ########################### TODO:
 ## prepare the data for making a queue
@@ -57,36 +57,36 @@ def makeQueue(sid):
 
 
 
-def makeSchedule(start_sem, end_sem, remaining_courses, chunk_size, sid):
+def makeSchedule(sid):
+	sched = Schedule.objects.get(id = sid)
 
-	
+	start_index = getIndex(sched.start_sem, sched)
+	end_index = getIndex(sched.end_sem, sched)
+	num_semesters = end_index - start_index + 1
+
+	# Some checks about these choices
+	try:
+		assert end_index > start_index and num_semesters >= 6 and num_semesters <= 11
+	except:
+		# TODO: figure out best way to handle this
+		# TODO: this check above should only happen for like first years e.g junior just tryna make senior yr
+		return -1
+
+	cred_needed = 32 - int(sched.existing_credits)
+	chunk_size = cred_needed / num_semesters
+
+	course_num = 0
+	# Loop through courses in template, adding them to the schedule
+	for i in xrange(num_semesters):
+		sesh = CourseSession(schedule=sched, semester = TERM_CHOICES[start_index + i][0][:2], term = ('20' + TERM_CHOICES[start_index + i][0][-2:]))
+		sesh.save()
+		for course in xrange(chunk_size):
+			c = Course.objects.get(course_id = TEMPLATE[course_num])
+			sesh.courses.add(c)
+			sesh.save()
+			course_num += 1
 
 
-	start_index = TERM_CHOICES.index(start_sem)
-	end_index = TERM_CHOICES.index(end_sem)
-	
-
-	# if a schedule can't be completed with a given chunk size and start/end sem,
-	# ERROR
-	#if ((end_index - end_index) * chunk_size) < (32 - credit_count) error
-
-	# iterate through the remaining courses and add them to the schedule
-	for x in remaining_courses:
-		if (x % chunk_size == 0):
-			start_index += 1 # if we have met the chunk size, increment the term index
-
-		###### make a query to look up a course with x as the course_id
-		to_add = Course.objects.get(course_id = x)		
-		# course = Schedule.course_sessions(semester = TERM_CHOICES[start_index][:2], 
-		# 								  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = x, 
-		# 								  course_name = to_add.course_name, area = to_add.area,
-		# 								  overlay = to_add.overlay, credit = to_add.credit) # Fix: add support for area, course name, and overlay
-		course = sched.course_sessions(semester = TERM_CHOICES[start_index][:2], 
-										  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = x, 
-										  course_name = to_add.course_name, area = to_add.area,
-										  overlay = to_add.overlay, credit = to_add.credit) # Fix: add support for area, course name, and overlay
-
-		course.save()
 
 
 def makeBlankSchedule(remaining_courses, sid):
@@ -103,8 +103,8 @@ def makeBlankSchedule(remaining_courses, sid):
 		assert end_index > start_index and num_semesters >= 6 and num_semesters <= 11
 	except:
 		# TODO: figure out best way to handle this
-		print 'Error: Invalid start and end semester!'
-		exit()
+		# TODO: this check above should only happen for like first years e.g junior just tryna make senior yr
+		return -1
 
 	cred_needed = 32 - int(sched.existing_credits)
 	chunk_size = cred_needed / num_semesters

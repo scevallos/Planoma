@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -159,3 +160,7 @@ EMAIL_HOST_USER = 'planoma4747@gmail.com'
 EMAIL_HOST_PASSWORD = 'Pomona47'
 SERVER_EMAIL = 'planoma4747@gmail.com'
 DEFAULT_FROM_EMAIL = "Planoma"
+
+# Update database configuration with $DATABASE_URL.
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)

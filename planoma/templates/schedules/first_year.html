@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+	<p> first_year stuff goes here. </p>
+
+	<form method="POST" class="schedule-form"> {% csrf_token %}
+										{{ firstForm.as_p }}
+
+	<div class="wsite-button wsite-button-large wsite-button-highlight">
+	<input class="wsite-button-inner" type="submit" value="Submit" /> 
+	 <!-- <button type="submit" class="wsite-button-inner save btn">Create Schedule</button>  -->
+	  </div> 
+	  </form> 
+{% endblock %}

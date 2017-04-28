@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from forms import CourseForm, ScheduleForm, AddTermForm
+from forms import CourseForm, ScheduleForm, AddTermForm, firstYearForm
 from accounts.models import StudentProfile
 from schedules.models import *
 from make_schedule import *
@@ -23,7 +23,7 @@ def my_schedules(request):
 @login_required
 def schedules(request):
     return redirect('index')
-
+# TODO test if user not logged in, does it redirect back to original page
 @login_required
 def new_schedule(request):
     if request.method == "POST":
@@ -47,7 +47,9 @@ def new_schedule(request):
             schedule.save()
 
             remaining_courses = makeQueue(schedule.id)
-            makeBlankSchedule(remaining_courses, schedule.id)
+            status_code = makeBlankSchedule(remaining_courses, schedule.id)
+            if status_code == -1:
+                messages.error(request, 'Please select valid start and end semesters.')
             messages.success(request, 'Your schedule was successfully made!')
             return redirect('my_schedules')
         else:
@@ -107,6 +109,33 @@ def edit_schedule(request, schedule_id):
 #         query = self.request.GET.get('q')
 #         if query:
             
+@login_required
+def first_year(request):
+
+    if request.method == "POST":
+        firstForm = firstYearForm(request.POST)
+        if firstForm.is_valid():
+            schedule = firstForm.save(commit=False)
+            schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
+            schedule.save()
+
+            status_code = makeSchedule(schedule.id)
+            if status_code == -1:
+                messages.error(request, 'Please select valid start and end semesters.')
+            messages.success(request, 'Your schedule was successfully made!')
+            return redirect('my_schedules')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        firstForm = firstYearForm()
+
+
+    return render(request, 'schedules/first_year.html', {'firstForm': firstForm})
+
+@login_required
+def other_year(request):
+
+    return render(request, 'schedules/other_year.html')
 
 # TODO: Test if removing login_required breaks request.user
 @login_required
