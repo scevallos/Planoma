@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-
+from planoma import settings
 from accounts import views as acc_views
 from schedules import views as sch_views
 
