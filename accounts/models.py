@@ -22,7 +22,14 @@ class UserProfile(models.Model):
         abstract = True
 
 class AdvisorProfile(UserProfile):
-    pass
+    @receiver(post_save, sender=User)
+    def create_advisor_profile(sender, instance, created, **kwargs):
+        if created:
+            AdvisorProfile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.advisorprofile.save()
 
 
 class StudentProfile(UserProfile):
