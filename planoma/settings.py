@@ -26,7 +26,7 @@ SECRET_KEY = '#65zdzwc9c6*wi6k!=um@&lend4q7n_6st%o$4%@vtm%ot0*wz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['project5.cs.pomona.edu', '127.0.0.1']
+ALLOWED_HOSTS = ['project5.cs.pomona.edu', '127.0.0.1', '0.0.0.0', 'localhost', 'planoma.herokuapp.com']
 
 
 # Application definition
@@ -78,29 +78,7 @@ WSGI_APPLICATION = 'planoma.wsgi.application'
 
 DATABASES = {
     # use on sebastian's computer 
-    'default' : {
-       'ENGINE' : 'django.db.backends.mysql',
-       'NAME' : 'planoma',
-       'USER' : 'root',
-       'PASSWORD' : '5cp',
-       'HOST' : 'localhost',
-       'PORT' : ''
-    }
-
-    # use on simple.cs server -- NOT WORKING
-    # 'default' : {
-    #     'ENGINE' : 'django.db.backends.mysql',
-    #     'NAME' : 'scevallos',
-    #     'USER' : 'scevallos',
-    #     'PASSWORD' : 'pomona4747',
-    #     'HOST' : '134.173.66.208',
-    #     'PORT' : '3306'
-    # }
-    
-    # 'default': {
-    #      'ENGINE': 'django.db.backends.sqlite3',
-    #      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
+    'default' : dj_database_url.config()
 }
 
 # django-registration settings:
@@ -145,11 +123,17 @@ LOGIN_REDIRECT_URL = '/schedules/my_schedules'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Setting up mailing to activate account
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -162,5 +146,5 @@ SERVER_EMAIL = 'planoma4747@gmail.com'
 DEFAULT_FROM_EMAIL = "Planoma"
 
 # Update database configuration with $DATABASE_URL.
-db_from_env = dj_database_url.config()
+db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)

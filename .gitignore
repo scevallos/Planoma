@@ -8,7 +8,6 @@
 *.so
 *.sh
 *.pyc
-*.DS_Store
 
 # Packages #
 ############
@@ -38,3 +37,8 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# ~Secret files~ #
+##################
+.env
+env/
