@@ -8,6 +8,7 @@
 *.so
 *.sh
 *.pyc
+*.DS_Store
 
 # Packages #
 ############
