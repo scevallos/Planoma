@@ -1,1 +1,1 @@
-web: gunicorn planoma.wsgi --log-file -
+web: gunicorn planoma:application --log-file -
