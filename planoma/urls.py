@@ -37,3 +37,9 @@ urlpatterns = [
     url(r'^courses/course_new/$', sch_views.add_course, name='course_new'),
     url(r'^admin/', admin.site.urls),
 ]
+
+
+# if not settings.DEBUG:
+urlpatterns += (
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+)
