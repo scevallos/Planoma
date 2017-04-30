@@ -18,6 +18,8 @@
 								{% else %}
 									<br>You do not have an advisor right now.<br><br>
 									<form role="form" action="" method="post"> {% csrf_token %}
+									You do not have an advisor right now.<br>
+									<form method="POST"> {% csrf_token %}
     									{{ form.as_p }}
 
 											<div class="wsite-button wsite-button-large wsite-button-highlight">

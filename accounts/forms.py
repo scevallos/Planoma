@@ -24,9 +24,9 @@ class StudentProfileForm(forms.ModelForm):
 
 ## A form to be used by students to invite their advisors
 class AdvisorInviteForm(forms.ModelForm):
-	class Meta:
-		model = AdvisorProfile
-		fields = ('dept',)
+    class Meta:
+        model = AdvisorProfile
+        fields = ('dept',)
 
 class InviteAdvisorForm(forms.Form):
     advisor_name = forms.CharField(required=True)
@@ -41,6 +41,6 @@ class InviteAdvisorForm(forms.Form):
 Forms for advisors
 """
 # class AdvisorProfileForm(forms.ModelForm):
-# 	class Meta:
-# 		model = AdvisorProfile
-# 		fields = ('advisees',)
+#   class Meta:
+#       model = AdvisorProfile
+#       fields = ('advisees',)

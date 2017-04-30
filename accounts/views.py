@@ -14,6 +14,7 @@ from models import StudentProfile
 from schedules.models import Schedule, Course, CourseSession
 from forms import UserForm, StudentProfileForm, InviteAdvisorForm
 from group_decorator import *
+from invitations.models import *
 
 
 def index(request):
@@ -52,13 +53,17 @@ def invite_advisor(request):
     if request.method == 'POST':
         form = InviteAdvisorForm(request.POST)
         if form.is_valid():
-            form.save()
+            # form.save()
             email = form.cleaned_data.get('advisor_email')
-            invite = Invitation.create(email, inviter=request.user)
-            invite.send_invitation(request)
+            if not Invitation.objects.filter(email=email):
+                invite = Invitation.create(email, inviter=request.user)
+                invite.send_invitation(request)
+                messages.success(request, 'An email invitation has been sent to your advisor')
+            else:
+                messages.error(request, 'Advisor already invited')
             return redirect('index') # TODO: redirect to thank you page
-        else:
-            form = InviteAdvisorForm()
+    else:
+        form = InviteAdvisorForm()
     return render(request, 'accounts/profile/my-advisor.html', {'form' : form})
 
 @login_required

@@ -110,9 +110,11 @@
                             <li id="pg223160214585533492" class="wsite-menu-item-wrap">
                                 <a href="{% url 'contact_us'%}" class="wsite-menu-item" > Contact Us </a>
                             </li>
+                            {% if user.is_authenticated %}
                             <li id="wsite-nav-803442335788721107" class="wsite-menu-item-wrap">
                                 <a href="{% url 'auth_logout' %}" class="wsite-menu-item"> Log out </a>
                             </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -175,11 +177,13 @@ $$%$%%$%$%$%%$%$%$%$%$%$%$%$%$% Wrapper $%%$%$%$%$%$%%$%$%$%%$%$%$%$%$%$%$-->
                             <span class="wsite-menu-title"> My Advisor </span>
                         </a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li id="wsite-nav-803442335788721107" class="wsite-menu-item-wrap">
                         <a href="{% url 'auth_logout' %}" class="wsite-menu-item">
                             <span class="wsite-menu-title"> Log out </span>
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </li>
