@@ -22,8 +22,8 @@ def makeQueue(sid):
 	past_courses = sched.get_all_courses()
 
 	# built a list of past course cids
-	past_cids = [course.course_id for course in past_courses]	
-	
+	past_cids = [course.course_id for course in past_courses]
+
 	# create a set from past courses
 	# this will be used for set-wise difference to get classes from template still not taken
 	p = set(past_cids)
@@ -37,7 +37,7 @@ def makeQueue(sid):
 	## we now have a list of remaining courses
 	# this enforces that all areas must be completed
 	remaining_courses = [x for x in TEMPLATE if x not in p]
-	
+
 
 	# make a new course session for 4848 and fill with remaining courses
 	sesh = CourseSession(term=4848, semester='FA', schedule=sched)
@@ -84,9 +84,10 @@ def makeSchedule(sid):
 			c = Course.objects.get(course_id = TEMPLATE[course_num])
 			sesh.courses.add(c)
 			sesh.save()
+			sched.course_sessions.add(sesh)
+			sched.save()
 			course_num += 1
-
-
+	
 
 
 def makeBlankSchedule(remaining_courses, sid):
@@ -97,7 +98,7 @@ def makeBlankSchedule(remaining_courses, sid):
 
 	# Calculate how many semesters this is
 	num_semesters = end_index - start_index + 1
-	
+
 	# Some checks about these choices
 	try:
 		assert end_index > start_index and num_semesters >= 6 and num_semesters <= 11
@@ -126,8 +127,8 @@ def makeBlankSchedule(remaining_courses, sid):
 
 		# fill schedule with others
 		#other = Course.objects.get(course_id = 'OTHER')
-		# course = sched.course_session(semester = TERM_CHOICES[start_index][:2], 
-		# 								  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = 'OTHER', 
+		# course = sched.course_session(semester = TERM_CHOICES[start_index][:2],
+		# 								  term = ('20' + TERM_CHOICES[start_index][-2:])).courses(course_id = 'OTHER',
 		# 								  course_name = 'Other course', area = None,
 		# 								  overlay = None, credit = '1.00')
 		# course.save()

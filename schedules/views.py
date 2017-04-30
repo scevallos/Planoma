@@ -131,6 +131,7 @@ def edit_schedule(request, schedule_id):
 #         query = self.request.GET.get('q')
 #         if query:
 
+
 @group_required('Students')
 @login_required
 def first_year(request):

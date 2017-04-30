@@ -30,20 +30,20 @@
 								</a>
 								{% if messages %}
 								  <ul class="messages">
-								    {% for message in messages %}
-								      <li class="{{ message.tags }}">{{ message }}</li>
-								    {% endfor %}
-								  </ul>
-								{% endif %}
+										{% for message in messages %}
+										<li class="{{ message.tags }}">{{ message }}</li>
+										{% endfor %}
+									</ul>
+									{% endif %}
 
-								<div class="wsite-spacer" style="height:250px;"></div>
+									<div class="wsite-spacer" style="height:250px;"></div>
+								</div>
 							</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 </div>
 
 {% endblock %}
