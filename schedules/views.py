@@ -5,14 +5,27 @@ from forms import CourseForm, ScheduleForm, AddTermForm, firstYearForm
 from accounts.models import StudentProfile
 from schedules.models import *
 from make_schedule import *
+from django.contrib.auth.models import Group
+from group_decorator import *
 
 
 # required permissions
+@group_required('Advisors')
 @login_required
 def add_course(request):
-    form = CourseForm()
+    if request.method == "POST":
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            course = form.save()
+            # schedules = Course.objects.filter(course_id__icontains='ELEC')
+            messages.success(request, 'Course has been successfully added.')
+        else:
+            messages.error(request, 'Course adding failed, course not added.')
+    else:
+        form = CourseForm()
     return render(request, 'courses/course_new.html', {'form': form})
 
+@group_required('Students')
 @login_required
 def my_schedules(request):
     # Get the latest 3 schedules made by the user
@@ -21,10 +34,13 @@ def my_schedules(request):
     return render(request, 'schedules/my_schedules.html', context)
     # return render(request, 'schedules/my_schedules.html')
 
+@group_required('Students')
 @login_required
 def schedules(request):
     return redirect('index')
 # TODO test if user not logged in, does it redirect back to original page
+
+@group_required('Students')
 @login_required
 def new_schedule(request):
     if request.method == "POST":
@@ -59,6 +75,7 @@ def new_schedule(request):
         form = ScheduleForm()
     return render(request, 'schedules/new_schedule.html', {'form': form})
 
+@group_required('Students')
 @login_required
 def edit_schedule(request, schedule_id):
     sched = get_object_or_404(Schedule, pk=schedule_id)
@@ -114,6 +131,8 @@ def edit_schedule(request, schedule_id):
 #         query = self.request.GET.get('q')
 #         if query:
 
+
+@group_required('Students')
 @login_required
 def first_year(request):
     if request.method == "POST":
@@ -136,12 +155,15 @@ def first_year(request):
 
     return render(request, 'schedules/first_year.html', {'firstForm': firstForm})
 
+@group_required('Students')
 @login_required
 def other_year(request):
 
     return render(request, 'schedules/other_year.html')
 
 # TODO: Test if removing login_required breaks request.user
+
+@group_required('Students')
 @login_required
 def detail(request, schedule_id):
     # Get the schedule
