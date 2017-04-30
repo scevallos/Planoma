@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
 from dept_codes import DEPTS
+from django.contrib.auth.models import Group
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, primary_key=True)
@@ -26,10 +27,11 @@ class AdvisorProfile(UserProfile):
     def create_advisor_profile(sender, instance, created, **kwargs):
         if created:
             AdvisorProfile.objects.create(user=instance)
+            instance.groups.add(Group.objects.get(name='Advisors'))
 
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.AdvisorProfile.save()
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+        # instance.advisorprofile.save()
 
 
 class StudentProfile(UserProfile):

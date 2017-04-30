@@ -37,7 +37,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.groups.add(Group.objects.get(name='Advisors'))
+            #user.groups.add(Group.objects.get(name='Advisors'))
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
