@@ -6,10 +6,14 @@ from django.http import Http404, HttpResponse
 from django.template import loader
 from django.contrib import messages
 from django.db import transaction
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import Group
 
 from models import StudentProfile
 from schedules.models import Schedule, Course, CourseSession
 from forms import UserForm, StudentProfileForm
+from group_decorator import *
 
 
 def index(request):
@@ -24,7 +28,24 @@ def profile_view(request):
 
 @login_required
 def my_advisor(request):
-    return render(request, 'accounts/profile/my-advisor.html')    
+    return render(request, 'accounts/profile/my-advisor.html')
+
+# used for signing up advisors
+def signup(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.groups.add(Group.objects.get(name='Advisors'))
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request,user)
+            return redirect('index') # not redirecting????
+        else:
+            form = UserCreationForm()
+    return render(request, 'accounts/advisor/signup.html', {'form': form})
 
 @login_required
 @transaction.atomic

@@ -29,7 +29,7 @@ class AdvisorProfile(UserProfile):
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
-        instance.advisorprofile.save()
+        instance.AdvisorProfile.save()
 
 
 class StudentProfile(UserProfile):
@@ -50,4 +50,3 @@ class StudentProfile(UserProfile):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.studentprofile.save()
-
