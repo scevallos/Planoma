@@ -22,10 +22,10 @@ from schedules import views as sch_views
 urlpatterns = [
     url(r'^$', acc_views.index, name='index'),
     url(r'^contact_us/$', acc_views.contact_us, name='contact_us'),
-    url(r'^accounts/advisor/signup/$', acc_views.signup, name='signup'),
+    url(r'^accounts/advisor/signup/$', acc_views.signup, name='account_signup'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/profile/view/$', acc_views.profile_view, name='profile_view'),
-    url(r'^accounts/profile/my_advisor/$', acc_views.my_advisor, name='my_advisor'),
+    url(r'^accounts/profile/my_advisor/$', acc_views.invite_advisor, name='my_advisor'),
     url(r'^accounts/profile/edit/$', acc_views.update_profile, name='update_profile'),
     url(r'^schedules/$', sch_views.schedules, name='schedules'),
     url(r'^schedules/first_year$', sch_views.first_year, name='first_year'),

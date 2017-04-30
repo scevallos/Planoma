@@ -17,7 +17,7 @@
 									Advisor: {{ user.studentprofile.adv }}
 								{% else %}
 									You do not have an advisor right now.<br>
-									<form role="form" action="" method="post"> {% csrf_token %}
+									<form method="POST"> {% csrf_token %}
     									{{ form.as_p }}
     									<button type="submit">Submit</button>
 									</form>
