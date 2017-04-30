@@ -116,7 +116,6 @@ def edit_schedule(request, schedule_id):
             
 @login_required
 def first_year(request):
-
     if request.method == "POST":
         firstForm = firstYearForm(request.POST)
         if firstForm.is_valid():
