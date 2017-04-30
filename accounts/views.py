@@ -55,8 +55,12 @@ def invite_advisor(request):
         if form.is_valid():
             # form.save()
             email = form.cleaned_data.get('advisor_email')
-            invite = Invitation.create(email, inviter=request.user)
-            invite.send_invitation(request)
+            if not Invitation.objects.filter(email=email):
+                invite = Invitation.create(email, inviter=request.user)
+                invite.send_invitation(request)
+                messages.success(request, 'An email invitation has been sent to your advisor')
+            else:
+                messages.error(request, 'Advisor already invited')
             return redirect('index') # TODO: redirect to thank you page
     else:
         form = InviteAdvisorForm()

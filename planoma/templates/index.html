@@ -24,6 +24,13 @@
                                                     <!-- <div class="wsite-spacer" style="height:-200px;"></div> -->
                                                     <div><div class="wsite-multicol"><div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
                                                         {% if user.is_authenticated %}
+                                                        {% if messages %}
+                                        								  <ul class="messages">
+                                        								    {% for message in messages %}
+                                        								      <li class="{{ message.tags }}">{{ message }}</li>
+                                        								    {% endfor %}
+                                        								  </ul>
+                                        								{% endif %}
                                                         <div><div class="wsite-multicol">
                                                             <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
                                                                 <table class="wsite-multicol-table">
@@ -79,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="wsite-spacer" style="height:120px;"></div>
+                <div class="wsite-spacer" style="height:320px;"></div>
             </div>
         </div>
     </div>

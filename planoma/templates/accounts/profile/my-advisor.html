@@ -16,25 +16,28 @@
 								{% if user.studentprofile.adv %}
 									Advisor: {{ user.studentprofile.adv }}
 								{% else %}
+									<br><br>
+									<form role="form" action="" method="post"> {% csrf_token %}
 									You do not have an advisor right now.<br>
 									<form method="POST"> {% csrf_token %}
-    									{{ form.as_p }}
-    									<button type="submit">Submit</button>
+										{{ form.as_p }}
+										<div class="wsite-button wsite-button-large wsite-button-highlight">
+											<button class="wsite-button-inner" type="submit" value="Submit">Invite Your Advisor!</button>
+											<!-- <button type="submit">Submit</button> -->
+										</div>
 									</form>
-
 									<!-- <a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'auth_login' %}" >
 										<span class="wsite-button-inner">Add your Advisor</span>
 									</a> -->
-								{% endif %}
-
-								<div class="wsite-spacer" style="height:350px;"></div>
+									{% endif %}
+									<div class="wsite-spacer" style="height:320px;"></div>
+								</div>
 							</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
