@@ -117,6 +117,8 @@ class Schedule(models.Model):
     title = models.CharField(max_length=50, default='Untitled', blank=True)
 
     course_sessions = models.ManyToManyField(CourseSession, related_name='sessions')
+    # will be used to store previous courses
+    previous_courses = models.ManyToManyField(CourseSession, related_name='prev_courses')
 
     # Stuff needed for auto-gen
     existing_credits = models.CharField(choices = CREDIT_CHOICES, max_length=12, null=True, default=0)
@@ -130,3 +132,7 @@ class Schedule(models.Model):
 
     def __unicode__(self):
         return "Schedule owner: {}".format(self.owner)
+
+
+# inviting advisors through a link
+# 

@@ -37,6 +37,7 @@ class firstYearForm(forms.ModelForm):
         model = Schedule
         fields = ('title', 'start_sem', 'end_sem', 'public', 'existing_credits', 
             'languages_completed', 'math_completed')
+
         
 
 # class ScheduleOptionsForm(forms.ModelForm):

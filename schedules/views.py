@@ -7,6 +7,7 @@ from schedules.models import *
 from make_schedule import *
 
 
+# required permissions
 @login_required
 def add_course(request):
     form = CourseForm()
@@ -83,7 +84,10 @@ def edit_schedule(request, schedule_id):
             session = add_form.cleaned_data['terms']
             courses = add_form.courses
 
-            # Logic of is the course able to be taken -- pre-req stuff - TODO:
+            # # Logic of is the course able to be taken -- pre-req stuff - TODO:
+            # for course in courses:
+            #     course 
+            #     PrereqCourses.objects.get(course_take=course)
             session.courses.add(courses[0])
             session.save()
 
@@ -99,6 +103,7 @@ def edit_schedule(request, schedule_id):
         'courses' : courses,
         'add_form' : add_form
         })
+
 
 # @login_required
 # class CourseSearchListView(CourseListView):

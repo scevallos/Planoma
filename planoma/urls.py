@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-
+from planoma import settings
 from accounts import views as acc_views
 from schedules import views as sch_views
 
 urlpatterns = [
     url(r'^$', acc_views.index, name='index'),
     url(r'^contact_us/$', acc_views.contact_us, name='contact_us'),
+    url(r'^accounts/advisor/signup/$', acc_views.signup, name='signup'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/profile/view/$', acc_views.profile_view, name='profile_view'),
     url(r'^accounts/profile/my_advisor/$', acc_views.my_advisor, name='my_advisor'),
@@ -39,7 +40,7 @@ urlpatterns = [
 ]
 
 
-# if not settings.DEBUG:
-#urlpatterns += (
-#    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+
+# urlpatterns += (
+#     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 # )
