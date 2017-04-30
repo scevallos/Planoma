@@ -78,7 +78,10 @@ WSGI_APPLICATION = 'planoma.wsgi.application'
 
 DATABASES = {
     # use on sebastian's computer 
-    'default' : dj_database_url.config()
+    'default' : {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 # django-registration settings:
@@ -146,5 +149,5 @@ SERVER_EMAIL = 'planoma4747@gmail.com'
 DEFAULT_FROM_EMAIL = "Planoma"
 
 # Update database configuration with $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
