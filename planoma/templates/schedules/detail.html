@@ -13,44 +13,42 @@
                             <div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
                                 <h2 class="wsite-content-title" style="text-align:center;">Schedule View</h2>
                                 <div class="wsite-spacer" style="height:30px;"></div>
+                                Title: {{ title }}
                                 <div class="wsite-multicol">
                                     <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
                                         <table class="wsite-multicol-table">
                                             <tbody class="wsite-multicol-tbody">
                                                 <tr class="wsite-multicol-tr">
-                                                    <td class="wsite-multicol-col" style="width:20%; padding:0 15px;"></td>
-                                                    <td class="wsite-multicol-col" style="width:60%; padding:0 15px;background-color: #ffffff;">
+                                                    <!-- <td class="wsite-multicol-col" style="width:10%; padding:0 15px;"></td> -->
+                                                    <div style="text-align:left;">
+                                                      {% for session in sessions %}
+                                                      <td class="wsite-multicol-col" style="width:30%; padding:0 15px;background-color: #f4df42;border-radius: 25px;">
+                                                        {% if session.term != 4747 and session.term != 4848 %}
+                                                        <h4>{{ session.get_semester_display }} {{ session.term }}</h4>
                                                         <div style="text-align:left;">
-                                                        	<h3>Title: {{ title }}</h3>
-                                                        	
-                                                        		{% for session in sessions %}
-                                                                <ul>
-                                                        		{% if session.term != 4747 and session.term != 4848 %}
-                                                        		<li><h4>{{ session.get_semester_display }} {{ session.term }}</h4></li>
-                                                        		<ul>
-                                                        			{% for course in session.courses.all %}
-                                                        			<li>{{ course.course_name }}</li>
-                                                        			{% endfor %}
-                                                        			{% endif %}
-                                                        		</ul>
-                                                                </ul>
-                                                        		{% endfor %}
-                                                        </div>
-                                                    </td>
-                                                    <td class="wsite-multicol-col" style="width:20%; padding:0 15px;"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                          {% for course in session.courses.all %}
+                                                            {{ course.course_name }}
+                                                            <hr>
+                                                            {% endfor %}
+                                                          </div>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                      </td>
+                                                      <td class="wsite-multicol-col" style="width:5%; padding:0 15px;"></td>
+                                                    </div>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
+                                  </div>
                                 </div>
+                              </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                          </div>
 
 	<!-- TODO EDIT THE ORDER OF THE SCHEDULE Semesters -->
 {% endblock %}

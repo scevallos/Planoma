@@ -22,31 +22,31 @@ TEMPLATE=(
 'CSCI105',
 'CSCI140',
 'AREA5',
-'OTHER',
+'OTHER1',
 
 # JUNIOR
 ##########
 'CSCI131',
 'ELEC1',
 'AREA6',
-'OTHER',
+'OTHER1',
 ##########
 'ELEC2',
-'OTHER',
-'OTHER',
-'OTHER',
+'OTHER1',
+'OTHER2',
+'OTHER3',
 
 # SENIOR
 ##########
 'CSCI190',
 'ELEC3',
-'OTHER',
-'OTHER',
+'OTHER1',
+'OTHER2',
 ##########
-'OTHER',
-'OTHER',
-'OTHER',
-'OTHER'
+'OTHER1',
+'OTHER2',
+'OTHER3',
+'OTHER4'
 )
 
 ###
@@ -55,7 +55,7 @@ TEMPLATE=(
 CREDIT_CHOICES = (
     ('0', '0'),
     ('1', '1'),
-    ('2', '2'), 
+    ('2', '2'),
 )
 
 LANGUAGE_CHOICES = (
@@ -66,7 +66,7 @@ LANGUAGE_CHOICES = (
 )
 
 MATH_CHOICES = (
-    # 
+    #
     ('NONE', 'None'),
     ('MATH030', 'Calc1'),
     ('MATH031', 'Calc2'),
@@ -94,4 +94,3 @@ TERM_CHOICES = (
     ('FA20', 'Fall 2020'),
     ('SP21', 'Spring 2021'),
 )
-

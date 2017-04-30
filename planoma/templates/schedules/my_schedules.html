@@ -22,7 +22,7 @@
 										<tr class="wsite-multicol-tr">
 											<td class="wsite-multicol-col" style="width:10%; padding:0 15px;"></td>
 											{% for sched in latest_scheds %}
-											<td class="wsite-multicol-col" style="width:25%; padding:0 15px;background-color: #f4df42">
+											<td class="wsite-multicol-col" style="width:25%; padding:0 15px;background-color: #f4df42;border-radius: 25px;">
 												<div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
 												<h4 style="text-align:center;"><a href="{% url 'detail' sched.id %}">{{ sched.title}}</a></h4>
 												<h5 style="text-align:center;"><a href="{% url 'edit_schedule' sched.id %}">(edit)</a></h5>
