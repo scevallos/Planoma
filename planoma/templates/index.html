@@ -38,14 +38,25 @@
                                                                         <tr class="wsite-multicol-tr">
                                                                             <td class="wsite-multicol-col" style="width:25%;">
                                                                             </td>
-                                                                            <td class="wsite-multicol-col" style="width:25%;">
-                                                                                <a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a> <br> Create
-                                                                            </td>
-                                                                            <td class="wsite-multicol-col" style = "width:25%;">
-                                                                                <a href="{% url 'my_schedules' %}" ><img src="{% static 'planoma/images/schedules/icon-view-schedule.png'%}" alt="View-icon"/></a><br> View
-                                                                            </td>
-                                                                            <td class="wsite-multicol-col" style="width:25%;">
-                                                                            </td>
+                                                                            {% if user.group == 'Students' %}
+                                                                                <td class="wsite-multicol-col" style="width:25%;">
+                                                                                    <a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a> <br> Create
+                                                                                </td>
+                                                                                <td class="wsite-multicol-col" style = "width:25%;">
+                                                                                    <a href="{% url 'my_schedules' %}" ><img src="{% static 'planoma/images/schedules/icon-view-schedule.png'%}" alt="View-icon"/></a><br> View
+                                                                                </td>
+                                                                                <td class="wsite-multicol-col" style="width:25%;">
+                                                                                </td>
+                                                                            {% else %}
+                                                                                <td class="wsite-multicol-col" style="width:25%;">
+                                                                                    <a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/advisors/icon-advisees.png'%}" alt="Advisee-icon"/></a> <br> View Advisees
+                                                                                </td>
+                                                                                <td class="wsite-multicol-col" style = "width:25%;">
+                                                                                    <a href="{% url 'course_new' %}" ><img src="{% static 'planoma/images/advisors/icon-add-course.png'%}" alt="Add-icon"/></a><br> Add Course
+                                                                                </td>
+                                                                                <td class="wsite-multicol-col" style="width:25%;">
+                                                                                </td>
+                                                                            {% endif %}
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>

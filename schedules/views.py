@@ -28,6 +28,8 @@ def add_course(request):
 @group_required('Students')
 @login_required
 def my_schedules(request):
+    if request.user.groups.all()[0] == 'Advisors':
+        return redirect('index')
     # Get the latest 3 schedules made by the user
     latest_scheds = Schedule.objects.all().filter(owner_id=request.user.id).order_by('-created_at')[:3]
     context = {'latest_scheds': latest_scheds}
