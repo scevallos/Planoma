@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^schedules/edit_schedule/(?P<schedule_id>[0-9]+)$', sch_views.edit_schedule, name='edit_schedule'),
     url(r'^schedules/detail/(?P<schedule_id>[0-9]+)$', sch_views.detail, name='detail'),
     url(r'^courses/course_new/$', sch_views.add_course, name='course_new'),
+    url(r'^invitations/', include('invitations.urls', namespace='invitations')),
     url(r'^admin/', admin.site.urls),
 ]
 

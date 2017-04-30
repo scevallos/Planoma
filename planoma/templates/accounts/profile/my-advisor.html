@@ -17,9 +17,14 @@
 									Advisor: {{ user.studentprofile.adv }}
 								{% else %}
 									You do not have an advisor right now.<br>
-									<a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'auth_login' %}" >
+									<form role="form" action="" method="post"> {% csrf_token %}
+    									{{ form.as_p }}
+    									<button type="submit">Submit</button>
+									</form>
+
+									<!-- <a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'auth_login' %}" >
 										<span class="wsite-button-inner">Add your Advisor</span>
-									</a>
+									</a> -->
 								{% endif %}
 
 								<div class="wsite-spacer" style="height:350px;"></div>
@@ -31,5 +36,5 @@
         </div>
     </div>
 </div>
-	
+
 {% endblock %}

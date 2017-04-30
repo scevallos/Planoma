@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group
 
 from models import StudentProfile
 from schedules.models import Schedule, Course, CourseSession
-from forms import UserForm, StudentProfileForm
+from forms import UserForm, StudentProfileForm, InviteAdvisorForm
 from group_decorator import *
 
 
@@ -46,6 +46,20 @@ def signup(request):
         else:
             form = UserCreationForm()
     return render(request, 'accounts/advisor/signup.html', {'form': form})
+
+def invite_advisor(request):
+    form = InviteAdvisorForm()
+    if request.method == 'POST':
+        form = InviteAdvisorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            email = form.cleaned_data.get('advisor_email')
+            invite = Invitation.create(email, inviter=request.user)
+            invite.send_invitation(request)
+            return redirect('index') # TODO: redirect to thank you page
+        else:
+            form = InviteAdvisorForm()
+    return render(request, 'accounts/profile/my-advisor.html', {'form' : form})
 
 @login_required
 @transaction.atomic

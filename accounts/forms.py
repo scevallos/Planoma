@@ -28,10 +28,14 @@ class AdvisorInviteForm(forms.ModelForm):
 		model = AdvisorProfile
 		fields = ('dept',)
 
-class SignUpForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ('username', 'password1', 'password2',)
+class InviteAdvisorForm(forms.Form):
+    advisor_name = forms.CharField(required=True)
+    advisor_email = forms.EmailField(required=True)
+
+# class SignUpForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields = ('username', 'password1', 'password2',)
 
 """
 Forms for advisors
