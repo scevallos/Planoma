@@ -48,6 +48,7 @@ class StudentProfile(UserProfile):
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             StudentProfile.objects.create(user=instance)
+            instance.groups.add(Group.objects.get(name='Students'))
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):

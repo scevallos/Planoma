@@ -5,7 +5,10 @@
 <div class="banner-wrap">
 	<div class="wsite-elements wsite-not-footer wsite-header-elements">
 		<div class="wsite-section-wrap">
-			<div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%; overflow:hidden" >
+			<div class="wsite-section wsite-header-section wsite-section-bg-image"
+			style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;
+			background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;
+			background-color: #4ac3de;height:100%; overflow:hidden" >
 				<div class="wsite-section-content">
 					<div class="container">
 						<div class="banner">
@@ -14,45 +17,41 @@
 								<h2 class="wsite-content-title" style="text-align:center;">My Schedules</h2>
 								<div class="wsite-spacer" style="height:30px;"></div>
 								{% if latest_scheds %}
-								<ul>
-									{% for sched in latest_scheds %}
-									<li>
-										<h4><a href="{% url 'detail' sched.id %}">{{ sched.title}}</a></h4><h5><a href="{% url 'edit_schedule' sched.id %}">(edit)</a></h5>
-										<p> Made on: {{ sched.created_at }}</p>
-										<p> Updated on: {{ sched.updated_at }}</p>
-									</li>
-									{% endfor %}
-								</ul>
-								
-								{% else %}
-								<h4>You haven't made any schedules. Create One!</h4> 
-								<a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a>
-								<div class="wsite-spacer" style="height:305px;"></div>
-								{% endif %}
-								<div style="height: 350px; overflow: hidden;"></div>
-								<!-- <div class="wsite-spacer" style="height:100%;"></div> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<table class="wsite-multicol-table">
+									<tbody class="wsite-multicol-tbody">
+										<tr class="wsite-multicol-tr">
+											<td class="wsite-multicol-col" style="width:10%; padding:0 15px;"></td>
+											{% for sched in latest_scheds %}
+											<td class="wsite-multicol-col" style="width:25%; padding:0 15px;background-color: #f4df42;border-radius: 25px;">
+												<div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
+												<h4 style="text-align:center;"><a href="{% url 'detail' sched.id %}">{{ sched.title}}</a></h4>
+												<h5 style="text-align:center;"><a href="{% url 'edit_schedule' sched.id %}">(edit)</a></h5>
+												<p> <b>Made on:</b> {{ sched.created_at }}</p>
+												<p> <b>Updated on:</b> {{ sched.updated_at }}</p>
+												<div style="height: 10px; overflow: hidden;"></div>
+											</div>
+										</td>
+										<td class="wsite-multicol-col" style="width:5%; padding:0 15px;background-color: #4ac3de">
+										{% endfor %}
+									</tr>
+								</tbody>
+							</table>
+
+							{% else %}
+							<h4>You haven't made any schedules. Create One!</h4>
+							<a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a>
+							<div class="wsite-spacer" style="height:305px;"></div>
+							{% endif %}
+							<div style="height: 250px; overflow: hidden;"></div>
+							<!-- <div class="wsite-spacer" style="height:100%;"></div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 
 
-<!-- <h3> Your Schedules</h3>
-{% if latest_scheds %}
-<ul>
-	{% for sched in latest_scheds %}
-	<li>
-		<h4>{{ sched.title}}</h4>
-		<p> Made on: {{ sched.created_at }}</p>
-		<p> Updated on: {{ sched.updated_at }}</p>
-	</li>
-	{% endfor %}
-</ul>
-{% else %}
-<h4>You haven't made any schedules.</h4> -->
-{% endif %}
 {% endblock %}

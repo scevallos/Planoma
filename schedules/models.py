@@ -6,7 +6,7 @@ from itertools import chain
 
 class Course(models.Model):
     course_id = models.CharField(max_length=9, primary_key=True) # e.g. CHEM170A or '\w{2,4}\d+\w?'
-    
+
     course_name = models.CharField(max_length=50)
 
     area_opts = (
@@ -20,7 +20,8 @@ class Course(models.Model):
     area = models.CharField(
         max_length=1,
         choices = area_opts,
-        null=True # there are like 2 GEOL courses that satisfy no area lol
+        null=True,
+        blank=True # there are like 2 GEOL courses that satisfy no area lol
     )
 
     overlay_opts = (
@@ -33,7 +34,8 @@ class Course(models.Model):
     overlay = models.CharField(
         max_length = 2,
         choices = overlay_opts,
-        null=True
+        null=True,
+        blank=True
     )
 
     credit_opts = (
@@ -135,4 +137,4 @@ class Schedule(models.Model):
 
 
 # inviting advisors through a link
-# 
+#
