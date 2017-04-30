@@ -86,7 +86,7 @@ def edit_schedule(request, schedule_id):
 
             # # Logic of is the course able to be taken -- pre-req stuff - TODO:
             # for course in courses:
-            #     course 
+            #     course
             #     PrereqCourses.objects.get(course_take=course)
             session.courses.add(courses[0])
             session.save()
@@ -107,16 +107,15 @@ def edit_schedule(request, schedule_id):
 
 # @login_required
 # class CourseSearchListView(CourseListView):
-    
+
 #     def get_queryset(self):
 #         result = super(CourseSearchListView, self).get_queryset()
 
 #         query = self.request.GET.get('q')
 #         if query:
-            
+
 @login_required
 def first_year(request):
-
     if request.method == "POST":
         firstForm = firstYearForm(request.POST)
         if firstForm.is_valid():
@@ -145,7 +144,7 @@ def other_year(request):
 # TODO: Test if removing login_required breaks request.user
 @login_required
 def detail(request, schedule_id):
-    # Get the schedule 
+    # Get the schedule
     sched = get_object_or_404(Schedule, pk=schedule_id)
 
     # Check to see requester is the owner, if it's private
