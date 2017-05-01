@@ -147,11 +147,11 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # Setting up mailing to activate account
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'planoma4747@gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_HOST_USER = 'planoma4747@yahoo.com'
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-SERVER_EMAIL = 'planoma4747@gmail.com'
+SERVER_EMAIL = 'planoma4747@yahoo.com'
 DEFAULT_FROM_EMAIL = "Planoma"
 
 # Update database configuration with $DATABASE_URL.
