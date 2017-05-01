@@ -12,26 +12,18 @@
                     <div class="container">
                         <div class="banner">
                             <div class="wsite-section-elements">
-                                <h2 class="wsite-content-title" style="text-align:center;">Log In</h2>
-                                <br>
-                            	<form method="post" action=".">
-                            		{% csrf_token %}
-                            		{{ form.as_p }}
-                            		<!-- <input type="submit" value="Log in" /> -->
-                                    <div class="wsite-button wsite-button-large wsite-button-highlight">
-                                        <input class="wsite-button-inner" type="submit" value="Log in" />
-                                    </div>
-                                    <input type="hidden" name="next" value="{{ next }}" />
-                            	</form> <br>
-
-                            	<p>Forgot password? <a href="{% url 'auth_password_reset' %}">Reset it</a>!</p>
-                            	<p>Not member? <a href="{% url 'registration_register' %}">Register</a>!</p>
+                              <h2 class="wsite-content-title" style="text-align:center;">My Advisees</h2><hr>
+                              <br>
+                              {% for adv in advisees %}
+                              <b>{{adv}} <br> </b>
+                              {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="wsite-spacer" style="height:230px;"></div>
     </div>
 </div>
 

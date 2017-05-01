@@ -85,7 +85,7 @@ class EquivCourses(models.Model):
 class CourseSession(models.Model):
     schedule = models.ForeignKey('Schedule', on_delete=models.CASCADE, related_name='schedule')
     courses = models.ManyToManyField(Course)
-    term = models.IntegerField(default=2017) # The year the course is taking place
+    term = models.IntegerField(default=2017, null=True) # The year the course is taking place
 
     SEMS = (
         ('FA' , 'Fall'),
@@ -93,7 +93,8 @@ class CourseSession(models.Model):
     )
     semester = models.CharField( # Either Spring or Fall to identify the semester
         max_length=2,
-        choices = SEMS
+        choices = SEMS,
+        null=True
     )
 
     def __unicode__(self):

@@ -112,7 +112,7 @@
                             </li>
                             {% elif request.user|has_group:"Advisors" %}
                             <li id="pg399140095119712199" class="wsite-menu-item-wrap">
-                                <a class="wsite-menu-item"> My Advisees </a>
+                                <a href="{% url 'advisees' %}" class="wsite-menu-item"> My Advisees </a>
                             </li>
                             <li id="pg399140095119712199" class="wsite-menu-item-wrap">
                                 <a href="{% url 'course_new' %}"class="wsite-menu-item"> Add Course </a>

@@ -1,5 +1,5 @@
 from django import forms
-from models import Schedule, Course
+from models import Schedule, Course, CourseSession
 from accounts.dept_codes import DEPTS
 from constants import *
 
@@ -7,6 +7,11 @@ class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ('course_id', 'course_name', 'area', 'overlay', 'credit')
+
+class TermForm(forms.ModelForm):
+    class Meta:
+        model = CourseSession
+        fields = ('term', 'semester')
 
 class ScheduleForm(forms.ModelForm):
     classes_taken = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), widget=forms.CheckboxSelectMultiple())
@@ -35,10 +40,10 @@ class firstYearForm(forms.ModelForm):
     """docstring for firstYearForm"""
     class Meta:
         model = Schedule
-        fields = ('title', 'start_sem', 'end_sem', 'public', 'existing_credits', 
+        fields = ('title', 'start_sem', 'end_sem', 'public', 'existing_credits',
             'languages_completed', 'math_completed')
 
-        
+
 
 # class ScheduleOptionsForm(forms.ModelForm):
 
@@ -65,5 +70,3 @@ class firstYearForm(forms.ModelForm):
 
 #   term_selected = forms.ChoiceField(choices = TERM_CHOICES,
 #                                     default = 'SP17')
-
-    
