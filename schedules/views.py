@@ -114,7 +114,7 @@ def other_year(request):
 def edit_schedule(request, schedule_id):
     sched = get_object_or_404(Schedule, pk=schedule_id)
     remaining_courses = sched.remaining_courses.courses.all()
-    sessions = sched.course_sessions.all().order_by('term').exclude(term=4747).exclude(term=4848)
+    sessions = sched.course_sessions.all().order_by('term')
 
     if sched.owner.user != request.user:
         # TODO: edit private html to show different message if view/edit
@@ -127,11 +127,11 @@ def edit_schedule(request, schedule_id):
         search = request.GET.get('search')
         courses = Course.objects.filter(course_name__icontains=search).exclude(course_id__in=sched.previous_courses.courses.all())
 
-        add_form = AddTermForm(sessions=sessions, courses=courses)
+        add_form = AddTermForm(sessions=sessions.exclude(term=4747).exclude(term=4848), courses=courses)
 
         # User just hit save button from course searches
     if request.method == "POST":
-        add_form = AddTermForm(request.POST, sessions=sessions, courses=courses)
+        add_form = AddTermForm(request.POST, sessions=sessions.exclude(term=4747).exclude(term=4848), courses=courses)
         if add_form.is_valid():
             session = add_form.cleaned_data['terms']
             courses = add_form.courses
