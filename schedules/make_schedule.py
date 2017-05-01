@@ -72,22 +72,145 @@ def makeSchedule(sid):
 		# TODO: this check above should only happen for like first years e.g junior just tryna make senior yr
 		return -1
 
-	cred_needed = 32 - int(sched.existing_credits)
-	chunk_size = cred_needed / num_semesters
+	# cred_needed = 32 - int(sched.existing_credits)
+	# chunk_size = cred_needed / num_semesters
+
 
 	course_num = 0
 	# Loop through courses in template, adding them to the schedule
 	for i in xrange(num_semesters):
 		sesh = CourseSession(schedule=sched, semester = TERM_CHOICES[start_index + i][0][:2], term = ('20' + TERM_CHOICES[start_index + i][0][-2:]))
 		sesh.save()
-		for course in xrange(chunk_size):
+		for course in xrange(4):
 			c = Course.objects.get(course_id = TEMPLATE[course_num])
 			sesh.courses.add(c)
 			sesh.save()
 			sched.course_sessions.add(sesh)
 			sched.save()
 			course_num += 1
-	
+
+	# Remove the others for extra credits
+	if int(sched.existing_credits) >= 1:		
+		sched.course_sessions.all().order_by('-term')[0].courses.remove(Course.objects.get(course_id='OTHER4'))
+	elif int(sched.existing_credits) == 2:
+		sched.course_sessions.all().order_by('-term')[1].courses.remove(Course.objects.get(course_id='OTHER2'))
+	sched.save()
+
+	other1 = Course.objects.get(course_id='OTHER1')
+	lang1 = Course.objects.get(course_id='LANG1')
+	lang2 = Course.objects.get(course_id='LANG2')
+	lang3 = Course.objects.get(course_id='LANG3')
+
+	count = 0
+
+	all_sessions = sched.course_sessions.all().order_by('term')
+	if sched.languages_completed == '0':
+		sesh = all_sessions[3]
+		sesh.courses.remove(other1)
+		sesh.courses.add(lang1)
+		sesh.save()
+		sesh = all_sessions[4]
+		sesh.courses.remove(other1)
+		sesh.courses.add(lang2)
+		sesh.save()
+		sesh = all_sessions[5]
+		sesh.courses.remove(other1)
+		sesh.courses.add(lang3)
+		sesh.save()
+		# for session in sched.course_sessions.all():
+		# 	if count = 3:
+		# 		break
+		# 	else:	
+		# 		all_courses = session.courses.all()
+		# 		if other1 in all_courses:
+		# 			session.courses.remove(other1)
+
+		# 			if count == 0:
+		# 				toAdd = lang1
+		# 			elif count == 1:
+		# 				toAdd = lang2
+		# 			elif 
+		# 			session.courses.add(lang1)
+		# 			count += 1
+	elif sched.languages_completed == '1':
+		sesh = all_sessions[3]
+		sesh.courses.remove(other1)
+		sesh.courses.add(lang2)
+		sesh.save()
+		sesh = all_sessions[4]
+		sesh.courses.remove(other1)
+		sesh.courses.add(lang3)
+		sesh.save()
+
+		# for session in sched.course_sessions.all():
+		# 	if count = 2:
+		# 		break
+		# 	else:	
+		# 		all_courses = session.courses.all()
+		# 		if other1 in all_courses:
+		# 			session.courses.remove(other1)
+		# 			session.courses.add(lang2)
+		# 			count += 1
+	elif sched.languages_completed == '2':
+		sesh = all_sessions[3]
+		sesh.courses.remove(other1)
+		sesh.courses.add(lang3)
+		sesh.save()
+		# for session in sched.course_sessions.all():
+		# 	if count = 1:
+		# 		break
+		# 	else:	
+		# 		all_courses = session.courses.all()
+		# 		if other1 in all_courses:
+		# 			session.courses.remove(other1)
+		# 			session.courses.add(lang3)
+		# 			count += 1
+
+	math30 = Course.objects.get(course_id='MATH030')
+	math31 = Course.objects.get(course_id='MATH031')
+	math60 = Course.objects.get(course_id='MATH060')
+	all_sessions = sched.course_sessions.all()
+	if sched.math_completed == 'MATH030':
+		all_sessions[0].courses.remove(math30)
+		all_sessions[0].courses.add(math31)
+		all_sessions[0].save()
+		
+		all_sessions[2].courses.remove(math31)
+		all_sessions[2].courses.add(math60)
+		all_sessions[2].save()
+
+		all_sessions[1].courses.remove(math60)
+		all_sessions[1].courses.add(other1)
+		all_sessions[1].save()
+
+	elif sched.math_completed == 'MATH031':
+		all_sessions[0].courses.remove(math30)
+		all_sessions[0].courses.add(math60)
+		all_sessions[0].save()
+		
+		all_sessions[2].courses.remove(math31)
+		all_sessions[2].courses.add(other1)
+		all_sessions[2].save()
+		
+		all_sessions[1].courses.remove(math60)
+		all_sessions[1].courses.add(other1)
+		all_sessions[1].save()
+		
+	elif sched.math_completed == 'MATH060':
+		all_sessions[0].courses.remove(math30)
+		all_sessions[0].courses.add(other1)
+		all_sessions[0].save()
+		
+		all_sessions[2].courses.remove(math31)
+		all_sessions[2].courses.add(other1)
+		all_sessions[2].save()
+		
+		all_sessions[1].courses.remove(math60)
+		all_sessions[1].courses.add(other1)
+		all_sessions[1].save()
+		
+
+
 
 
 def makeBlankSchedule(remaining_courses, sid):
