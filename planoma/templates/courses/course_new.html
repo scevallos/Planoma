@@ -6,7 +6,9 @@
 	<div class="banner-wrap">
 	<div class="wsite-elements wsite-not-footer wsite-header-elements">
 		<div class="wsite-section-wrap">
-			<div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%; overflow:hidden" >
+			<div class="wsite-section wsite-header-section wsite-section-bg-image"
+			style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;
+			background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%; overflow:hidden" >
 				<div class="wsite-section-content">
 					<div class="container">
 						<div class="banner">
@@ -14,22 +16,41 @@
 								<div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
 								<h2 class="wsite-content-title" style="text-align:center;"><br>Add Courses</h2>
                 <br>
+								<table class="wsite-multicol-table">
+									<tbody class="wsite-multicol-tbody">
+										<tr class="wsite-multicol-tr">
+											<td class="wsite-multicol-col" style="width:5%; padding:0 15px;"></td>
 
-									<form method="POST"> {% csrf_token %}
-    									{{ form.as_p }}
-											{{ term_form.as_p }}
-    									<button type="submit">Submit</button>
-									</form>
+											<td class="wsite-multicol-col" style="width:25%; padding:0 15px;background-color: #7bcde0;border-radius: 25px;">
+												<div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
+												<form method="POST"> {% csrf_token %}
+			    									{{ form.as_p }}
+														{{ term_form.as_p }}
+														<a class="wsite-button wsite-button-large wsite-button-highlight">
+																<button type="submit" class="wsite-button-inner">Submit</button>
+														</a>
+			    									<!-- <button type="submit">Submit</button> -->
+												</form>
 
-                  {% if messages %}
-                    <ul class="messages">
-                      {% for message in messages %}
-                        <li class="{{ message.tags }}">{{ message }}</li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
+			                  {% if messages %}
+			                    <ul class="messages">
+			                      {% for message in messages %}
+			                        <li class="{{ message.tags }}">{{ message }}</li>
+			                      {% endfor %}
+			                    </ul>
+			                  {% endif %}
+												<div style="height: 10px; overflow: hidden;"></div>
+											</div>
+										</td>
+										<td class="wsite-multicol-col" style="width:5%; padding:0 15px;background-color: #4ac3de">
 
-								<div class="wsite-spacer" style="height:350px;"></div>
+									</tr>
+								</tbody>
+							</table>
+
+
+
+								<div class="wsite-spacer" style="height:50px;"></div>
 							</div>
                         </div>
                     </div>
