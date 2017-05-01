@@ -2,12 +2,62 @@
 {% load static %}
 
 {% block content %}
-You do not have an advisor right now.<br>
-<form method="POST"> {% csrf_token %}
-	{{ form.as_p }}
-	<div class="wsite-button wsite-button-large wsite-button-highlight">
-		<button class="wsite-button-inner" type="submit" value="Submit">Submit</button>
-		<!-- <button type="submit">Submit</button> -->
-	</div>
-</form>
+<div class="banner-wrap">
+<div class="wsite-elements wsite-not-footer wsite-header-elements">
+		<div class="wsite-section-wrap">
+				<div class="wsite-section wsite-header-section wsite-section-bg-image"
+				style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;
+				background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%;
+				overflow:hidden" >
+						<div class="wsite-section-content">
+								<div class="container">
+										<div class="banner">
+												<div class="wsite-section-elements">
+														<div class="wsite-spacer" style="height:50px;height:100%; overflow:hidden"></div>
+																<h2 class="wsite-content-title" style="text-align:center;">Schedule Creator</h2>
+																<div class="wsite-spacer" style="height:30px;"></div>
+																<div class="wsite-multicol">
+																		<div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
+																				<table class="wsite-multicol-table">
+																						<tbody class="wsite-multicol-tbody">
+																								<tr class="wsite-multicol-tr">
+																										<td class="wsite-multicol-col" style="width:20%; padding:0 15px;"></td>
+																										<td class="wsite-multicol-col" style="width:60%; padding:0 15px;background-color: #4ac3de;">
+																												<div style="text-align:left;">
+																													<form method="POST"> {% csrf_token %}
+																														<b>Title: {{ form.title }}</b><br>
+																														<p>Start Semester: {{ form.start_sem }}
+																															End Semester: {{ form.end_sem }}<br>
+																															Make Schedule Public: {{ form.public }}<br>
+																															Existing Credits: {{ form.existing_credits }}<br>
+																															Language Complete: {{ form.languages_completed }}<br>
+																															Math Complete: {{ form.math_completed }}<br></p>
+																														<h4 style="text-align:center;">Courses Completed:</h4>
+																														{% for class in form.classes_taken %}
+																														{{class}}
+																														{% endfor %}
+																														<br>
+																														<div style="text-align:center;">
+																														<div class="wsite-button wsite-button-large wsite-button-highlight">
+																															<button class="wsite-button-inner" type="submit" value="Submit">Submit</button>
+																															<!-- <button type="submit">Submit</button> -->
+																														</div>
+																														</div>
+																													</form>
+																												</div>
+																										</td>
+																										<td class="wsite-multicol-col" style="width:20%; padding:0 15px;"></td>
+																								</tr>
+																						</tbody>
+																				</table>
+																		</div>
+																</div>
+														</div>
+												</div>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+</div>
 {% endblock %}
