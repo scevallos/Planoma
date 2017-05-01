@@ -35,14 +35,18 @@
 										{% endfor %}
 									</tr>
 								</tbody>
-							</table>
-
+							</table><br><br>
+							<a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'new_schedule' %}" >
+									<span class="wsite-button-inner">Create a new schedule</span>
+							</a>
+							<div style="height: 150px; overflow: hidden;"></div>
 							{% else %}
 							<h4>You haven't made any schedules. Create One!</h4>
 							<a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a>
 							<div class="wsite-spacer" style="height:305px;"></div>
-							{% endif %}
 							<div style="height: 250px; overflow: hidden;"></div>
+							{% endif %}
+
 							<!-- <div class="wsite-spacer" style="height:100%;"></div> -->
 						</div>
 					</div>

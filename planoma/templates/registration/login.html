@@ -5,14 +5,17 @@
 <div class="banner-wrap">
     <div class="wsite-elements wsite-not-footer wsite-header-elements">
         <div class="wsite-section-wrap">
-            <div class="wsite-section wsite-header-section wsite-section-bg-image" style="vertical-align: middle;height: 666px;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 50% 50% ;background-size: 100% ;background-color: #4ac3de ;background-size: cover;">
+            <div class="wsite-section wsite-header-section wsite-section-bg-image"
+            style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;background-repeat: no-repeat ;background-position: 100% 100% ;
+            background-size: 100% ;background-color: #4ac3de;height:100%; overflow:hidden" >
                 <div class="wsite-section-content">
                     <div class="container">
                         <div class="banner">
                             <div class="wsite-section-elements">
                                 <h2 class="wsite-content-title" style="text-align:center;">Log In</h2>
+                                <br>
                             	<form method="post" action=".">
-                            		{% csrf_token %} 
+                            		{% csrf_token %}
                             		{{ form.as_p }}
                             		<!-- <input type="submit" value="Log in" /> -->
                                     <div class="wsite-button wsite-button-large wsite-button-highlight">
@@ -31,4 +34,18 @@
         </div>
     </div>
 </div>
+
+<div class="wsite-section-wrap">
+	<div class="wsite-section wsite-body-section wsite-section-bg-color wsite-background-4 wsite-custom-background"
+  style="height: 1px;vertical-align: bottom;background-color: #4ac3de;background-image: none;is_customized: 1;">
+		<div class="wsite-section-content">
+			<div class="container">
+				<div class="wsite-section-elements">
+					<div class="wsite-spacer" style="height:8px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
