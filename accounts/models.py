@@ -23,11 +23,12 @@ class UserProfile(models.Model):
         abstract = True
 
 class AdvisorProfile(UserProfile):
-    @receiver(post_save, sender=User)
-    def create_advisor_profile(sender, instance, created, **kwargs):
-        if created:
-            AdvisorProfile.objects.create(user=instance)
-            instance.groups.add(Group.objects.get(name='Advisors'))
+    pass
+    # @receiver(post_save, sender=User)
+    # def create_advisor_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         AdvisorProfile.objects.create(user=instance)
+    #         instance.groups.add(Group.objects.get(name='Advisors'))
 
     # @receiver(post_save, sender=User)
     # def save_user_profile(sender, instance, **kwargs):
@@ -52,4 +53,7 @@ class StudentProfile(UserProfile):
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
-        instance.studentprofile.save()
+        try:
+            instance.studentprofile.save()
+        except:
+            pass

@@ -10,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group
 
-from models import StudentProfile
+from models import StudentProfile, AdvisorProfile
 from schedules.models import Schedule, Course, CourseSession
 from forms import UserForm, StudentProfileForm, InviteAdvisorForm
 from group_decorator import *
@@ -38,7 +38,13 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            #user.groups.add(Group.objects.get(name='Advisors'))
+
+            AdvisorProfile.objects.create(user=user)
+            user.groups.add(Group.objects.get(name='Advisors'))
+
+            StudentProfile.objects.get(user=user).delete()
+            Group.objects.get(name='Students').user_set.remove(user)
+
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
