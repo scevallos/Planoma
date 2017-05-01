@@ -79,10 +79,11 @@ def other_year(request):
         if form.is_valid():
             schedule = form.save(commit=False)
             schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
+
             schedule.save()
 
             # Make dummy course session
-            sesh = schedule.previous_courses
+            sesh = CourseSession.objects.create(term=4747, semester='FA', schedule=)
             sesh.save()
 
             # Add all previous courses
