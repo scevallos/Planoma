@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^$', acc_views.index, name='index'),
     url(r'^contact_us/$', acc_views.contact_us, name='contact_us'),
     url(r'^accounts/advisor/signup/$', acc_views.signup, name='account_signup'),
+    url(r'^accounts/advisor/advisees/$', acc_views.advisee_list, name='advisees'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/profile/view/$', acc_views.profile_view, name='profile_view'),
     url(r'^accounts/profile/my_advisor/$', acc_views.invite_advisor, name='my_advisor'),

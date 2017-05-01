@@ -53,7 +53,7 @@
                                                                                 </td>
                                                                             {% elif request.user|has_group:"Advisors" %}
                                                                                 <td class="wsite-multicol-col" style="width:25%;">
-                                                                                    <a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/advisors/icon-advisees.png'%}" alt="Advisee-icon"/></a> <br> View Advisees
+                                                                                    <a href="{% url 'advisees' %}" ><img src="{% static 'planoma/images/advisors/icon-advisees.png'%}" alt="Advisee-icon"/></a> <br> View Advisees
                                                                                 </td>
                                                                                 <td class="wsite-multicol-col" style = "width:25%;">
                                                                                     <a href="{% url 'course_new' %}" ><img src="{% static 'planoma/images/advisors/icon-add-course.png'%}" alt="Add-icon"/></a><br> Add Course

@@ -84,6 +84,11 @@ def invite_advisor(request):
         form = InviteAdvisorForm()
     return render(request, 'accounts/profile/my-advisor.html', {'form' : form})
 
+# @group_required
+def advisee_list(request):
+    advisees = StudentProfile.objects.filter(adv = AdvisorProfile.objects.get(user = request.user))
+    return render(request, 'accounts/advisor/advisees.html',{'advisees': advisees})
+
 @login_required
 @transaction.atomic
 def update_profile(request):
