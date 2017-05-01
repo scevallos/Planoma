@@ -17,6 +17,24 @@ def add_course(request):
         form = CourseForm(request.POST)
         if form.is_valid():
             course = form.save()
+            for sched in Schedule.objects.all():
+                done = False
+                # courses = sched.get_all_courses()
+                for sesh in sched.course_sessions.all():
+                    if done:
+                        break
+                    for cur_course in sesh.courses.all():
+                        if cur_course.course_id.startswith("ELEC"):
+                            sesh.courses.remove(cur_course)
+                            sesh.courses.add(course)
+                            sesh.save()
+                            done = True
+                        if done:
+                            break
+
+
+
+
             # schedules = Course.objects.filter(course_id__icontains='ELEC')
             messages.success(request, 'Course has been successfully added.')
         else:
@@ -25,10 +43,10 @@ def add_course(request):
         form = CourseForm()
     return render(request, 'courses/course_new.html', {'form': form})
 
-@group_required('Students')
+
 @login_required
 def my_schedules(request):
-    if request.user.groups.all()[0] == 'Advisors':
+    if request.user.groups.all()[0] == Group.objects.get(name='Advisors'):
         return redirect('index')
     # Get the latest 3 schedules made by the user
     latest_scheds = Schedule.objects.all().filter(owner_id=request.user.id).order_by('-created_at')[:3]
@@ -148,6 +166,7 @@ def first_year(request):
             schedule = firstForm.save(commit=False)
             schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
             schedule.save()
+            # schedule.existing_credits=schedule.cleaned_data('existing_credits')
 
             status_code = makeSchedule(schedule.id)
             if status_code == -1:
@@ -170,8 +189,8 @@ def first_year(request):
 #
 # # TODO: Test if removing login_required breaks request.user
 
-@group_required('Students')
-@login_required
+# @group_required('Students')
+# @login_required
 def detail(request, schedule_id):
     # Get the schedule
     sched = get_object_or_404(Schedule, pk=schedule_id)
