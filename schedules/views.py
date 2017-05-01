@@ -19,7 +19,7 @@ def add_course(request):
         if form.is_valid() and term_form.is_valid():
             course = form.save()
             term = term_form.save(commit=False)
-            term.schedule = Schedule.objects.get(pk=14)
+            term.schedule = Schedule.objects.get(pk=7)
             term_selected = term.term
             semester_selected = term.semester
             for sched in Schedule.objects.all():
