@@ -79,12 +79,13 @@ def other_year(request):
         if form.is_valid():
             schedule = form.save(commit=False)
             schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
-
             schedule.save()
 
             # Make dummy course session
-            sesh = CourseSession.objects.create(term=4747, semester='FA', schedule=)
+            sesh = CourseSession.objects.create(term=4747, semester='FA', schedule=schedule)
             sesh.save()
+            schedule.previous_courses = sesh
+            schedule.save()
 
             # Add all previous courses
             for course in form.cleaned_data['classes_taken']:
@@ -113,7 +114,7 @@ def other_year(request):
 def edit_schedule(request, schedule_id):
     sched = get_object_or_404(Schedule, pk=schedule_id)
     remaining_courses = sched.remaining_courses.courses.all()
-    sessions = sched.course_sessions.all().order_by('term')
+    sessions = sched.course_sessions.all().order_by('term').exclude(term=4747).exclude(term=4848)
 
     if sched.owner.user != request.user:
         # TODO: edit private html to show different message if view/edit
@@ -124,7 +125,7 @@ def edit_schedule(request, schedule_id):
     # Search bar 
     if request.GET.get('search'):
         search = request.GET.get('search')
-        courses = Course.objects.filter(course_name__icontains=search)
+        courses = Course.objects.filter(course_name__icontains=search).exclude(course_id__in=sched.previous_courses.courses.all())
 
         add_form = AddTermForm(sessions=sessions, courses=courses)
 
@@ -139,16 +140,14 @@ def edit_schedule(request, schedule_id):
             # for course in courses:
             #     course
             #     PrereqCourses.objects.get(course_take=course)
-            session.courses.add(courses[0])
-            session.save()
-            remaining_courses.remove(courses)
-            remaining_courses.save()
-
+            for course in courses:
+                session.courses.add(course)
+                session.save()
+                sched.remaining_courses.courses.remove(course)
+                sched.save()
 
         else:
             messages.error('Please select a valid semester.')
-
-
 
     return render(request, 'schedules/edit_schedule.html',
         {'remaining_courses': remaining_courses,

@@ -68,6 +68,7 @@
                         <div class="right-div" style="margin-left: 258px;">
                           <h2> Current Schedule </h2>
                           {% for session in sessions %}
+                          {% if session.term != 4848 and session.term != 4747 %}
                           <ul>
                             <li><h4>{{ session.get_semester_display }} {{ session.term }}</h4></li>
                             <ul>
@@ -76,6 +77,15 @@
                               {% endfor %}
                             </ul>
                           </ul>
+                          {% elif session.term == 4747 %}
+                          <br>
+                          <h2>Courses Taken:</h2>
+                          <ul>
+                              {% for course in session.courses.all %}
+                              <li>{{ course.course_name }}</li>
+                              {% endfor %}
+                          </ul>
+                          {% endif %}
                           {% endfor %}
                         </div>
                       </td>
