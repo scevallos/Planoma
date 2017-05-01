@@ -233,7 +233,7 @@ def makeBlankSchedule(remaining_courses, sid):
 	cred_needed = 32 - int(sched.existing_credits)
 	chunk_size = cred_needed / num_semesters
 
-	other = Course.objects.get(course_id='OTHER')
+	# other = Course.objects.get(course_id='OTHER1')
 
 	for x in xrange(1, cred_needed + 1):
 		if (x % chunk_size == 0):
