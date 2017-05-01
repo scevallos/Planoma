@@ -61,6 +61,8 @@ def invite_advisor(request):
         if form.is_valid():
             # form.save()
             email = form.cleaned_data.get('advisor_email')
+            name = form.cleaned_data.get('advisor_name')
+            
             if not Invitation.objects.filter(email=email):
                 invite = Invitation.create(email, inviter=request.user)
                 invite.send_invitation(request)

@@ -1,4 +1,5 @@
 {% load static %}
+{% load template_extras %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,6 +74,7 @@
                             <li id="active" class="wsite-menu-item-wrap">
                                 <a href="{% url 'index' %}" class="wsite-menu-item">Home </a>
                             </li>
+                            {% if request.user|has_group:"Students" %}
                             <li id="pg460448653247643812" class="wsite-menu-item-wrap">
                                 <a class="wsite-menu-item" > My Schedules</a>
                                 <div class="wsite-menu-wrap" style="display:none">
@@ -90,6 +92,7 @@
                                     </ul>
                                 </div>
                             </li>
+
                             <li id="pg399140095119712199" class="wsite-menu-item-wrap">
                                 <a class="wsite-menu-item"> Account </a>
                                 <div class="wsite-menu-wrap" style="display:none">
@@ -107,6 +110,15 @@
                                     </ul>
                                 </div>
                             </li>
+                            {% elif request.user|has_group:"Advisors" %}
+                            <li id="pg399140095119712199" class="wsite-menu-item-wrap">
+                                <a class="wsite-menu-item"> My Advisees </a>
+                            </li>
+                            <li id="pg399140095119712199" class="wsite-menu-item-wrap">
+                                <a href="{% url 'course_new' %}"class="wsite-menu-item"> Add Course </a>
+                            </li>
+                            {% else %}
+                            {% endif %}
                             <li id="pg223160214585533492" class="wsite-menu-item-wrap">
                                 <a href="{% url 'contact_us'%}" class="wsite-menu-item" > Contact Us </a>
                             </li>

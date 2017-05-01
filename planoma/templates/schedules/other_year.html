@@ -2,5 +2,12 @@
 {% load static %}
 
 {% block content %}
-	<p>other year stuff goes here. </p>
+You do not have an advisor right now.<br>
+<form method="POST"> {% csrf_token %}
+	{{ form.as_p }}
+	<div class="wsite-button wsite-button-large wsite-button-highlight">
+		<button class="wsite-button-inner" type="submit" value="Submit">Submit</button>
+		<!-- <button type="submit">Submit</button> -->
+	</div>
+</form>
 {% endblock %}

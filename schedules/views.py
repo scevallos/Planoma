@@ -42,9 +42,13 @@ def schedules(request):
     return redirect('index')
 # TODO test if user not logged in, does it redirect back to original page
 
+def new_schedule(request):
+    return render(request, 'schedules/new_schedule.html')
+
+
 @group_required('Students')
 @login_required
-def new_schedule(request):
+def other_year(request):
     if request.method == "POST":
         form = ScheduleForm(request.POST)
         if form.is_valid():
@@ -66,7 +70,8 @@ def new_schedule(request):
             schedule.save()
 
             remaining_courses = makeQueue(schedule.id)
-            status_code = makeBlankSchedule(remaining_courses, schedule.id)
+            status_code = makeBlankSchedule(remaining_courses, schedule.id) # we have a schedule with all the course sessions needed from 4848
+
             if status_code == -1:
                 messages.error(request, 'Please select valid start and end semesters.')
             messages.success(request, 'Your schedule was successfully made!')
@@ -75,7 +80,7 @@ def new_schedule(request):
             messages.error(request, 'Please correct the error below.')
     else:
         form = ScheduleForm()
-    return render(request, 'schedules/new_schedule.html', {'form': form})
+    return render(request, 'schedules/other_year.html', {'form': form})
 
 @group_required('Students')
 @login_required
@@ -157,13 +162,13 @@ def first_year(request):
 
     return render(request, 'schedules/first_year.html', {'firstForm': firstForm})
 
-@group_required('Students')
-@login_required
-def other_year(request):
-
-    return render(request, 'schedules/other_year.html')
-
-# TODO: Test if removing login_required breaks request.user
+# @group_required('Students')
+# @login_required
+# def other_year(request):
+#
+#     return render(request, 'schedules/other_year.html')
+#
+# # TODO: Test if removing login_required breaks request.user
 
 @group_required('Students')
 @login_required
