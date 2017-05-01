@@ -15,12 +15,6 @@ class TermForm(forms.ModelForm):
 
 class ScheduleForm(forms.ModelForm):
     classes_taken = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), widget=forms.CheckboxSelectMultiple())
-    # def add_prev_courses(self):
-    #     sesh = CourseSession(schedule=self.instance, term=4747, semester='FA')
-    #     sesh.save()
-    #     for course in classes_taken:
-    #         sesh.courses.add(course)
-    #         sesh.save()
 
     class Meta:
         model = Schedule

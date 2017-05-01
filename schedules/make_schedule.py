@@ -40,8 +40,8 @@ def makeQueue(sid):
 
 
 	# make a new course session for 4848 and fill with remaining courses
-	sesh = CourseSession(term=4848, semester='FA', schedule=sched)
-	sesh.save()
+	sesh = sched.remaining_courses
+	
 	for course in remaining_courses:
 		sesh.courses.add(Course.objects.get(course_id=course))
 		sesh.save()

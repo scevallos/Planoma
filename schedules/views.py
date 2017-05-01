@@ -82,7 +82,7 @@ def other_year(request):
             schedule.save()
 
             # Make dummy course session
-            sesh = CourseSession(term=4747, semester='FA', schedule=schedule)
+            sesh = schedule.previous_courses
             sesh.save()
 
             # Add all previous courses
@@ -111,8 +111,8 @@ def other_year(request):
 @login_required
 def edit_schedule(request, schedule_id):
     sched = get_object_or_404(Schedule, pk=schedule_id)
-    remaining_courses = sched.course_sessions.filter(term=4848)[0].courses.all()
-    sessions = sched.course_sessions.all().order_by('term').exclude(term=4848).exclude(term=4747)
+    remaining_courses = sched.remaining_courses.courses.all()
+    sessions = sched.course_sessions.all().order_by('term')
 
     if sched.owner.user != request.user:
         # TODO: edit private html to show different message if view/edit
@@ -120,6 +120,7 @@ def edit_schedule(request, schedule_id):
 
     courses = -1
     add_form = None
+    # Search bar 
     if request.GET.get('search'):
         search = request.GET.get('search')
         courses = Course.objects.filter(course_name__icontains=search)

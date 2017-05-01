@@ -23,7 +23,6 @@
                                                     <div style="text-align:left;">
                                                       {% for session in sessions %}
                                                       <td class="wsite-multicol-col" style="width:30%; padding:0 15px;background-color: #f4df42;border-radius: 25px;">
-                                                        {% if session.term != 4747 and session.term != 4848 %}
                                                         <h4>{{ session.get_semester_display }} {{ session.term }}</h4>
                                                         <div style="text-align:left;">
                                                           {% for course in session.courses.all %}
@@ -31,7 +30,6 @@
                                                             <hr>
                                                             {% endfor %}
                                                           </div>
-                                                        {% endif %}
                                                         {% endfor %}
                                                       </td>
                                                       <td class="wsite-multicol-col" style="width:5%; padding:0 15px;"></td>

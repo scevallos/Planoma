@@ -120,8 +120,10 @@ class Schedule(models.Model):
     title = models.CharField(max_length=50, default='Untitled', blank=True)
 
     course_sessions = models.ManyToManyField(CourseSession, related_name='sessions')
+
     # will be used to store previous courses
-    previous_courses = models.ManyToManyField(CourseSession, related_name='prev_courses')
+    previous_courses = models.ForeignKey(CourseSession, on_delete=models.CASCADE, null=True, related_name='previous_courses')
+    remaining_courses = models.ForeignKey(CourseSession, on_delete=models.CASCADE, null=True, related_name='remaining_courses')
 
     # Stuff needed for auto-gen
     existing_credits = models.CharField(choices = CREDIT_CHOICES, max_length=12, null=True, default=0)
