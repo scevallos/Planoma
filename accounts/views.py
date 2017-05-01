@@ -33,25 +33,35 @@ def my_advisor(request):
 
 # used for signing up advisors
 def signup(request):
-    form = UserCreationForm()
+    form = UserForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             user = form.save()
 
-            AdvisorProfile.objects.create(user=user)
+            advisor_profile = AdvisorProfile.objects.create(user=user)
             user.groups.add(Group.objects.get(name='Advisors'))
+            advisor_profile.save()
 
             StudentProfile.objects.get(user=user).delete()
             Group.objects.get(name='Students').user_set.remove(user)
+
+            inv = Invitation.objects.get(email=form.cleaned_data.get('email'))
+            stu = StudentProfile.objects.get(user=inv.inviter)
+            stu.adv = advisor_profile
+            stu.save()
+
 
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request,user)
-            return redirect('index') # not redirecting????
         else:
-            form = UserCreationForm()
+            # Invalid fields
+            messages.error(request, 'Please correct the errors above.')
+        return redirect('index') # not redirecting????
+    else:
+        form = UserForm()
     return render(request, 'accounts/advisor/signup.html', {'form': form})
 
 def invite_advisor(request):
@@ -62,7 +72,7 @@ def invite_advisor(request):
             # form.save()
             email = form.cleaned_data.get('advisor_email')
             name = form.cleaned_data.get('advisor_name')
-            
+
             if not Invitation.objects.filter(email=email):
                 invite = Invitation.create(email, inviter=request.user)
                 invite.send_invitation(request)

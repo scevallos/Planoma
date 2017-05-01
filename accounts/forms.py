@@ -8,10 +8,8 @@ from models import StudentProfile, AdvisorProfile
 Forms for students
 """
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email')
+class UserForm(UserCreationForm):
+    email = forms.EmailField(required=True)
 
 
 # Seen on the profile page

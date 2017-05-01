@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from forms import CourseForm, ScheduleForm, AddTermForm, firstYearForm
+from forms import CourseForm, ScheduleForm, AddTermForm, firstYearForm, TermForm
 from accounts.models import StudentProfile
 from schedules.models import *
 from make_schedule import *
@@ -15,14 +15,18 @@ from group_decorator import *
 def add_course(request):
     if request.method == "POST":
         form = CourseForm(request.POST)
-        if form.is_valid():
+        term_form = TermForm(request.POST)
+        if form.is_valid() and term_form.is_valid():
             course = form.save()
+            term = term_form.save(commit=False)
+            term.schedule = Schedule.objects.get(pk=14)
+            term_selected = term.term
+            semester_selected = term.semester
             for sched in Schedule.objects.all():
                 done = False
                 # courses = sched.get_all_courses()
-                for sesh in sched.course_sessions.all():
-                    if done:
-                        break
+                try:
+                    sesh = sched.course_sessions.get(term=term_selected, semester=semester_selected)
                     for cur_course in sesh.courses.all():
                         if cur_course.course_id.startswith("ELEC"):
                             sesh.courses.remove(cur_course)
@@ -31,17 +35,20 @@ def add_course(request):
                             done = True
                         if done:
                             break
+                except:
+                    pass
+                # for sesh in sched.course_sessions.all():
+                #     if done:
+                #         break
 
 
-
-
-            # schedules = Course.objects.filter(course_id__icontains='ELEC')
             messages.success(request, 'Course has been successfully added.')
         else:
             messages.error(request, 'Course adding failed, course not added.')
     else:
         form = CourseForm()
-    return render(request, 'courses/course_new.html', {'form': form})
+        term_form = TermForm()
+    return render(request, 'courses/course_new.html', {'form': form, 'term_form' : term_form} )
 
 
 @login_required
@@ -132,6 +139,8 @@ def edit_schedule(request, schedule_id):
             #     PrereqCourses.objects.get(course_take=course)
             session.courses.add(courses[0])
             session.save()
+            remaining_courses.remove(courses)
+            remaining_courses.save()
 
 
         else:
