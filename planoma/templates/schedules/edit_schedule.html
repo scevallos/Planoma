@@ -52,90 +52,44 @@
 													<ul>
 													{% if courses == -1 %}
 													{% elif courses %}
-														{% for course in courses %}
-															<li> {{ course.course_name }} | Add to: {{ add_form.as_p }} </li>
-														{% endfor %}
-														<div class="wsite-button wsite-button-large wsite-button-highlight">
-														<button class="wsite-button-inner save btn" type="submit">Save </button>
-													{% else %}
-													<p>No courses found :(</p>
-													{% endif %}
-													</ul>
-													
-												</div>
-												</form>
-												<!-- <div>
-                                                                    <div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:center">
-                                                                        <a>
-                                                                            <img src="planoma/templates/uploads/498115425.jpg" alt="Picture" style="width:auto;max-width:100%" />
-                                                                        </a>
-                                                                        <div style="display:block;font-size:90%"></div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <h2 class="wsite-content-title" style="text-align:center;"><font size="5">&#8203;Schedule One</font></h2>
-
-                                                                <div class="paragraph" style="text-align:center;">September 14, 2016</div> -->
-
-                                                            </td>
-                                                            <td class="wsite-multicol-col" style = "width:66.333333333333%; padding:0 15px;">
-                                                            	<div class="right-div" style="margin-left: 258px;">
-                                                            		<h2> Current Schedule </h2>
-	                                                        		{% for session in sessions %}
-	                                                                <ul>
-	                                                        		<li><h4>{{ session.get_semester_display }} {{ session.term }}</h4></li>
-	                                                        		<ul>
-	                                                        			{% for course in session.courses.all %}
-	                                                        			<li>{{ course.course_name }}</li>
-	                                                        			{% endfor %}
-	                                                        		</ul>
-	                                                                </ul>
-	                                                        		{% endfor %}
-                                                            	</div>
-
-                                                                <!-- <div>
-                                                                    <div class="wsite-image wsite-image-border-none " style="padding-top:30px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:center">
-                                                                        <a>
-                                                                            <img src="uploads/273319276.jpg" alt="Picture" style="width:auto;max-width:100%" />
-                                                                        </a>
-                                                                        <div style="display:block;font-size:90%"></div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <h2 class="wsite-content-title" style="text-align:center;"><font size="5">Schedule 2</font></h2>
-
-                                                                <div class="paragraph" style="text-align:center;"><span>August 21, 2016</span>
-                                                                </div> -->
-
-                                                            </td>
-                                                            
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="wsite-spacer" style="height:50px;"></div>
-                                </div>
-                            </div>
+                            {% for course in courses %}
+                            <li> {{ course.course_name }} | Add to: {{ add_form.as_p }} </li>
+                            {% endfor %}
+                            <div class="wsite-button wsite-button-large wsite-button-highlight">
+                              <button class="wsite-button-inner save btn" type="submit">Save </button>
+                              {% else %}
+                              <p>No courses found :(</p>
+                              {% endif %}
+                            </ul>
+                          </div>
+                        </form>
+                      </td>
+                      <td class="wsite-multicol-col" style = "width:66.333333333333%; padding:0 15px;">
+                        <div class="right-div" style="margin-left: 258px;">
+                          <h2> Current Schedule </h2>
+                          {% for session in sessions %}
+                          <ul>
+                            <li><h4>{{ session.get_semester_display }} {{ session.term }}</h4></li>
+                            <ul>
+                              {% for course in session.courses.all %}
+                              <li>{{ course.course_name }}</li>
+                              {% endfor %}
+                            </ul>
+                          </ul>
+                          {% endfor %}
                         </div>
-
-                    </div>
-                </div>
-
-<!-- <h2> Remaining Courses </h2>
-<div class="scroll" style="background-color: #00FFFF; width: 200px; height: 350px; overflow: scroll; margin-right: 8px;">
-<ul>
-{% for course in remaining_courses %}
-	<li>{{ course.course_name }}</li>
-{% endfor %}
-</ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="wsite-spacer" style="height:50px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="right-div" style="margin-left: 258px;">
-<h2> Current Schedule </h2>
-</div> -->
-
+</div>
 {% endblock %}
-
