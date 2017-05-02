@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts',
     'schedules',
     'invitations',
+    'django_extensions',
 ]
 SITE_ID = 1
 

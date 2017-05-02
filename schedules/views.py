@@ -7,6 +7,7 @@ from schedules.models import *
 from make_schedule import *
 from django.contrib.auth.models import Group
 from group_decorator import *
+from constants import TERM_CHOICES
 
 
 # required permissions
@@ -175,12 +176,19 @@ def first_year(request):
         if firstForm.is_valid():
             schedule = firstForm.save(commit=False)
             schedule.owner = StudentProfile.objects.get(user_id=request.user.id)
-            schedule.save()
-            # schedule.existing_credits=schedule.cleaned_data('existing_credits')
 
-            status_code = makeSchedule(schedule.id)
-            if status_code == -1:
+            # Check semesters are valid
+            getIndex = lambda x: [i for i in xrange(len(TERM_CHOICES)) if TERM_CHOICES[i][0] == x][0]
+            numSems = getIndex(firstForm.cleaned_data['end_sem']) - getIndex(firstForm.cleaned_data['start_sem'])
+            try:
+                assert numSems >= 6 and numSems <= 11
+            except:
                 messages.error(request, 'Please select valid start and end semesters.')
+                return redirect('first_year')
+
+            schedule.save()
+            makeSchedule(schedule.id)
+
             messages.success(request, 'Your schedule was successfully made!')
             return redirect('my_schedules')
         else:

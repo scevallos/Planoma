@@ -68,14 +68,6 @@ def makeSchedule(sid):
 	end_index = getIndex(sched.end_sem, sched)
 	num_semesters = end_index - start_index + 1
 
-	# Some checks about these choices
-	try:
-		assert end_index > start_index and num_semesters >= 6 and num_semesters <= 11
-	except:
-		# TODO: figure out best way to handle this
-		# TODO: this check above should only happen for like first years e.g junior just tryna make senior yr
-		return -1
-
 	# cred_needed = 32 - int(sched.existing_credits)
 	# chunk_size = cred_needed / num_semesters
 

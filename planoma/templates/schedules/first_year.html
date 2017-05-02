@@ -7,7 +7,7 @@
 		<div class="wsite-section-wrap">
 				<div class="wsite-section wsite-header-section wsite-section-bg-image"
 				style="vertical-align: middle;background-image: url('{% static 'planoma/bg.png' %}') ;
-				background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #4ac3de;height:100%;
+				background-repeat: no-repeat ;background-position: 100% 100% ;background-size: 100% ;background-color: #31c3dd;height:100%;
 				overflow:hidden" >
 						<div class="wsite-section-content">
 								<div class="container">
@@ -22,14 +22,13 @@
 																						<tbody class="wsite-multicol-tbody">
 																								<tr class="wsite-multicol-tr">
 																										<td class="wsite-multicol-col" style="width:20%; padding:0 15px;"></td>
-																										<td class="wsite-multicol-col" style="width:60%; padding:0 15px;background-color: #4ac3de;">
+																										<td class="wsite-multicol-col" style="width:60%; padding:0 15px;background-color: #31c3dd;">
 																												<div style="text-align:left;">
 																													<form method="POST" class="schedule-form">
 																														{% csrf_token %}
 																														{{ firstForm.as_p }}
 																														<div class="wsite-button wsite-button-large wsite-button-highlight">
 																															<input class="wsite-button-inner" type="submit" value="Submit" />
-																															<!-- <button type="submit" class="wsite-button-inner save btn">Create Schedule</button>  -->
 																														</div>
 																													</form>
 																												</div>
@@ -38,6 +37,11 @@
 																								</tr>
 																						</tbody>
 																				</table>
+																				{% if messages %}
+																				{% for message in messages %}
+																				<h3>{{ message }}</h3>
+																				{% endfor %}
+																				{% endif %}
 																		</div>
 																</div>
 														</div>
@@ -50,7 +54,7 @@
 </div>
 <div class="wsite-section-wrap">
 	<div class="wsite-section wsite-body-section wsite-section-bg-color wsite-background-4 wsite-custom-background"
-  style="height: 6px;vertical-align: bottom;background-color: #4ac3de;background-image: none;is_customized: 1;">
+  style="height: 6px;vertical-align: bottom;background-color: #31c3dd;background-image: none;is_customized: 1;">
 		<div class="wsite-section-content">
 			<div class="container">
 				<div class="wsite-section-elements">
