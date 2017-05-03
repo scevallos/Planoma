@@ -24,21 +24,10 @@ class UserProfile(models.Model):
 
 class AdvisorProfile(UserProfile):
     pass
-    # @receiver(post_save, sender=User)
-    # def create_advisor_profile(sender, instance, created, **kwargs):
-    #     if created:
-    #         AdvisorProfile.objects.create(user=instance)
-    #         instance.groups.add(Group.objects.get(name='Advisors'))
-
-    # @receiver(post_save, sender=User)
-    # def save_user_profile(sender, instance, **kwargs):
-        # instance.advisorprofile.save()
 
 
 class StudentProfile(UserProfile):
-    YEAR_CHOICES = []
-    for r in range(2010, (datetime.now().year+1)):
-        YEAR_CHOICES.append((r,r))
+    YEAR_CHOICES = [(r,r) for r in xrange(2010, (datetime.now().year+5))]
     year = models.IntegerField(
         choices=YEAR_CHOICES,
         default=datetime.now().year

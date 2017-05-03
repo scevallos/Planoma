@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group
 
 from models import StudentProfile, AdvisorProfile
 from schedules.models import Schedule, Course, CourseSession
-from forms import UserForm, StudentProfileForm, InviteAdvisorForm
+from forms import UserForm, StudentProfileForm, InviteAdvisorForm, UserUpdateForm
 from group_decorator import *
 from invitations.models import *
 
@@ -93,12 +93,19 @@ def advisee_list(request):
 @transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
+        user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = StudentProfileForm(request.POST, instance=request.user.studentprofile)
         if profile_form.is_valid() and user_form.is_valid():
+            user = user_form.save(commit=False)
+
             # if blank, use last saved entry
-            # if not user_form.data['email']:
-            #     user_form.cleaned_data['email'] = User.objects.get(id=request.user.id).email
+            if not user_form.cleaned_data['email']:
+                user.email = User.objects.get(id=request.user.id).email
+            if not user_form.cleaned_data['first_name']:
+                user.first_name = User.objects.get(id=request.user.id).first_name
+            if not user_form.cleaned_data['last_name']:
+                user.last_name = User.objects.get(id=request.user.id).last_name
+                
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile was successfully updated!')
@@ -107,5 +114,5 @@ def update_profile(request):
             messages.error(request, 'Please correct the error below.')
     else:
         profile_form = StudentProfileForm()
-        user_form = UserForm()
+        user_form = UserUpdateForm()
     return render(request, 'accounts/profile/edit.html', {'prof_form' : profile_form, 'user_form' : user_form})
