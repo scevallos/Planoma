@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from forms import CourseForm, ScheduleForm, AddTermForm, firstYearForm, TermForm
@@ -10,7 +11,6 @@ from group_decorator import *
 from constants import TERM_CHOICES
 
 
-# required permissions
 @group_required('Advisors')
 @login_required
 def add_course(request):
@@ -56,11 +56,18 @@ def add_course(request):
 def my_schedules(request):
     if request.user.groups.all()[0] == Group.objects.get(name='Advisors'):
         return redirect('index')
-    # Get the latest 3 schedules made by the user
+
+    # Get the latest 3 schedules made by the student, and any deleted schedules
     latest_scheds = Schedule.objects.all().filter(owner_id=request.user.id).order_by('-created_at')[:3]
-    context = {'latest_scheds': latest_scheds}
+    last_deleted = Schedule.trash.filter(owner_id=request.user.id).order_by('-trashed_at')
+
+    # Display an undo option for the last deleted schedule for 30 seconds, if there is one
+    if last_deleted.count() > 0 and (timezone.now() - last_deleted[0].trashed_at).seconds <= 30:
+        context = {'latest_scheds': latest_scheds, 'deleted': last_deleted[0]}
+        print 'in the if'
+    else:
+        context = {'latest_scheds': latest_scheds}
     return render(request, 'schedules/my_schedules.html', context)
-    # return render(request, 'schedules/my_schedules.html')
 
 @group_required('Students')
 @login_required
@@ -157,17 +164,6 @@ def edit_schedule(request, schedule_id):
         'add_form' : add_form
         })
 
-
-# @login_required
-# class CourseSearchListView(CourseListView):
-
-#     def get_queryset(self):
-#         result = super(CourseSearchListView, self).get_queryset()
-
-#         query = self.request.GET.get('q')
-#         if query:
-
-
 @group_required('Students')
 @login_required
 def first_year(request):
@@ -179,7 +175,7 @@ def first_year(request):
 
             # Check semesters are valid
             getIndex = lambda x: [i for i in xrange(len(TERM_CHOICES)) if TERM_CHOICES[i][0] == x][0]
-            numSems = getIndex(firstForm.cleaned_data['end_sem']) - getIndex(firstForm.cleaned_data['start_sem'])
+            numSems = getIndex(firstForm.cleaned_data['end_sem']) - getIndex(firstForm.cleaned_data['start_sem']) + 1
             try:
                 assert numSems >= 6 and numSems <= 11
             except:
@@ -199,14 +195,8 @@ def first_year(request):
 
     return render(request, 'schedules/first_year.html', {'firstForm': firstForm})
 
-# @group_required('Students')
-# @login_required
-# def other_year(request):
-#
-#     return render(request, 'schedules/other_year.html')
-#
-# # TODO: Test if removing login_required breaks request.user
 
+# TODO: Test if removing login_required breaks request.user
 # @group_required('Students')
 # @login_required
 def detail(request, schedule_id):
@@ -221,3 +211,23 @@ def detail(request, schedule_id):
 
 def private(request):
     return render(request, 'schedules/private.html')
+
+@group_required('Students')
+@login_required
+def delete(request, schedule_id):
+    sched = get_object_or_404(Schedule, pk=schedule_id)
+    if sched.owner.user != request.user:
+        return redirect('private')
+    else:
+        sched.delete()
+        return redirect('my_schedules')
+
+@group_required('Students')
+@login_required
+def restore(request, schedule_id):
+    sched = Schedule.trash.get(pk=schedule_id)
+    if sched.owner.user != request.user:
+        return redirect('private')
+    else:
+        sched.restore()
+    return redirect('my_schedules')

@@ -1,9 +1,26 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
+
+from datetime import datetime
 from constants import *
 from itertools import chain
 
+# Managers used for handling trash
+class NonTrashManager(models.Manager):
+    ''' Query only objects which have not been trashed. '''
+    def get_queryset(self):
+        query_set = super(NonTrashManager, self).get_queryset()
+        return query_set.filter(trashed_at__isnull=True)
+
+class TrashManager(models.Manager):
+    ''' Query only objects which have been trashed. '''
+    def get_queryset(self):
+        query_set = super(TrashManager, self).get_queryset()
+        return query_set.filter(trashed_at__isnull=False)
+
+# Models used in project
 class Course(models.Model):
     course_id = models.CharField(max_length=9, primary_key=True) # e.g. CHEM170A or '\w{2,4}\d+\w?'
 
@@ -130,14 +147,27 @@ class Schedule(models.Model):
     languages_completed = models.CharField(choices = LANGUAGE_CHOICES, max_length=12, null=True, default=0)
     math_completed = models.CharField(choices = MATH_CHOICES, max_length=12, null=True, default=None)
 
+    # Allows for undo-delete feature
+    trashed_at = models.DateTimeField(blank=True, null=True)
+
+    objects = NonTrashManager()
+    trash = TrashManager()
+
+    def __unicode__(self):
+        trashed = (self.trashed_at and 'trashed' or 'not trashed')
+        return '%s - %s (%s)' % (self.title, self.owner, trashed)
+
+    def delete(self, trash=True):
+        if not self.trashed_at and trash:
+            self.trashed_at = timezone.now()
+            self.save()
+        else:
+            super(SomeModel, self).delete()
+
+    def restore(self, commit=True):
+        self.trashed_at = None
+        if commit:
+            self.save()
 
     def get_all_courses(self):
         return list(chain(*[session.courses.all() for session in self.course_sessions.all()]))
-
-
-    def __unicode__(self):
-        return "Schedule owner: {}".format(self.owner)
-
-
-# inviting advisors through a link
-#
