@@ -26,12 +26,16 @@
 												<div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
 												<h4 style="text-align:center;"><a href="{% url 'detail' sched.id %}">{{ sched.title}}</a></h4>
 												<h5 style="text-align:center;"><a href="{% url 'edit_schedule' sched.id %}">(edit)</a></h5>
+												<form action="{% url 'schedule_delete' sched.id %}" method="post">
+    												{% csrf_token %}
+    												<input type="submit" value="X delete" />
+												</form>
 												<p> <b>Made on:</b> {{ sched.created_at }}</p>
 												<p> <b>Updated on:</b> {{ sched.updated_at }}</p>
 												<div style="height: 10px; overflow: hidden;"></div>
-											</div>
-										</td>
-										<td class="wsite-multicol-col" style="width:5%; padding:0 15px;background-color: #31c3dd">
+												</div>
+											</td>
+										<td class="wsite-multicol-col" style="width:10%; padding:0 15px;background-color: #31c3dd">
 										{% endfor %}
 									</tr>
 								</tbody>
@@ -39,15 +43,19 @@
 							<a class="wsite-button wsite-button-large wsite-button-highlight" href="{% url 'new_schedule' %}" >
 									<span class="wsite-button-inner">Create a new schedule</span>
 							</a>
+							{% if deleted %}
+								<h3>Deleted your schedule '{{ deleted.title }}'. <a href="{% url 'restore' deleted.id %}">Undo.</a></h3>
+							{% endif %}
 							<div style="height: 150px; overflow: hidden;"></div>
 							{% else %}
 							<h4>You haven't made any schedules. Create One!</h4>
 							<a href="{% url 'new_schedule' %}" ><img src="{% static 'planoma/images/schedules/icon-create-schedule.png'%}" alt="Create-icon"/></a>
 							<div class="wsite-spacer" style="height:305px;"></div>
+							{% if deleted %}
+								<h3>Deleted your schedule '{{ deleted.title }}'. <a href="{% url 'restore' deleted.id %}">Undo.</a></h3>
+							{% endif %}
 							<div style="height: 250px; overflow: hidden;"></div>
 							{% endif %}
-
-							<!-- <div class="wsite-spacer" style="height:100%;"></div> -->
 						</div>
 					</div>
 				</div>
