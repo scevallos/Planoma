@@ -64,7 +64,6 @@ def my_schedules(request):
     # Display an undo option for the last deleted schedule for 30 seconds, if there is one
     if last_deleted.count() > 0 and (timezone.now() - last_deleted[0].trashed_at).seconds <= 30:
         context = {'latest_scheds': latest_scheds, 'deleted': last_deleted[0]}
-        print 'in the if'
     else:
         context = {'latest_scheds': latest_scheds}
     return render(request, 'schedules/my_schedules.html', context)
@@ -73,8 +72,10 @@ def my_schedules(request):
 @login_required
 def schedules(request):
     return redirect('index')
-# TODO test if user not logged in, does it redirect back to original page
 
+
+@group_required('Students')
+@login_required
 def new_schedule(request):
     return render(request, 'schedules/new_schedule.html')
 
@@ -121,7 +122,13 @@ def other_year(request):
 @login_required
 def edit_schedule(request, schedule_id):
     sched = get_object_or_404(Schedule, pk=schedule_id)
-    remaining_courses = sched.remaining_courses.courses.all()
+
+    try:
+        remaining_courses = sched.remaining_courses.courses.all()
+    except:
+        # First year schedule, so sched.remaining courses is None
+        remaining_courses = CourseSession.objects.none()
+
     sessions = sched.course_sessions.all().order_by('term')
 
     if sched.owner.user != request.user:
@@ -137,7 +144,7 @@ def edit_schedule(request, schedule_id):
 
         add_form = AddTermForm(sessions=sessions.exclude(term=4747).exclude(term=4848), courses=courses)
 
-        # User just hit save button from course searches
+    # User just hit save button from course searches
     if request.method == "POST":
         add_form = AddTermForm(request.POST, sessions=sessions.exclude(term=4747).exclude(term=4848), courses=courses)
         if add_form.is_valid():
@@ -151,8 +158,12 @@ def edit_schedule(request, schedule_id):
             for course in courses:
                 session.courses.add(course)
                 session.save()
-                sched.remaining_courses.courses.remove(course)
-                sched.save()
+                try:
+                    sched.remaining_courses.courses.remove(course)
+                    sched.save()
+                except:
+                    pass
+                
 
         else:
             messages.error('Please select a valid semester.')

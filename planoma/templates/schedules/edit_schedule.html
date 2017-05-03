@@ -36,11 +36,15 @@
 											<td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
 												<h2> Remaining Courses </h2>
 												<div class="scroll" style="background-color: #fedb62; width: 250px; height: 350px; overflow: scroll; margin-right: 8px; padding: 10px">
+                          {% if remaining_courses %}
 													<ul>
 														{% for course in remaining_courses %}
 														<li>{{ course.course_name }}</li>
 														{% endfor %}
 													</ul>
+                          {% else %}
+                          <h4 style="text-align: center"> All done with requirements!</h4>
+                          {% endif %}
 												</div>
 												<!-- Begin Course search -->
 												<form method="GET">
