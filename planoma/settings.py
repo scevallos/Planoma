@@ -160,7 +160,7 @@ try:
 except:
     EMAIL_HOST_PASSWORD = SENDGRID_PASSWORD
 SERVER_EMAIL = 'app67577166@heroku.com'
-DEFAULT_FROM_EMAIL = "Planoma"
+DEFAULT_FROM_EMAIL = "planoma4747@gmail.com"
 
 
 # Directory to initial data fixture
