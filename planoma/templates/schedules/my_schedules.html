@@ -24,12 +24,12 @@
 											{% for sched in latest_scheds %}
 											<td class="wsite-multicol-col" style="width:25%; padding:0 15px;background-color: #f4df42;border-radius: 25px;">
 												<div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
+												<form action="{% url 'schedule_delete' sched.id %}" method="post" style="text-align: right;margin-bottom: -1.5em;">
+    												{% csrf_token %}
+    												<input type="submit" value="&#10006;" style="border: none;color: #de5656;background-color: #f4df42;"/>
+												</form>
 												<h4 style="text-align:center;"><a href="{% url 'detail' sched.id %}">{{ sched.title}}</a></h4>
 												<h5 style="text-align:center;"><a href="{% url 'edit_schedule' sched.id %}">(edit)</a></h5>
-												<form action="{% url 'schedule_delete' sched.id %}" method="post">
-    												{% csrf_token %}
-    												<input type="submit" value="X delete" />
-												</form>
 												<p> <b>Made on:</b> {{ sched.created_at }}</p>
 												<p> <b>Updated on:</b> {{ sched.updated_at }}</p>
 												<div style="height: 10px; overflow: hidden;"></div>
